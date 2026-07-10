@@ -1,67 +1,78 @@
-# CamGuard - Multi-Camera Health Monitoring System
+# 🎥 CamGuard — Multi-Camera Health Monitoring System
 
-CamGuard is an enterprise-grade dashboard and monitoring system designed to track the physical and operating health of multi-camera surveillance deployments. It evaluates camera performance metrics (such as CPU usage, memory, storage, and network latency) and generates alerts on health threshold breaches.
+A production-ready system for monitoring the health of multiple security cameras in real-time.
 
-> [!NOTE]
-> This application is a health monitoring and diagnostic system. It does **not** capture or stream live video feeds.
+## Architecture
 
----
-
-## Technical Stack
-
-### Backend
-- **Language**: Python
-- **Framework**: Flask (REST API)
-- **Database**: SQLite (SQLAlchemy ORM)
-
-### Frontend
-- **Language**: Vanilla HTML5, CSS3, JavaScript (ES6+)
-- **Charts**: Chart.js
-
-### Camera Simulator
-- **Language**: Python (Simulates camera devices transmitting telemetry data to the backend REST API)
-
----
-
-## Directory Structure
-
-```text
-CamGuard/
-├── backend/          # Flask application, routes, config, and models (Commit 2+)
-├── frontend/         # Web dashboard assets (HTML, CSS, JS) (Commit 5+)
-├── simulator/        # Multi-camera client telemetry simulator (Commit 3+)
-├── .gitignore        # Git ignore rules
-└── requirements.txt  # Python backend dependencies
+```
+Camera Simulator (Python) → Flask Backend (REST API + SQLite) → React Dashboard (Vite)
 ```
 
----
+## Quick Start
 
-## Getting Started
+### 1. Install Python Dependencies
 
-### Prerequisites
-- Python 3.8 or higher installed on your system.
+```bash
+cd camera-health-monitor
+pip install -r requirements.txt
+```
 
-### Installation & Setup
+### 2. Start the Flask Backend
 
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd CamGuard
-   ```
+```bash
+cd camera-health-monitor
+python -m backend.app
+```
 
-2. **Set up a virtual environment**:
-   - **Windows (PowerShell)**:
-     ```powershell
-     python -m venv .venv
-     .venv\Scripts\Activate.ps1
-     ```
-   - **macOS / Linux**:
-     ```bash
-     python3 -m venv .venv
-     source .venv/bin/activate
-     ```
+The API will be running at `http://localhost:5000`
 
-3. **Install backend dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 3. Start the Camera Simulator
+
+In a new terminal:
+
+```bash
+cd camera-health-monitor
+python -m simulator.simulator
+```
+
+### 4. Start the React Dashboard
+
+In a new terminal:
+
+```bash
+cd camera-health-monitor/dashboard
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173` in your browser.
+
+## Features
+
+- **10 Simulated Cameras** with realistic drift-based metrics
+- **Real-time Dashboard** with 5-second polling
+- **Alert Generation** with deduplication and auto-resolution
+- **Historical Charts** using Chart.js
+- **Configurable Thresholds** via REST API
+- **Responsive Design** — works on desktop and mobile
+- **Fault Injection** — random hardware faults for testing alerts
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/health` | Ingest camera health data |
+| GET | `/api/cameras` | List all cameras |
+| GET | `/api/cameras/<id>` | Camera details |
+| GET | `/api/cameras/<id>/history` | Historical data |
+| GET | `/api/dashboard/summary` | Dashboard stats |
+| GET | `/api/alerts` | List alerts |
+| PUT | `/api/alerts/<id>/resolve` | Resolve alert |
+| GET | `/api/config/thresholds` | Get thresholds |
+| PUT | `/api/config/thresholds` | Update thresholds |
+
+## Tech Stack
+
+- **Simulator**: Python, threading, requests
+- **Backend**: Flask, SQLAlchemy, SQLite, Flask-CORS
+- **Frontend**: React, Vite, Chart.js, Axios

@@ -1,38 +1,40 @@
+"""
+Backend Configuration
+---------------------
+Centralized configuration for the Flask application.
+Uses a class-based config pattern for easy environment switching.
+
+Design decisions:
+- SQLALCHEMY_DATABASE_URI uses SQLite for zero-config local development
+- CORS is enabled for all origins in dev (React runs on :5173)
+- Default thresholds are stored here and can be overridden at runtime via API
+"""
+
 import os
 
-# Get base directory of the project
-BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
 
 class Config:
-    """Base configuration class."""
-    SECRET_KEY = os.environ.get('SECRET_KEY', 'camguard-dev-secret-key-189230')
+    """Base configuration."""
+
+    SECRET_KEY = os.environ.get("SECRET_KEY", "camera-health-monitor-secret-key")
+
+    # Database
+    SQLALCHEMY_DATABASE_URI = os.environ.get(
+        "DATABASE_URL", f"sqlite:///{os.path.join(BASE_DIR, '..', 'health.db')}"
+    )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-class DevelopmentConfig(Config):
-    """Development configuration."""
-    DEBUG = True
-    # Place database in the root project folder during development
-    SQLALCHEMY_DATABASE_URI = os.environ.get(
-        'DATABASE_URL',
-        f'sqlite:///{os.path.join(BASE_DIR, "camguard.db")}'
-    )
-
-class ProductionConfig(Config):
-    """Production configuration."""
-    DEBUG = False
-    # Use database URL from environment (e.g. Render PostgreSQL or SQLite instance)
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
-
-class TestingConfig(Config):
-    """Testing configuration."""
-    TESTING = True
-    DEBUG = True
-    # In-memory database for fast, isolated tests
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
-
-# Export active configuration selection
-config_by_name = {
-    'development': DevelopmentConfig,
-    'production': ProductionConfig,
-    'testing': TestingConfig
-}
+    # Default health thresholds — crossing these triggers alerts
+    THRESHOLDS = {
+        "cpu_warning": 75.0,       # CPU % above this = warning
+        "cpu_critical": 90.0,      # CPU % above this = critical
+        "memory_warning": 75.0,    # Memory % above this = warning
+        "memory_critical": 90.0,   # Memory % above this = critical
+        "storage_warning": 80.0,   # Storage % above this = warning
+        "storage_critical": 95.0,  # Storage % above this = critical
+        "latency_warning": 200.0,  # Latency ms above this = warning
+        "latency_critical": 500.0, # Latency ms above this = critical
+        "heartbeat_timeout": 90,   # Seconds without heartbeat = offline
+    }
