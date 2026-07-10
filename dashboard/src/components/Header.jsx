@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
-import {
-    Sun, Moon, Settings, Radio, CalendarDays,
-} from 'lucide-react';
+import { Sun, Moon, CalendarDays, Server, RefreshCw } from 'lucide-react';
 
-function Header({ onOpenSettings }) {
+function Header({ apiStatus = 'online', lastUpdated, onRefresh }) {
     const { theme, toggleTheme } = useTheme();
     const [time, setTime] = useState(new Date());
 
@@ -23,26 +21,29 @@ function Header({ onOpenSettings }) {
         hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true,
     });
 
+    const formattedLastUpdated = useMemo(() => {
+        if (!lastUpdated) return 'N/A';
+        return lastUpdated.toLocaleTimeString('en-US', {
+            hour: '2-digit', minute: '2-digit', hour12: true,
+        });
+    }, [lastUpdated]);
+
     return (
         <header className="header" role="banner">
             <div className="header__left">
-                <div className="header__logo" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                        <rect width="28" height="28" rx="7" fill="var(--color-primary)" />
-                        <path d="M7 11L14 7L21 11V17L14 21L7 17V11Z" stroke="#fff" strokeWidth="1.5" fill="none" />
-                        <circle cx="14" cy="14" r="2.5" fill="#fff" />
-                    </svg>
-                </div>
-                <div>
-                    <h1 className="header__title">CamGuard</h1>
-                    <p className="header__subtitle">Camera Health Monitor</p>
-                </div>
+                <span className="header__title">CamGuard</span>
+                <span className="header__subtitle">Enterprise Camera Health Monitoring</span>
             </div>
 
             <div className="header__right">
-                <div className="header__live" role="status" aria-label="System is live">
-                    <Radio size={14} />
-                    <span>LIVE</span>
+                {/* Backend Connection Status */}
+                <div className={`status-badge-header status-badge-header--${apiStatus}`} title="Backend Connection Status">
+                    <Server size={14} />
+                    <span>Backend {apiStatus === 'online' ? 'Connected' : 'Offline'}</span>
+                </div>
+
+                <div className="header__last-update" style={{ display: 'flex', alignItems: 'center', fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>
+                    <span>Last Updated: {formattedLastUpdated}</span>
                 </div>
 
                 <div className="header__datetime" aria-label={`${formattedDate} ${formattedTime}`}>
@@ -53,20 +54,20 @@ function Header({ onOpenSettings }) {
 
                 <button
                     className="header__btn"
-                    onClick={toggleTheme}
-                    aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-                    title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                    onClick={onRefresh}
+                    title="Refresh telemetry"
+                    aria-label="Refresh telemetry"
                 >
-                    {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                    <RefreshCw size={14} />
                 </button>
 
                 <button
                     className="header__btn"
-                    onClick={onOpenSettings}
-                    aria-label="Open settings"
-                    title="Settings"
+                    onClick={toggleTheme}
+                    aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                    title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
                 >
-                    <Settings size={18} />
+                    {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
                 </button>
             </div>
         </header>

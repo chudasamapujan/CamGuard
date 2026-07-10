@@ -35,9 +35,53 @@ def create_app():
     app.register_blueprint(cameras_bp)
     app.register_blueprint(alerts_bp)
 
-    # Create database tables
+    # Create and migrate database tables
     with app.app_context():
         db.create_all()
+
+        try:
+            from sqlalchemy import inspect, text
+            from backend.models import Setting
+
+            engine = db.engine
+            inspector = inspect(engine)
+            columns = [col["name"] for col in inspector.get_columns("cameras")]
+
+            new_cols = {
+                "storage_capacity": "FLOAT DEFAULT 100.0",
+                "reporting_interval": "INTEGER DEFAULT 30",
+                "fault_probability": "FLOAT DEFAULT 0.05",
+                "offline_probability": "FLOAT DEFAULT 0.03",
+                "is_enabled": "BOOLEAN DEFAULT 1",
+                "notes": "VARCHAR(500)"
+            }
+
+            for col, col_type in new_cols.items():
+                if col not in columns:
+                    db.session.execute(text(f"ALTER TABLE cameras ADD COLUMN {col} {col_type}"))
+            db.session.commit()
+
+            # Seed default configuration settings if missing
+            defaults = {
+                "camera_count": "10",
+                "default_reporting_interval": "30",
+                "cpu_threshold": "75.0",
+                "memory_threshold": "75.0",
+                "storage_threshold": "85.0",
+                "latency_threshold": "200.0",
+                "offline_probability": "0.03",
+                "fault_probability": "0.05",
+                "heartbeat_timeout": "90"
+            }
+            for key, val in defaults.items():
+                existing = db.session.get(Setting, key)
+                if not existing:
+                    setting = Setting(key=key, value=val)
+                    db.session.add(setting)
+            db.session.commit()
+
+        except Exception as e:
+            print(f"Database migration/initialization error: {e}")
 
     # Root health check
     @app.route("/")

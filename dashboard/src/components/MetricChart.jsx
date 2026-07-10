@@ -19,7 +19,8 @@ import {
     Filler,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { fetchCameraHistory } from '../services/api';
+import { fetchCameraHistory, fetchDashboardHistory } from '../services/api';
+import { Activity } from 'lucide-react';
 
 ChartJS.register(
     CategoryScale,
@@ -34,14 +35,23 @@ ChartJS.register(
 
 export default function MetricChart({ cameraId, cameraName }) {
     const [history, setHistory] = useState(null);
+    const [selectedMetric, setSelectedMetric] = useState('resources'); // resources, latency, health
 
     useEffect(() => {
-        if (!cameraId) return;
-
         const load = async () => {
             try {
-                const res = await fetchCameraHistory(cameraId, 1);
-                setHistory(res.data);
+                const res = cameraId
+                    ? await fetchCameraHistory(cameraId, 1)
+                    : await fetchDashboardHistory(1);
+                
+                if (cameraId) {
+                    setHistory(res.data);
+                } else {
+                    setHistory({
+                        camera_id: 'FLEET',
+                        records: res.data
+                    });
+                }
             } catch (err) {
                 console.error('Failed to load history:', err);
             }
@@ -54,8 +64,9 @@ export default function MetricChart({ cameraId, cameraName }) {
 
     if (!history || !history.records || history.records.length === 0) {
         return (
-            <div className="metric-chart-empty">
-                <p>📊 No historical data available yet</p>
+            <div className="metric-chart-empty" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', minHeight: '220px', color: 'var(--color-text-secondary)' }}>
+                <Activity size={24} style={{ marginBottom: '8px', opacity: 0.5 }} />
+                <p style={{ margin: 0, fontSize: '0.85rem' }}>No historical telemetry logs found for this timeframe.</p>
             </div>
         );
     }
@@ -65,40 +76,84 @@ export default function MetricChart({ cameraId, cameraName }) {
         return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
     });
 
-    const chartData = {
-        labels,
-        datasets: [
+    const getDatasets = () => {
+        if (selectedMetric === 'latency') {
+            return [
+                {
+                    label: 'Latency (ms)',
+                    data: history.records.map((r) => r.network_latency),
+                    borderColor: '#FF7675',
+                    backgroundColor: 'rgba(255,118,117,0.1)',
+                    fill: true,
+                    tension: 0.35,
+                    pointRadius: 1.5,
+                    pointHoverRadius: 4,
+                }
+            ];
+        }
+        if (selectedMetric === 'health') {
+            return [
+                {
+                    label: 'Health Score %',
+                    data: history.records.map((r) => {
+                        if (cameraId) {
+                            if (!r.is_online) return 0;
+                            let score = 100;
+                            if (r.cpu_usage > 75) score -= (r.cpu_usage - 75) * 0.5;
+                            if (r.memory_usage > 75) score -= (r.memory_usage - 75) * 0.5;
+                            if (r.storage_usage > 85) score -= (r.storage_usage - 85) * 0.5;
+                            if (r.network_latency > 200) score -= (r.network_latency - 200) * 0.1;
+                            if (r.fault_type) score -= 40;
+                            return Math.max(0, Math.round(score));
+                        }
+                        return r.health_score ?? 100;
+                    }),
+                    borderColor: '#2ECC71',
+                    backgroundColor: 'rgba(46,204,113,0.1)',
+                    fill: true,
+                    tension: 0.35,
+                    pointRadius: 1.5,
+                    pointHoverRadius: 4,
+                }
+            ];
+        }
+        return [
             {
                 label: 'CPU %',
                 data: history.records.map((r) => r.cpu_usage),
                 borderColor: '#00D4FF',
-                backgroundColor: 'rgba(0,212,255,0.1)',
+                backgroundColor: 'rgba(0,212,255,0.08)',
                 fill: true,
-                tension: 0.4,
-                pointRadius: 2,
-                pointHoverRadius: 5,
+                tension: 0.35,
+                pointRadius: 1.5,
+                pointHoverRadius: 4,
             },
             {
                 label: 'Memory %',
                 data: history.records.map((r) => r.memory_usage),
                 borderColor: '#6C5CE7',
-                backgroundColor: 'rgba(108,92,231,0.1)',
+                backgroundColor: 'rgba(108,92,231,0.08)',
                 fill: true,
-                tension: 0.4,
-                pointRadius: 2,
-                pointHoverRadius: 5,
+                tension: 0.35,
+                pointRadius: 1.5,
+                pointHoverRadius: 4,
             },
             {
                 label: 'Storage %',
                 data: history.records.map((r) => r.storage_usage),
                 borderColor: '#FFB800',
-                backgroundColor: 'rgba(255,184,0,0.1)',
+                backgroundColor: 'rgba(255,184,0,0.08)',
                 fill: true,
-                tension: 0.4,
-                pointRadius: 2,
-                pointHoverRadius: 5,
+                tension: 0.35,
+                pointRadius: 1.5,
+                pointHoverRadius: 4,
             },
-        ],
+        ];
+    };
+
+    const chartData = {
+        labels,
+        datasets: getDatasets(),
     };
 
     const options = {
@@ -111,7 +166,7 @@ export default function MetricChart({ cameraId, cameraName }) {
                     color: '#B2BEC3',
                     usePointStyle: true,
                     padding: 20,
-                    font: { family: "'Inter', sans-serif", size: 12 },
+                    font: { family: "'Inter', sans-serif", size: 11 },
                 },
             },
             tooltip: {
@@ -126,14 +181,14 @@ export default function MetricChart({ cameraId, cameraName }) {
         },
         scales: {
             x: {
-                ticks: { color: '#636E72', maxTicksLimit: 10, font: { size: 11 } },
-                grid: { color: 'rgba(255,255,255,0.05)' },
+                ticks: { color: '#636E72', maxTicksLimit: 8, font: { size: 10 } },
+                grid: { color: 'rgba(255,255,255,0.04)' },
             },
             y: {
                 min: 0,
-                max: 100,
-                ticks: { color: '#636E72', font: { size: 11 } },
-                grid: { color: 'rgba(255,255,255,0.05)' },
+                max: selectedMetric === 'latency' ? undefined : 100,
+                ticks: { color: '#636E72', font: { size: 10 } },
+                grid: { color: 'rgba(255,255,255,0.04)' },
             },
         },
         interaction: {
@@ -144,9 +199,38 @@ export default function MetricChart({ cameraId, cameraName }) {
 
     return (
         <div className="metric-chart">
-            <h3 className="metric-chart-title">
-                📊 {cameraName || cameraId} — Performance History (1h)
-            </h3>
+            <div className="metric-chart-header">
+                <h3 className="metric-chart-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Activity size={16} />
+                    {cameraId ? `Camera ${cameraName || cameraId} Metrics` : 'Performance Overview'}
+                </h3>
+                <div className="metric-chart-tabs" role="tablist">
+                    <button
+                        role="tab"
+                        aria-selected={selectedMetric === 'resources'}
+                        className={`metric-chart-tab ${selectedMetric === 'resources' ? 'metric-chart-tab--active' : ''}`}
+                        onClick={() => setSelectedMetric('resources')}
+                    >
+                        Resources
+                    </button>
+                    <button
+                        role="tab"
+                        aria-selected={selectedMetric === 'latency'}
+                        className={`metric-chart-tab ${selectedMetric === 'latency' ? 'metric-chart-tab--active' : ''}`}
+                        onClick={() => setSelectedMetric('latency')}
+                    >
+                        Latency
+                    </button>
+                    <button
+                        role="tab"
+                        aria-selected={selectedMetric === 'health'}
+                        className={`metric-chart-tab ${selectedMetric === 'health' ? 'metric-chart-tab--active' : ''}`}
+                        onClick={() => setSelectedMetric('health')}
+                    >
+                        Health
+                    </button>
+                </div>
+            </div>
             <div className="metric-chart-container">
                 <Line data={chartData} options={options} />
             </div>

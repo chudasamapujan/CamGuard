@@ -1,12 +1,12 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import {
-    Search, Filter, Download, Check, X, AlertCircle, AlertTriangle, Clock,
+    Search, Download, Check, X, AlertCircle, AlertTriangle, Clock,
 } from 'lucide-react';
 import { resolveAlert } from '../services/api';
 import EmptyState from './EmptyState';
 import { formatDateTime, exportToCSV } from '../utils/helpers';
 
-function AlertCenter({ alerts, loading, onAlertResolved }) {
+function AlertCenter({ alerts, loading, onAlertResolved, addToast }) {
     const [search, setSearch] = useState('');
     const [severityFilter, setSeverityFilter] = useState('all');
     const [statusFilter, setStatusFilter] = useState('active');
@@ -21,6 +21,7 @@ function AlertCenter({ alerts, loading, onAlertResolved }) {
             const q = search.toLowerCase();
             list = list.filter(a =>
                 a.camera_id.toLowerCase().includes(q) ||
+                (a.location && a.location.toLowerCase().includes(q)) ||
                 a.message.toLowerCase().includes(q) ||
                 a.alert_type.toLowerCase().includes(q)
             );
@@ -52,9 +53,12 @@ function AlertCenter({ alerts, loading, onAlertResolved }) {
     const handleResolve = useCallback(async (id) => {
         try {
             await resolveAlert(id);
+            if (addToast) addToast(`Alert #${id} marked as resolved`, 'success');
             if (onAlertResolved) onAlertResolved();
-        } catch { /* ignore */ }
-    }, [onAlertResolved]);
+        } catch (err) {
+            if (addToast) addToast('Failed to resolve alert', 'error');
+        }
+    }, [onAlertResolved, addToast]);
 
     const handleExport = () => {
         if (filtered.length > 0) exportToCSV(filtered, 'alerts_export');
@@ -158,6 +162,7 @@ function AlertCenter({ alerts, loading, onAlertResolved }) {
                             <tr>
                                 <th>Severity</th>
                                 <th>Camera</th>
+                                <th>Location</th>
                                 <th>Message</th>
                                 <th>Type</th>
                                 <th>Created</th>
@@ -177,6 +182,7 @@ function AlertCenter({ alerts, loading, onAlertResolved }) {
                                         </span>
                                     </td>
                                     <td><span className="alert-camera-tag">{alert.camera_id}</span></td>
+                                    <td><span className="alert-location-cell">{alert.location || 'Unknown'}</span></td>
                                     <td className="alert-message-cell">{alert.message}</td>
                                     <td><span className="alert-type-tag">{alert.alert_type.replace(/_/g, ' ')}</span></td>
                                     <td className="alert-time-cell">

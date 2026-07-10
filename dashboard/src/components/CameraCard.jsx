@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Clock, Zap, Globe, MoreVertical } from 'lucide-react';
+import { MapPin, Clock, Zap, Globe, Edit2, Power, WifiOff, VideoOff } from 'lucide-react';
 import StatusBadge from './StatusBadge';
 import { computeHealthScore, healthScoreColor, formatRelativeTime } from '../utils/helpers';
 
@@ -24,15 +24,15 @@ function ProgressBar({ label, value, warn = 75, crit = 90 }) {
     );
 }
 
-function CameraCard({ camera, onClick }) {
+function CameraCard({ camera, onClick, onToggle, onEdit }) {
     const health = camera.latest_health;
-    const isOnline = health && health.is_online;
-    const score = computeHealthScore(health);
-    const scoreColor = healthScoreColor(score);
+    const isOnline = health && health.is_online && camera.is_enabled;
+    const score = camera.is_enabled ? computeHealthScore(health) : 0;
+    const scoreColor = camera.is_enabled ? healthScoreColor(score) : 'var(--color-text-muted)';
 
     return (
         <article
-            className={`cam-card cam-card--${camera.status}`}
+            className={`cam-card cam-card--${camera.status} ${!camera.is_enabled ? 'cam-card--disabled' : ''}`}
             onClick={() => onClick && onClick(camera)}
             onKeyDown={(e) => e.key === 'Enter' && onClick && onClick(camera)}
             role="button"
@@ -46,9 +46,30 @@ function CameraCard({ camera, onClick }) {
             <div className="cam-card__top">
                 <div className="cam-card__identity">
                     <h3 className="cam-card__name">{camera.name || camera.id}</h3>
-                    <span className="cam-card__id">{camera.id}</span>
+                    <div className="cam-card__id-status">
+                        <span className="cam-card__id">{camera.id}</span>
+                        <StatusBadge status={camera.status} />
+                    </div>
                 </div>
-                <StatusBadge status={camera.status} />
+                
+                <div className="cam-card__quick-actions" onClick={(e) => e.stopPropagation()}>
+                    <button
+                        className="cam-card__quick-btn"
+                        onClick={() => onEdit && onEdit(camera)}
+                        title="Edit Camera"
+                        aria-label="Edit Camera settings"
+                    >
+                        <Edit2 size={13} />
+                    </button>
+                    <button
+                        className={`cam-card__quick-btn ${camera.is_enabled ? 'cam-card__quick-btn--active' : 'cam-card__quick-btn--inactive'}`}
+                        onClick={() => onToggle && onToggle(camera)}
+                        title={camera.is_enabled ? "Disable Camera" : "Enable Camera"}
+                        aria-label="Toggle Camera active state"
+                    >
+                        <Power size={13} />
+                    </button>
+                </div>
             </div>
 
             <div className="cam-card__location">
@@ -92,9 +113,15 @@ function CameraCard({ camera, onClick }) {
                 </>
             ) : (
                 <div className="cam-card__offline">
-                    <div className="cam-card__offline-icon">📡</div>
-                    <p className="cam-card__offline-title">Camera Offline</p>
-                    <p className="cam-card__offline-sub">Last seen: {formatRelativeTime(camera.last_heartbeat)}</p>
+                    <div className="cam-card__offline-icon" style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px', color: 'var(--color-text-muted)' }}>
+                        {camera.is_enabled ? <WifiOff size={24} /> : <VideoOff size={24} />}
+                    </div>
+                    <p className="cam-card__offline-title">{camera.is_enabled ? 'Camera Offline' : 'Camera Disabled'}</p>
+                    <p className="cam-card__offline-sub">
+                        {camera.is_enabled 
+                            ? `Last seen: ${formatRelativeTime(camera.last_heartbeat)}` 
+                            : 'Simulation feed paused'}
+                    </p>
                 </div>
             )}
 

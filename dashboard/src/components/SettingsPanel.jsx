@@ -1,140 +1,234 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { X, Save, RotateCcw, Cpu, MemoryStick, HardDrive, Globe, Clock } from 'lucide-react';
-import { fetchThresholds, updateThresholds } from '../services/api';
+import React, { useState, useEffect } from 'react';
+import { Save, RotateCcw, Cpu, MemoryStick, HardDrive, Globe, Clock, Sparkles } from 'lucide-react';
+import { fetchSettings, updateSettings } from '../services/api';
 
-function SettingsPanel({ isOpen, onClose, onSaved }) {
-    const [thresholds, setThresholds] = useState(null);
+export default function SettingsPanel({ addToast }) {
+    const [settings, setSettings] = useState(null);
     const [original, setOriginal] = useState(null);
     const [saving, setSaving] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    const loadSettings = async () => {
+        setLoading(true);
+        try {
+            const res = await fetchSettings();
+            setSettings(res.data);
+            setOriginal(res.data);
+        } catch (err) {
+            console.error('Failed to fetch settings:', err);
+            if (addToast) addToast('Failed to load global configurations', 'error');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        if (!isOpen) return;
-        fetchThresholds()
-            .then(res => {
-                setThresholds({ ...res.data });
-                setOriginal({ ...res.data });
-            })
-            .catch(() => { });
-    }, [isOpen]);
-
-    useEffect(() => {
-        if (!isOpen) return;
-        const handler = (e) => { if (e.key === 'Escape') onClose(); };
-        window.addEventListener('keydown', handler);
-        return () => window.removeEventListener('keydown', handler);
-    }, [isOpen, onClose]);
-
-    const handleChange = useCallback((key, value) => {
-        setThresholds(prev => ({ ...prev, [key]: parseFloat(value) || 0 }));
+        loadSettings();
     }, []);
 
-    const handleSave = async () => {
+    const handleChange = (key, val) => {
+        setSettings(prev => ({ ...prev, [key]: val }));
+    };
+
+    const handleSave = async (e) => {
+        e.preventDefault();
         setSaving(true);
         try {
-            await updateThresholds(thresholds);
-            setOriginal({ ...thresholds });
-            if (onSaved) onSaved('Thresholds updated successfully');
-        } catch {
-            if (onSaved) onSaved('Failed to update thresholds', true);
+            await updateSettings(settings);
+            setOriginal({ ...settings });
+            if (addToast) addToast('Global system configurations successfully updated', 'success');
+        } catch (err) {
+            if (addToast) addToast('Failed to update system configurations', 'error');
+        } finally {
+            setSaving(false);
         }
-        setSaving(false);
     };
 
     const handleReset = () => {
-        if (original) setThresholds({ ...original });
+        if (original) {
+            setSettings({ ...original });
+            if (addToast) addToast('Form reset to last saved state', 'info');
+        }
     };
 
-    if (!isOpen) return null;
-
-    const fields = [
-        {
-            group: 'CPU Thresholds', icon: Cpu, items: [
-                { key: 'cpu_warning', label: 'Warning (%)', min: 0, max: 100 },
-                { key: 'cpu_critical', label: 'Critical (%)', min: 0, max: 100 },
-            ]
-        },
-        {
-            group: 'Memory Thresholds', icon: MemoryStick, items: [
-                { key: 'memory_warning', label: 'Warning (%)', min: 0, max: 100 },
-                { key: 'memory_critical', label: 'Critical (%)', min: 0, max: 100 },
-            ]
-        },
-        {
-            group: 'Storage Thresholds', icon: HardDrive, items: [
-                { key: 'storage_warning', label: 'Warning (%)', min: 0, max: 100 },
-                { key: 'storage_critical', label: 'Critical (%)', min: 0, max: 100 },
-            ]
-        },
-        {
-            group: 'Network Thresholds', icon: Globe, items: [
-                { key: 'latency_warning', label: 'Warning (ms)', min: 0, max: 5000 },
-                { key: 'latency_critical', label: 'Critical (ms)', min: 0, max: 5000 },
-            ]
-        },
-        {
-            group: 'Heartbeat', icon: Clock, items: [
-                { key: 'heartbeat_timeout', label: 'Timeout (seconds)', min: 10, max: 600 },
-            ]
-        },
-    ];
+    if (loading) {
+        return (
+            <div className="settings-page">
+                <h2 className="page-title">Global Settings</h2>
+                <div className="skeleton-grid" style={{ marginTop: '20px' }}>
+                    <div className="skeleton-card" style={{ height: '250px' }}></div>
+                    <div className="skeleton-card" style={{ height: '250px' }}></div>
+                </div>
+            </div>
+        );
+    }
 
     return (
-        <>
-            <div className="drawer-overlay" onClick={onClose} aria-hidden="true" />
-            <aside className="drawer drawer--settings" role="dialog" aria-label="Settings">
-                <div className="drawer__header">
-                    <h2 className="drawer__title">Settings</h2>
-                    <button className="drawer__close" onClick={onClose} aria-label="Close settings">
-                        <X size={20} />
+        <div className="settings-page">
+            <div className="management-header">
+                <div>
+                    <h2 className="page-title">System Configurations</h2>
+                    <p className="page-subtitle">Configure thresholds and global simulator parameters stored in the database.</p>
+                </div>
+            </div>
+
+            <form onSubmit={handleSave} className="settings-form">
+                <div className="settings-grid">
+                    
+                    {/* Section: Metrics Thresholds */}
+                    <div className="settings-card">
+                        <div className="settings-card-header">
+                            <Cpu size={18} />
+                            <h3>Telemetry Alerts Thresholds</h3>
+                        </div>
+                        <div className="settings-card-body">
+                            <p className="settings-section-desc">Warning thresholds. Critical thresholds are computed automatically at ~1.2x warning levels.</p>
+                            
+                            <div className="form-group">
+                                <label htmlFor="set-cpu">CPU Warning Threshold (%)</label>
+                                <input
+                                    id="set-cpu"
+                                    type="number"
+                                    className="form-control"
+                                    value={settings.cpu_threshold ?? 75}
+                                    onChange={e => handleChange('cpu_threshold', parseFloat(e.target.value))}
+                                    min="1" max="100" required
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="set-mem">Memory Warning Threshold (%)</label>
+                                <input
+                                    id="set-mem"
+                                    type="number"
+                                    className="form-control"
+                                    value={settings.memory_threshold ?? 75}
+                                    onChange={e => handleChange('memory_threshold', parseFloat(e.target.value))}
+                                    min="1" max="100" required
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="set-storage">Storage Warning Threshold (%)</label>
+                                <input
+                                    id="set-storage"
+                                    type="number"
+                                    className="form-control"
+                                    value={settings.storage_threshold ?? 80}
+                                    onChange={e => handleChange('storage_threshold', parseFloat(e.target.value))}
+                                    min="1" max="100" required
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="set-latency">Network Latency Warning Threshold (ms)</label>
+                                <input
+                                    id="set-latency"
+                                    type="number"
+                                    className="form-control"
+                                    value={settings.latency_threshold ?? 200}
+                                    onChange={e => handleChange('latency_threshold', parseFloat(e.target.value))}
+                                    min="1" max="5000" required
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Section: Simulator Configurations */}
+                    <div className="settings-card">
+                        <div className="settings-card-header">
+                            <Sparkles size={18} />
+                            <h3>Global Telemetry Simulator Defaults</h3>
+                        </div>
+                        <div className="settings-card-body">
+                            <p className="settings-section-desc">Default parameters loaded by the simulator orchestrator for camera nodes.</p>
+
+                            <div className="form-group">
+                                <label htmlFor="set-cam-count">Default Camera Spawn Count</label>
+                                <input
+                                    id="set-cam-count"
+                                    type="number"
+                                    className="form-control"
+                                    value={settings.camera_count ?? 10}
+                                    onChange={e => handleChange('camera_count', parseInt(e.target.value))}
+                                    min="1" max="100" required
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="set-interval">Default Reporting Interval (seconds)</label>
+                                <input
+                                    id="set-interval"
+                                    type="number"
+                                    className="form-control"
+                                    value={settings.default_reporting_interval ?? 30}
+                                    onChange={e => handleChange('default_reporting_interval', parseInt(e.target.value))}
+                                    min="5" max="3600" required
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="set-fault-prob">Default Fault Probability (0.0 - 1.0)</label>
+                                <input
+                                    id="set-fault-prob"
+                                    type="number" step="0.01"
+                                    className="form-control"
+                                    value={settings.fault_probability ?? 0.05}
+                                    onChange={e => handleChange('fault_probability', parseFloat(e.target.value))}
+                                    min="0" max="1" required
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="set-offline-prob">Default Offline Probability (0.0 - 1.0)</label>
+                                <input
+                                    id="set-offline-prob"
+                                    type="number" step="0.01"
+                                    className="form-control"
+                                    value={settings.offline_probability ?? 0.03}
+                                    onChange={e => handleChange('offline_probability', parseFloat(e.target.value))}
+                                    min="0" max="1" required
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Section: Heartbeat Configuration */}
+                    <div className="settings-card full-width">
+                        <div className="settings-card-header">
+                            <Clock size={18} />
+                            <h3>Liveness Detection Config</h3>
+                        </div>
+                        <div className="settings-card-body">
+                            <div className="form-group">
+                                <label htmlFor="set-timeout">Heartbeat Offline Timeout (seconds)</label>
+                                <input
+                                    id="set-timeout"
+                                    type="number"
+                                    className="form-control"
+                                    value={settings.heartbeat_timeout ?? 90}
+                                    onChange={e => handleChange('heartbeat_timeout', parseInt(e.target.value))}
+                                    min="10" max="1200" required
+                                    style={{ maxWidth: '300px' }}
+                                />
+                                <small className="form-text text-muted" style={{ display: 'block', marginTop: '6px' }}>
+                                    Duration of telemetry silence after which a camera is flagged as "Offline".
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div className="settings-actions-bar">
+                    <button type="button" className="btn btn--ghost" onClick={handleReset} disabled={saving}>
+                        <RotateCcw size={15} /> Reset Form
+                    </button>
+                    <button type="submit" className="btn btn--primary" disabled={saving}>
+                        <Save size={15} /> {saving ? 'Saving Configurations...' : 'Save Settings'}
                     </button>
                 </div>
-
-                <div className="drawer__body">
-                    {!thresholds ? (
-                        <p className="drawer__loading">Loading thresholds...</p>
-                    ) : (
-                        <>
-                            {fields.map(group => (
-                                <section key={group.group} className="drawer__section">
-                                    <h3 className="drawer__section-title">
-                                        <group.icon size={16} /> {group.group}
-                                    </h3>
-                                    <div className="settings__fields">
-                                        {group.items.map(field => (
-                                            <div key={field.key} className="settings__field">
-                                                <label htmlFor={`setting-${field.key}`} className="settings__label">
-                                                    {field.label}
-                                                </label>
-                                                <input
-                                                    id={`setting-${field.key}`}
-                                                    type="number"
-                                                    className="settings__input"
-                                                    value={thresholds[field.key] ?? ''}
-                                                    onChange={e => handleChange(field.key, e.target.value)}
-                                                    min={field.min}
-                                                    max={field.max}
-                                                    step={1}
-                                                />
-                                            </div>
-                                        ))}
-                                    </div>
-                                </section>
-                            ))}
-
-                            <div className="settings__actions">
-                                <button className="btn btn--ghost" onClick={handleReset} disabled={saving}>
-                                    <RotateCcw size={15} /> Reset
-                                </button>
-                                <button className="btn btn--primary" onClick={handleSave} disabled={saving}>
-                                    <Save size={15} /> {saving ? 'Saving...' : 'Save Changes'}
-                                </button>
-                            </div>
-                        </>
-                    )}
-                </div>
-            </aside>
-        </>
+            </form>
+        </div>
     );
 }
-
-export default React.memo(SettingsPanel);

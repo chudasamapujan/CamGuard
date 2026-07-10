@@ -4,7 +4,7 @@ import CameraCard from './CameraCard';
 import { SkeletonCard } from './Skeleton';
 import EmptyState from './EmptyState';
 
-function CameraGrid({ cameras, loading, onCameraClick }) {
+function CameraGrid({ cameras, loading, onCameraClick, onToggle, onEdit, onAddCamera }) {
     const [search, setSearch] = useState('');
     const [statusFilter, setStatusFilter] = useState('all');
     const [showFilters, setShowFilters] = useState(false);
@@ -17,15 +17,27 @@ function CameraGrid({ cameras, loading, onCameraClick }) {
                 c.id?.toLowerCase().includes(search.toLowerCase()) ||
                 c.location?.toLowerCase().includes(search.toLowerCase());
 
-            const matchesStatus = statusFilter === 'all' || c.status === statusFilter;
-            return matchesSearch && matchesStatus;
+            if (statusFilter === 'all') {
+                return matchesSearch;
+            }
+            if (statusFilter === 'disabled') {
+                return matchesSearch && !c.is_enabled;
+            }
+            // For other statuses, must be enabled and match status
+            return matchesSearch && c.is_enabled && c.status === statusFilter;
         });
     }, [cameras, search, statusFilter]);
 
     const statusCounts = useMemo(() => {
         if (!cameras) return {};
-        const counts = { all: cameras.length, online: 0, warning: 0, critical: 0, offline: 0 };
-        cameras.forEach(c => { if (counts[c.status] !== undefined) counts[c.status]++; });
+        const counts = { all: cameras.length, online: 0, warning: 0, critical: 0, offline: 0, disabled: 0 };
+        cameras.forEach(c => {
+            if (!c.is_enabled) {
+                counts.disabled++;
+            } else if (counts[c.status] !== undefined) {
+                counts[c.status]++;
+            }
+        });
         return counts;
     }, [cameras]);
 
@@ -39,6 +51,15 @@ function CameraGrid({ cameras, loading, onCameraClick }) {
         );
     }
 
+    const filters = [
+        { key: 'all', label: 'All' },
+        { key: 'online', label: 'Healthy' },
+        { key: 'warning', label: 'Warning' },
+        { key: 'critical', label: 'Critical' },
+        { key: 'offline', label: 'Offline' },
+        { key: 'disabled', label: 'Disabled' }
+    ];
+
     return (
         <section className="camera-section" aria-label="Camera fleet">
             {/* Toolbar */}
@@ -47,7 +68,7 @@ function CameraGrid({ cameras, loading, onCameraClick }) {
                     <Search size={16} />
                     <input
                         type="text"
-                        placeholder="Search cameras..."
+                        placeholder="Search fleet by Camera Name, ID, or Location..."
                         value={search}
                         onChange={e => setSearch(e.target.value)}
                         aria-label="Search cameras by name, ID, or location"
@@ -67,22 +88,22 @@ function CameraGrid({ cameras, loading, onCameraClick }) {
                     aria-controls="camera-filters"
                 >
                     <SlidersHorizontal size={15} />
-                    <span>Filters</span>
+                    <span>Filters ({statusFilter.toUpperCase()})</span>
                 </button>
             </div>
 
             {/* Filter bar */}
             {showFilters && (
                 <div className="camera-filters" id="camera-filters" role="group" aria-label="Status filters">
-                    {['all', 'online', 'warning', 'critical', 'offline'].map(s => (
+                    {filters.map(f => (
                         <button
-                            key={s}
-                            className={`filter-chip ${statusFilter === s ? 'filter-chip--active' : ''} ${s !== 'all' ? `filter-chip--${s}` : ''}`}
-                            onClick={() => setStatusFilter(s)}
-                            aria-pressed={statusFilter === s}
+                            key={f.key}
+                            className={`filter-chip ${statusFilter === f.key ? 'filter-chip--active' : ''} ${f.key !== 'all' ? `filter-chip--${f.key}` : ''}`}
+                            onClick={() => setStatusFilter(f.key)}
+                            aria-pressed={statusFilter === f.key}
                         >
-                            {s.charAt(0).toUpperCase() + s.slice(1)}
-                            <span className="filter-chip__count">{statusCounts[s] ?? 0}</span>
+                            {f.label}
+                            <span className="filter-chip__count">{statusCounts[f.key] ?? 0}</span>
                         </button>
                     ))}
                 </div>
@@ -90,21 +111,35 @@ function CameraGrid({ cameras, loading, onCameraClick }) {
 
             {/* Grid */}
             {filtered.length === 0 ? (
-                <EmptyState
-                    type="cameras"
-                    title={search || statusFilter !== 'all' ? 'No cameras match your filters' : undefined}
-                    description={search || statusFilter !== 'all' ? 'Try adjusting your search or filters.' : undefined}
-                />
+                cameras && cameras.length === 0 ? (
+                    <EmptyState
+                        type="setup"
+                        onAction={onAddCamera}
+                        actionLabel="Register Your First Camera"
+                    />
+                ) : (
+                    <EmptyState
+                        type="cameras"
+                        title="No cameras match your filters"
+                        description="Try adjusting your search or filters."
+                    />
+                )
             ) : (
                 <div className="camera-grid">
                     {filtered.map(cam => (
-                        <CameraCard key={cam.id} camera={cam} onClick={onCameraClick} />
+                        <CameraCard
+                            key={cam.id}
+                            camera={cam}
+                            onClick={onCameraClick}
+                            onToggle={onToggle}
+                            onEdit={onEdit}
+                        />
                     ))}
                 </div>
             )}
 
             <p className="camera-section__count">
-                Showing {filtered.length} of {cameras?.length ?? 0} cameras
+                Showing {filtered.length} of {cameras?.length ?? 0} cameras in fleet
             </p>
         </section>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Camera, Bell, FileBarChart } from 'lucide-react';
+import { Camera, Bell, FileBarChart, Plus, Video } from 'lucide-react';
 
 const presets = {
     cameras: {
@@ -17,19 +17,30 @@ const presets = {
         title: 'No Historical Data',
         description: 'Data will appear once cameras begin reporting metrics.',
     },
+    setup: {
+        icon: Video,
+        title: 'No cameras configured yet',
+        description: 'Get started by registering your first camera. The simulator will automatically begin generating health telemetry once a camera is added.',
+    },
 };
 
-function EmptyState({ type = 'cameras', title, description }) {
+function EmptyState({ type = 'cameras', title, description, onAction, actionLabel }) {
     const preset = presets[type] || presets.cameras;
     const Icon = preset.icon;
 
     return (
         <div className="empty-state" role="status">
             <div className="empty-state__icon">
-                <Icon size={40} strokeWidth={1.5} />
+                <Icon size={48} strokeWidth={1.5} />
             </div>
             <h3 className="empty-state__title">{title || preset.title}</h3>
             <p className="empty-state__desc">{description || preset.description}</p>
+            {onAction && (
+                <button className="btn btn--primary empty-state__cta" onClick={onAction}>
+                    <Plus size={18} />
+                    {actionLabel || 'Add Camera'}
+                </button>
+            )}
         </div>
     );
 }

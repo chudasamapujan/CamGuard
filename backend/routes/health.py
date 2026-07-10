@@ -37,14 +37,18 @@ def ingest_health_data():
     camera_id = data["camera_id"]
 
     # Auto-register camera if it doesn't exist
-    camera = Camera.query.get(camera_id)
+    camera = db.session.get(Camera, camera_id)
     if not camera:
         camera = Camera(
             id=camera_id,
             name=data.get("name", f"Camera {camera_id}"),
             location=data.get("location", "Unknown"),
+            is_enabled=True,
+            status="offline"
         )
         db.session.add(camera)
+    elif not camera.is_enabled:
+        return jsonify({"error": f"Camera {camera_id} is disabled", "is_enabled": False}), 400
 
     # Update camera status based on health data
     is_online = data.get("is_online", True)
@@ -54,12 +58,15 @@ def ingest_health_data():
     latency = data.get("network_latency", 0)
     fault = data.get("fault_type")
 
+    from backend.services.threshold import get_db_thresholds
+    thresholds = get_db_thresholds()
+
     # Determine status: critical > warning > online > offline
     if not is_online or fault:
         camera.status = "critical"
-    elif cpu >= 90 or memory >= 90 or storage >= 95 or latency >= 500:
+    elif cpu >= thresholds["cpu_critical"] or memory >= thresholds["memory_critical"] or storage >= thresholds["storage_critical"] or latency >= thresholds["latency_critical"]:
         camera.status = "critical"
-    elif cpu >= 75 or memory >= 75 or storage >= 80 or latency >= 200:
+    elif cpu >= thresholds["cpu_warning"] or memory >= thresholds["memory_warning"] or storage >= thresholds["storage_warning"] or latency >= thresholds["latency_warning"]:
         camera.status = "warning"
     else:
         camera.status = "online"

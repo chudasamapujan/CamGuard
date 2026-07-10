@@ -34,16 +34,20 @@ parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
-from simulator.config import FAULT_TYPES, FAULT_PROBABILITY, OFFLINE_PROBABILITY
+from simulator.config import FAULT_TYPES
 
 
 class Camera:
     """Simulates a single camera with realistic health metric behavior."""
 
-    def __init__(self, camera_id, name, location):
+    def __init__(self, camera_id, name, location, storage_capacity=100.0, reporting_interval=30, fault_probability=0.05, offline_probability=0.03):
         self.camera_id = camera_id
         self.name = name
         self.location = location
+        self.storage_capacity = storage_capacity
+        self.reporting_interval = reporting_interval
+        self.fault_probability = fault_probability
+        self.offline_probability = offline_probability
 
         # Initialize with "normal" baseline values
         self.cpu_usage = random.uniform(20, 45)
@@ -69,7 +73,7 @@ class Camera:
         self.fault_type = None
 
         # Check if camera goes offline this tick
-        if random.random() < OFFLINE_PROBABILITY and self.is_online:
+        if random.random() < self.offline_probability and self.is_online:
             self.is_online = False
         elif not self.is_online:
             # 50% chance to come back online each tick
@@ -91,7 +95,7 @@ class Camera:
         self.network_latency = self._drift(self.network_latency, 5, 150, max_delta=15)
 
         # Fault injection
-        if random.random() < FAULT_PROBABILITY:
+        if random.random() < self.fault_probability:
             self.fault_type = random.choice(FAULT_TYPES)
             # Faults cause metric spikes
             self.cpu_usage = random.uniform(80, 99)

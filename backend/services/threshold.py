@@ -14,6 +14,27 @@ Design decisions:
 from backend.config import Config
 
 
+def get_db_thresholds():
+    """Retrieve thresholds dynamically from the settings DB table."""
+    try:
+        from backend.models import Setting
+        settings = Setting.query.all()
+        s_dict = {s.key: s.value for s in settings}
+        return {
+            "cpu_warning": float(s_dict.get("cpu_threshold", 75.0)),
+            "cpu_critical": float(s_dict.get("cpu_threshold", 75.0)) * 1.2,
+            "memory_warning": float(s_dict.get("memory_threshold", 75.0)),
+            "memory_critical": float(s_dict.get("memory_threshold", 75.0)) * 1.2,
+            "storage_warning": float(s_dict.get("storage_threshold", 80.0)),
+            "storage_critical": float(s_dict.get("storage_threshold", 80.0)) * 1.15,
+            "latency_warning": float(s_dict.get("latency_threshold", 200.0)),
+            "latency_critical": float(s_dict.get("latency_threshold", 200.0)) * 2.5,
+            "heartbeat_timeout": int(s_dict.get("heartbeat_timeout", 90)),
+        }
+    except Exception:
+        return Config.THRESHOLDS
+
+
 def check_thresholds(health_data, thresholds=None):
     """
     Check health data against thresholds and return violations.
@@ -21,13 +42,13 @@ def check_thresholds(health_data, thresholds=None):
     Args:
         health_data: dict with cpu_usage, memory_usage, storage_usage,
                      network_latency, is_online, fault_type
-        thresholds: dict of threshold values (uses Config defaults if None)
+        thresholds: dict of threshold values (uses database settings if None)
 
     Returns:
         list of dicts: [{alert_type, severity, message}, ...]
     """
     if thresholds is None:
-        thresholds = Config.THRESHOLDS
+        thresholds = get_db_thresholds()
 
     violations = []
     camera_id = health_data.get("camera_id", "UNKNOWN")

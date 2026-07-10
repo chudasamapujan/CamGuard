@@ -1,16 +1,25 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
     Camera, Wifi, WifiOff, AlertTriangle, AlertCircle,
-    Cpu, MemoryStick, HardDrive, Activity,
+    Cpu, MemoryStick, HardDrive, ShieldOff, ChevronDown, ChevronUp
 } from 'lucide-react';
 import { SkeletonSummaryCard } from './Skeleton';
 
 function SummaryCards({ summary, cameras, loading }) {
+    const [showSecondary, setShowSecondary] = useState(false);
+
     const avgMetrics = useMemo(() => {
+        if (summary && summary.avg_cpu !== undefined) {
+            return {
+                cpu: summary.avg_cpu,
+                mem: summary.avg_mem,
+                sto: summary.avg_storage
+            };
+        }
         if (!cameras || cameras.length === 0) return { cpu: 0, mem: 0, sto: 0 };
         let cpuSum = 0, memSum = 0, stoSum = 0, count = 0;
         cameras.forEach(c => {
-            if (c.latest_health && c.latest_health.is_online) {
+            if (c.latest_health && c.latest_health.is_online && c.is_enabled) {
                 cpuSum += c.latest_health.cpu_usage;
                 memSum += c.latest_health.memory_usage;
                 stoSum += c.latest_health.storage_usage;
@@ -23,102 +32,164 @@ function SummaryCards({ summary, cameras, loading }) {
             mem: (memSum / count).toFixed(1),
             sto: (stoSum / count).toFixed(1),
         };
-    }, [cameras]);
+    }, [cameras, summary]);
 
     if (loading) {
         return (
             <section className="summary-row" aria-label="Loading summary">
-                {Array.from({ length: 8 }).map((_, i) => (
+                {Array.from({ length: 6 }).map((_, i) => (
                     <SkeletonSummaryCard key={i} />
                 ))}
             </section>
         );
     }
 
-    const cards = [
+    const primaryCards = [
         {
             id: 'total',
             label: 'Total Cameras',
-            value: summary?.total_cameras ?? 0,
+            value: summary?.total_cameras ?? cameras?.length ?? 0,
             icon: Camera,
-            color: 'var(--color-primary)',
-            bg: 'var(--kpi-bg-primary)',
+            color: '#2563EB',
+            bg: 'rgba(37, 99, 235, 0.1)',
         },
         {
             id: 'online',
-            label: 'Online',
+            label: 'Healthy',
             value: summary?.online ?? 0,
             icon: Wifi,
-            color: 'var(--color-success)',
-            bg: 'var(--kpi-bg-success)',
+            color: '#16A34A',
+            bg: 'rgba(22, 163, 74, 0.1)',
+        },
+        {
+            id: 'critical',
+            label: 'Critical',
+            value: summary?.critical ?? 0,
+            icon: AlertCircle,
+            color: '#DC2626',
+            bg: 'rgba(220, 38, 38, 0.1)',
         },
         {
             id: 'offline',
             label: 'Offline',
             value: summary?.offline ?? 0,
             icon: WifiOff,
-            color: 'var(--color-muted)',
-            bg: 'var(--kpi-bg-muted)',
-        },
-        {
-            id: 'warning',
-            label: 'Warnings',
-            value: summary?.warning_alerts ?? 0,
-            icon: AlertTriangle,
-            color: 'var(--color-warning)',
-            bg: 'var(--kpi-bg-warning)',
-        },
-        {
-            id: 'critical',
-            label: 'Critical',
-            value: summary?.critical_alerts ?? 0,
-            icon: AlertCircle,
-            color: 'var(--color-critical)',
-            bg: 'var(--kpi-bg-critical)',
+            color: '#64748B',
+            bg: 'rgba(100, 116, 139, 0.1)',
         },
         {
             id: 'cpu',
-            label: 'Avg CPU',
+            label: 'Average CPU',
             value: `${avgMetrics.cpu}%`,
             icon: Cpu,
-            color: 'var(--color-primary)',
-            bg: 'var(--kpi-bg-primary)',
+            color: '#2563EB',
+            bg: 'rgba(37, 99, 235, 0.1)',
         },
         {
             id: 'mem',
-            label: 'Avg Memory',
+            label: 'Average Memory',
             value: `${avgMetrics.mem}%`,
             icon: MemoryStick,
-            color: 'var(--color-info)',
-            bg: 'var(--kpi-bg-info)',
+            color: '#7C3AED',
+            bg: 'rgba(124, 58, 237, 0.1)',
+        },
+    ];
+
+    const secondaryCards = [
+        {
+            id: 'warning',
+            label: 'Warning Status',
+            value: summary?.warning ?? 0,
+            icon: AlertTriangle,
+            color: '#F59E0B',
+            bg: 'rgba(245, 158, 11, 0.1)',
+        },
+        {
+            id: 'disabled',
+            label: 'Disabled',
+            value: summary?.disabled ?? 0,
+            icon: ShieldOff,
+            color: '#64748B',
+            bg: 'rgba(100, 116, 139, 0.1)',
         },
         {
             id: 'sto',
-            label: 'Avg Storage',
+            label: 'Average Storage',
             value: `${avgMetrics.sto}%`,
             icon: HardDrive,
-            color: 'var(--color-warning)',
-            bg: 'var(--kpi-bg-warning)',
+            color: '#F59E0B',
+            bg: 'rgba(245, 158, 11, 0.1)',
         },
     ];
 
     return (
-        <section className="summary-row" aria-label="Key performance indicators">
-            {cards.map(card => {
-                const Icon = card.icon;
-                return (
-                    <div key={card.id} className="kpi-card" id={`kpi-${card.id}`}>
-                        <div className="kpi-card__icon" style={{ background: card.bg, color: card.color }}>
-                            <Icon size={20} />
+        <div className="summary-section">
+            <section className="summary-row" aria-label="Primary indicators" style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                gap: '12px',
+                marginBottom: '16px'
+            }}>
+                {primaryCards.map(card => {
+                    const Icon = card.icon;
+                    return (
+                        <div key={card.id} className="kpi-card" id={`kpi-${card.id}`}>
+                            <div className="kpi-card__icon" style={{ background: card.bg, color: card.color }}>
+                                <Icon size={20} />
+                            </div>
+                            <div className="kpi-card__body">
+                                <span className="kpi-card__value">{card.value}</span>
+                                <span className="kpi-card__label">{card.label}</span>
+                            </div>
                         </div>
-                        <div className="kpi-card__body">
-                            <span className="kpi-card__value">{card.value}</span>
-                            <span className="kpi-card__label">{card.label}</span>
-                        </div>
-                    </div>
-                );
-            })}
-        </section>
+                    );
+                })}
+            </section>
+
+            <div className="secondary-metrics-accordion" style={{ marginBottom: '16px' }}>
+                <button
+                    className="btn btn--secondary btn--sm"
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        fontSize: '0.8rem',
+                        fontWeight: 600,
+                        padding: '6px 12px',
+                        cursor: 'pointer'
+                    }}
+                    onClick={() => setShowSecondary(!showSecondary)}
+                >
+                    {showSecondary ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                    <span>{showSecondary ? 'Hide' : 'Show'} Secondary Metrics</span>
+                </button>
+
+                {showSecondary && (
+                    <section className="summary-row secondary-summary-row" aria-label="Secondary indicators" style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                        gap: '12px',
+                        marginTop: '12px',
+                        animation: 'fadeIn 0.2s ease-out'
+                    }}>
+                        {secondaryCards.map(card => {
+                            const Icon = card.icon;
+                            return (
+                                <div key={card.id} className="kpi-card kpi-card--secondary" id={`kpi-${card.id}`} style={{ opacity: 0.9 }}>
+                                    <div className="kpi-card__icon" style={{ background: card.bg, color: card.color }}>
+                                        <Icon size={20} />
+                                    </div>
+                                    <div className="kpi-card__body">
+                                        <span className="kpi-card__value">{card.value}</span>
+                                        <span className="kpi-card__label">{card.label}</span>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </section>
+                )}
+            </div>
+        </div>
     );
 }
 

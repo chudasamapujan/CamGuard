@@ -29,10 +29,48 @@ class Camera(db.Model):
     status = db.Column(db.String(20), default="offline")  # online/offline/warning/critical
     last_heartbeat = db.Column(db.DateTime, nullable=True)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    
+    # New configurations
+    storage_capacity = db.Column(db.Float, default=100.0)      # in GB
+    reporting_interval = db.Column(db.Integer, default=30)     # in seconds
+    fault_probability = db.Column(db.Float, default=0.05)      # 0.0 to 1.0
+    offline_probability = db.Column(db.Float, default=0.03)    # 0.0 to 1.0
+    is_enabled = db.Column(db.Boolean, default=True)
+    notes = db.Column(db.String(500), nullable=True)
 
     # Relationships
-    health_records = db.relationship("HealthRecord", backref="camera", lazy="dynamic")
-    alerts = db.relationship("Alert", backref="camera", lazy="dynamic")
+    health_records = db.relationship("HealthRecord", back_populates="camera", lazy="dynamic")
+    alerts = db.relationship("Alert", back_populates="camera", lazy="dynamic")
+
+    def __init__(
+        self,
+        id,
+        name,
+        location="Unknown",
+        status="offline",
+        last_heartbeat=None,
+        created_at=None,
+        storage_capacity=100.0,
+        reporting_interval=30,
+        fault_probability=0.05,
+        offline_probability=0.03,
+        is_enabled=True,
+        notes="",
+        **kwargs
+    ):
+        self.id = id
+        self.name = name
+        self.location = location
+        self.status = status
+        self.last_heartbeat = last_heartbeat
+        if created_at is not None:
+            self.created_at = created_at
+        self.storage_capacity = storage_capacity
+        self.reporting_interval = reporting_interval
+        self.fault_probability = fault_probability
+        self.offline_probability = offline_probability
+        self.is_enabled = is_enabled
+        self.notes = notes
 
     def to_dict(self):
         return {
@@ -42,6 +80,12 @@ class Camera(db.Model):
             "status": self.status,
             "last_heartbeat": self.last_heartbeat.isoformat() if self.last_heartbeat else None,
             "created_at": self.created_at.isoformat() if self.created_at else None,
+            "storage_capacity": self.storage_capacity,
+            "reporting_interval": self.reporting_interval,
+            "fault_probability": self.fault_probability,
+            "offline_probability": self.offline_probability,
+            "is_enabled": self.is_enabled,
+            "notes": self.notes,
         }
 
 
@@ -61,6 +105,31 @@ class HealthRecord(db.Model):
     timestamp = db.Column(
         db.DateTime, default=lambda: datetime.now(timezone.utc), index=True
     )
+
+    # Relationships
+    camera = db.relationship("Camera", back_populates="health_records")
+
+    def __init__(
+        self,
+        camera_id,
+        cpu_usage,
+        memory_usage,
+        storage_usage,
+        network_latency,
+        is_online=True,
+        fault_type=None,
+        timestamp=None,
+        **kwargs
+    ):
+        self.camera_id = camera_id
+        self.cpu_usage = cpu_usage
+        self.memory_usage = memory_usage
+        self.storage_usage = storage_usage
+        self.network_latency = network_latency
+        self.is_online = is_online
+        self.fault_type = fault_type
+        if timestamp is not None:
+            self.timestamp = timestamp
 
     def to_dict(self):
         return {
@@ -92,14 +161,59 @@ class Alert(db.Model):
     )
     resolved_at = db.Column(db.DateTime, nullable=True)
 
+    # Relationships
+    camera = db.relationship("Camera", back_populates="alerts")
+
+    def __init__(
+        self,
+        camera_id,
+        alert_type,
+        severity,
+        message,
+        resolved=False,
+        created_at=None,
+        resolved_at=None,
+        **kwargs
+    ):
+        self.camera_id = camera_id
+        self.alert_type = alert_type
+        self.severity = severity
+        self.message = message
+        self.resolved = resolved
+        if created_at is not None:
+            self.created_at = created_at
+        if resolved_at is not None:
+            self.resolved_at = resolved_at
+
     def to_dict(self):
         return {
             "id": self.id,
             "camera_id": self.camera_id,
+            "camera_name": self.camera.name if self.camera else "Unknown",
+            "location": self.camera.location if self.camera else "Unknown",
             "alert_type": self.alert_type,
             "severity": self.severity,
             "message": self.message,
             "resolved": self.resolved,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "resolved_at": self.resolved_at.isoformat() if self.resolved_at else None,
+        }
+
+
+class Setting(db.Model):
+    """Represents a global configuration setting stored in the database."""
+
+    __tablename__ = "settings"
+
+    key = db.Column(db.String(50), primary_key=True)
+    value = db.Column(db.String(255), nullable=False)
+
+    def __init__(self, key, value, **kwargs):
+        self.key = key
+        self.value = value
+
+    def to_dict(self):
+        return {
+            "key": self.key,
+            "value": self.value,
         }
