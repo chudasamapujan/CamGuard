@@ -115,11 +115,13 @@ export default function MetricChart({ cameraId, cameraName }) {
                 },
             },
             tooltip: {
-                backgroundColor: 'rgba(20,20,40,0.95)',
-                titleFont: { family: "'Inter', sans-serif" },
-                bodyFont: { family: "'Inter', sans-serif" },
+                backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                titleColor: '#FFFFFF',
+                bodyColor: '#94A3B8',
                 borderColor: 'rgba(255,255,255,0.1)',
                 borderWidth: 1,
+                titleFont: { family: "'Inter', sans-serif" },
+                bodyFont: { family: "'Inter', sans-serif" },
             },
         },
         scales: {

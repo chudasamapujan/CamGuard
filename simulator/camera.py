@@ -25,6 +25,15 @@ Design decisions:
 """
 
 import random
+import os
+import sys
+
+# Resolve package name conflicts when executing simulator files directly
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
 from simulator.config import FAULT_TYPES, FAULT_PROBABILITY, OFFLINE_PROBABILITY
 
 
