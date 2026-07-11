@@ -66,11 +66,13 @@ class HealthEvaluationService:
 
     @classmethod
     def list_cameras(cls):
-        """List all cameras with dynamic status and latest health metrics."""
+        """List all active cameras with dynamic status and latest health metrics."""
         try:
             settings = ConfigurationService.get_all_settings()
             bounds = cls.get_threshold_bounds(settings)
-            cameras = Camera.query.order_by(Camera.id.asc()).all()
+            
+            # Enforce querying only active devices
+            cameras = Camera.query.filter_by(active=True).order_by(Camera.id.asc()).all()
 
             result = []
             for cam in cameras:
@@ -99,7 +101,7 @@ class HealthEvaluationService:
 
     @classmethod
     def get_camera(cls, camera_id):
-        """Get details for a single camera."""
+        """Get details for a single camera (supports both active and inactive units)."""
         try:
             cam = db.session.get(Camera, camera_id)
             if not cam:
@@ -129,11 +131,13 @@ class HealthEvaluationService:
 
     @classmethod
     def get_dashboard_summary(cls):
-        """Retrieve aggregated dashboard stats."""
+        """Retrieve aggregated dashboard stats only for active devices."""
         try:
             settings = ConfigurationService.get_all_settings()
             bounds = cls.get_threshold_bounds(settings)
-            cameras = Camera.query.all()
+            
+            # Query active devices exclusively
+            cameras = Camera.query.filter_by(active=True).all()
 
             total = len(cameras)
             online = 0
@@ -171,9 +175,14 @@ class HealthEvaluationService:
 
             db.session.commit()
 
-            active_alerts = Alert.query.filter_by(resolved=False).count()
-            critical_alerts = Alert.query.filter_by(resolved=False, severity="critical").count()
-            warning_alerts = Alert.query.filter_by(resolved=False, severity="warning").count()
+            # Filter active alerts to only those belonging to active cameras
+            active_alerts = db.session.query(Alert).join(Camera).filter(
+                Alert.resolved == False,
+                Camera.active == True
+            ).all()
+
+            critical_alerts = sum(1 for a in active_alerts if a.severity == "critical")
+            warning_alerts = sum(1 for a in active_alerts if a.severity == "warning")
 
             return {
                 "total_cameras": total,
@@ -181,7 +190,7 @@ class HealthEvaluationService:
                 "warning": warning,
                 "critical": critical,
                 "offline": offline,
-                "active_alerts": active_alerts,
+                "active_alerts": len(active_alerts),
                 "critical_alerts": critical_alerts,
                 "warning_alerts": warning_alerts,
                 "avg_cpu": round(total_cpu / active_count, 1) if active_count > 0 else 0.0,

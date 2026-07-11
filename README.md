@@ -7,13 +7,22 @@ A production-ready monitoring platform for security cameras, inspired by Datadog
 ## 🏗️ Architecture
 
 ```
-+--------------------------+          +-------------------------+          +------------------------+
-|                          |          |                         |          |                        |
-|  Camera Telemetry        |  POST    |  Flask API Server       |  Read    |  React SPA Dashboard   |
-|  Simulator               | -------->|  (Services & Route      | <--------|  (Summary, Grid,       |
-|  (Thread-based scaling)  |  JSON    |  Controllers)           |  JSON    |  Charts, Alerts Log)   |
-|                          |          |                         |          |                        |
-+--------------------------+          +-------------------------+          +------------------------+
++--------------------------+          +-------------------------+
+|                          |          |                         |
+|  Camera Telemetry        |  POST    |  Flask API Server       |
+|  Simulator               | -------->|  (Services & Route      |
+|  (Thread-based scaling)  |  JSON    |  Controllers)           |
+|                          |          |                         |
++--------------------------+          +-------------------------+
+                                                   |
+                                                   | Emit Socket.IO Events
+                                                   v
+                                      +-------------------------+
+                                      |                         |
+                                      |  React SPA Dashboard    |
+                                      |  (🟢 Live connection)    |
+                                      |                         |
+                                      +-------------------------+
                                                    |
                                                    | SQLite DB
                                                    v
@@ -28,11 +37,17 @@ A production-ready monitoring platform for security cameras, inspired by Datadog
                                       +-------------------------+
 ```
 
-### System Flow
-1. **Dynamic Initialization**: On startup, the backend spins up and automatically seeds default system configuration options (camera count, intervals, alerting thresholds) into the SQLite database.
-2. **Telemetry Ingestion**: The Telemetry Simulator pulls the current camera count, reporting interval, and fault probability from `/settings`. It dynamically scales the telemetry threads to simulate that exact camera fleet, generating drift-based health metrics (CPU, Memory, Storage, network latency) and posting them to `/health`.
-3. **Health Evaluation & Auto-Alerting**: The backend receives the metrics, logs a new time-series record, and evaluates them against warning/critical thresholds. If values cross thresholds, a warning or critical alert is generated automatically. When metrics return to normal, active alerts are auto-resolved.
-4. **Interactive Dashboard**: The React client polls summary data, camera status grids, history charts, and recent alerts every 5 seconds, maintaining real-time system visibility.
+### Real-Time Flow
+1. **Dynamic Initialization**: On startup, the backend spins up and automatically seeds default system configurations into SQLite.
+2. **Telemetry Ingestion**: The Telemetry Simulator queries settings and spawns telemetry threads generating metrics, posting them to `/health`.
+3. **Health Evaluation**: The backend evaluates records against thresholds.
+4. **WebSocket Broadcast**: On successful evaluations and db commits, the backend immediately emits events via Socket.IO:
+   - `camera_update`: Broadcasts updated metrics of the camera.
+   - `dashboard_summary`: Broadcasts aggregated system counts.
+   - `alert_created`: Emitted when warning/critical bounds are breached.
+   - `alert_resolved`: Emitted when metrics return to normal or when manually resolved.
+   - `settings_updated`: Emitted when settings are adjusted.
+5. **Interactive Dashboard**: The React client subscribes to these events via `socket.io-client` for sub-second UI updates, maintaining a connection status banner (`🟢 Live` or `🔴 Disconnected`) in the header.
 
 ---
 
@@ -150,9 +165,9 @@ Available interactively at `http://localhost:5000/docs`.
 ---
 
 ## 💡 Future Improvements
-- **WebSockets / Socket.io**: Replace 5-second polling with event-driven WebSockets for sub-second telemetry updates.
 - **User Authentication**: Implement OAuth/JWT authentication to prevent unauthorized setting overrides.
 - **Slack/Email Webhooks**: Integrate Slack notification triggers on critical database incidents.
+- **InfluxDB Time-series**: Move telemetry records to a dedicated TSDB.
 
 ---
 

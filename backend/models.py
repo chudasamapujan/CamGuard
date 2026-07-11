@@ -17,24 +17,28 @@ class Camera(db.Model):
     name = db.Column(db.String(100), nullable=False)
     status = db.Column(db.String(20), default="offline")  # online, warning, critical, offline
     last_heartbeat = db.Column(db.DateTime, nullable=True)
+    active = db.Column(db.Boolean, default=True, nullable=False)
 
     # Relationships
     health_records = db.relationship("HealthRecord", back_populates="camera", cascade="all, delete-orphan", lazy="dynamic")
     alerts = db.relationship("Alert", back_populates="camera", cascade="all, delete-orphan", lazy="dynamic")
 
-    def __init__(self, id, name, status="offline", last_heartbeat=None, **kwargs):
+    def __init__(self, id, name, status="offline", last_heartbeat=None, active=True, **kwargs):
         self.id = id
         self.name = name
         self.status = status
         self.last_heartbeat = last_heartbeat
+        self.active = active
 
     def to_dict(self):
         return {
             "id": self.id,
             "name": self.name,
             "status": self.status,
-            "last_heartbeat": serialize_dt(self.last_heartbeat)
+            "last_heartbeat": serialize_dt(self.last_heartbeat),
+            "active": self.active
         }
+
 
 class HealthRecord(db.Model):
     """Time-series telemetry packet from a camera."""

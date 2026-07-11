@@ -155,8 +155,8 @@ def main():
             except Exception as e:
                 print(f"  {RED}[x] Orchestrator sync error: {e}{RESET}")
 
-            # Sleep 10s between checks
-            for _ in range(10):
+            # Sleep 2s between checks for rapid config changes responsiveness
+            for _ in range(2):
                 if stop_orchestrator:
                     break
                 time.sleep(1)

@@ -39,7 +39,7 @@ function Header({ apiStatus = 'online', lastUpdated, onRefresh }) {
                 {/* Backend Connection Status */}
                 <div className={`status-badge-header status-badge-header--${apiStatus}`} title="Backend Connection Status">
                     <Server size={14} />
-                    <span>Backend {apiStatus === 'online' ? 'Connected' : 'Offline'}</span>
+                    <span>{apiStatus === 'online' ? '🟢 Live' : '🔴 Disconnected'}</span>
                 </div>
 
                 <div className="header__last-update" style={{ display: 'flex', alignItems: 'center', fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>

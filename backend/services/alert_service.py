@@ -4,6 +4,12 @@ from backend.database import db
 from backend.models import Camera, HealthRecord, Alert
 from backend.services.configuration_service import ConfigurationService
 from backend.services.health_evaluation_service import HealthEvaluationService
+from backend.socket_manager import (
+    broadcast_camera_update,
+    broadcast_alert_created,
+    broadcast_alert_resolved,
+    broadcast_dashboard_summary
+)
 
 logger = logging.getLogger(__name__)
 
@@ -17,15 +23,33 @@ class AlertService:
         camera_id = data["camera_id"]
         
         try:
-            # 1. Auto-register camera if missing
+            # 1. Auto-register camera if missing or reactivate if inactive
             camera = db.session.get(Camera, camera_id)
             if not camera:
                 camera = Camera(
                     id=camera_id,
                     name=data.get("name", f"Camera {camera_id}"),
-                    status="offline"
+                    status="offline",
+                    active=True
                 )
                 db.session.add(camera)
+            elif not camera.active:
+                # Only auto-reactivate if this camera ID is within the configured count
+                settings = ConfigurationService.get_all_settings()
+                try:
+                    cam_num = int(camera_id.split("-")[1])
+                except (IndexError, ValueError):
+                    cam_num = 0
+                if cam_num <= int(settings.get("camera_count", 0)):
+                    camera.active = True
+                    db.session.add(camera)
+                    db.session.flush()
+                    from backend.socket_manager import broadcast_camera_activated
+                    broadcast_camera_activated(camera.to_dict())
+                else:
+                    # Camera is beyond configured count — drop telemetry silently
+                    logger.debug(f"Dropped telemetry for inactive camera {camera_id}: beyond configured count")
+                    return {"status": "ignored", "camera_status": "inactive", "new_alerts": 0}, None
 
             # 2. Extract metrics
             is_online = data.get("is_online", True)
@@ -97,15 +121,18 @@ class AlertService:
             all_alert_types = {"cpu_high", "memory_high", "storage_full", "latency_high", "camera_offline", "fault_detected"}
             cleared_types = all_alert_types - violated_types
 
+            resolved_alerts = []
             # Auto-resolve cleared alert types
             for a_type in cleared_types:
                 active_alerts = Alert.query.filter_by(camera_id=camera_id, alert_type=a_type, resolved=False).all()
                 for alert in active_alerts:
                     alert.resolved = True
                     alert.resolved_at = datetime.now(timezone.utc)
+                    resolved_alerts.append(alert)
 
             # Trigger new alerts with deduplication
             new_alerts_count = 0
+            created_alerts = []
             for v in violations:
                 existing = Alert.query.filter_by(
                     camera_id=camera_id,
@@ -122,9 +149,29 @@ class AlertService:
                         message=v["msg"]
                     )
                     db.session.add(alert)
+                    created_alerts.append(alert)
                     new_alerts_count += 1
 
             db.session.commit()
+
+            # Broadcast WebSocket updates after successful DB commit
+            cam_dict = camera.to_dict()
+            cam_dict["latest_health"] = record.to_dict()
+            cam_dict["active_alerts"] = Alert.query.filter_by(camera_id=camera_id, resolved=False).count()
+            broadcast_camera_update(cam_dict)
+
+            # Emit dashboard summary updates
+            summary_dict = HealthEvaluationService.get_dashboard_summary()
+            broadcast_dashboard_summary(summary_dict)
+
+            # Emit newly created alerts
+            for a in created_alerts:
+                broadcast_alert_created(a.to_dict())
+
+            # Emit newly resolved alerts
+            for a in resolved_alerts:
+                broadcast_alert_resolved(a.to_dict())
+
             return {
                 "status": "ok",
                 "camera_status": camera.status,
@@ -164,6 +211,14 @@ class AlertService:
                 alert.resolved = True
                 alert.resolved_at = datetime.now(timezone.utc)
                 db.session.commit()
+
+                # Broadcast resolving action
+                broadcast_alert_resolved(alert.to_dict())
+
+                # Broadcast summary update
+                summary_dict = HealthEvaluationService.get_dashboard_summary()
+                broadcast_dashboard_summary(summary_dict)
+
             return True
         except Exception as e:
             db.session.rollback()
