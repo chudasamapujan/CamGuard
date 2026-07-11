@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { useToast } from './hooks/useToast';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
-import CameraManagement from './components/CameraManagement';
 import SettingsPanel from './components/SettingsPanel';
 import ToastContainer from './components/Toast';
 import { fetchCameras, fetchDashboardSummary, fetchAlerts } from './services/api';
@@ -48,10 +47,6 @@ function AppContent() {
     return () => clearInterval(interval);
   }, [loadData]);
 
-  const activeAlertsCount = useMemo(() => {
-    return alerts.filter(a => !a.resolved).length;
-  }, [alerts]);
-
   const handleRefresh = useCallback(() => {
     loadData();
     addToast('Dashboard data refreshed', 'info');
@@ -66,42 +61,7 @@ function AppContent() {
             summary={summary}
             alerts={alerts}
             loading={loading}
-            onRefresh={handleRefresh}
-            activeTab="overview"
-            setActivePage={setActivePage}
-            addToast={addToast}
-          />
-        );
-      case 'cameras':
-        return (
-          <Dashboard
-            cameras={cameras}
-            summary={summary}
-            alerts={alerts}
-            loading={loading}
-            onRefresh={handleRefresh}
-            activeTab="cameras"
-            setActivePage={setActivePage}
-            addToast={addToast}
-          />
-        );
-      case 'management':
-        return (
-          <CameraManagement
-            addToast={addToast}
-            onCameraChange={loadData}
-          />
-        );
-      case 'alerts':
-        return (
-          <Dashboard
-            cameras={cameras}
-            summary={summary}
-            alerts={alerts}
-            loading={loading}
-            onRefresh={handleRefresh}
-            activeTab="alerts"
-            setActivePage={setActivePage}
+            onRefresh={loadData}
             addToast={addToast}
           />
         );
@@ -118,7 +78,7 @@ function AppContent() {
             summary={summary}
             alerts={alerts}
             loading={loading}
-            onRefresh={handleRefresh}
+            onRefresh={loadData}
             addToast={addToast}
           />
         );
@@ -130,7 +90,6 @@ function AppContent() {
       <Sidebar
         activePage={activePage}
         setActivePage={setActivePage}
-        activeAlertsCount={activeAlertsCount}
       />
       <div className="app-main-layout">
         <Header

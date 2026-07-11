@@ -1,133 +1,151 @@
 import React from 'react';
-import { MapPin, Clock, Zap, Globe, Edit2, Power, WifiOff, VideoOff } from 'lucide-react';
+import { Cpu, MemoryStick, HardDrive, Globe, Clock, Zap, WifiOff, ShieldAlert } from 'lucide-react';
 import StatusBadge from './StatusBadge';
-import { computeHealthScore, healthScoreColor, formatRelativeTime } from '../utils/helpers';
+import { formatRelativeTime } from '../utils/helpers';
 
-function ProgressBar({ label, value, warn = 75, crit = 90 }) {
+function ProgressBar({ label, value, icon: Icon, warn = 75, crit = 90 }) {
     let color = 'var(--color-success)';
     if (value >= crit) color = 'var(--color-critical)';
     else if (value >= warn) color = 'var(--color-warning)';
 
     return (
         <div className="progress" role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={100} aria-label={`${label}: ${value.toFixed(1)}%`}>
-            <div className="progress__header">
-                <span className="progress__label">{label}</span>
-                <span className="progress__value" style={{ color }}>{value.toFixed(1)}%</span>
+            <div className="progress__header" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
+                <Icon size={12} />
+                <span className="progress__label" style={{ flex: 1 }}>{label}</span>
+                <span className="progress__value" style={{ color, fontWeight: 700 }}>{value.toFixed(1)}%</span>
             </div>
-            <div className="progress__track">
+            <div className="progress__track" style={{ height: '5px', borderRadius: '3px', background: 'rgba(255,255,255,0.05)', overflow: 'hidden', marginTop: '4px' }}>
                 <div
                     className="progress__fill"
-                    style={{ width: `${Math.min(value, 100)}%`, backgroundColor: color }}
+                    style={{ width: `${Math.min(value, 100)}%`, backgroundColor: color, height: '100%' }}
                 />
             </div>
         </div>
     );
 }
 
-function CameraCard({ camera, onClick, onToggle, onEdit }) {
+function CameraCard({ camera, onClick }) {
     const health = camera.latest_health;
-    const isOnline = health && health.is_online && camera.is_enabled;
-    const score = camera.is_enabled ? computeHealthScore(health) : 0;
-    const scoreColor = camera.is_enabled ? healthScoreColor(score) : 'var(--color-text-muted)';
+    const isOnline = camera.status !== 'offline' && health && health.is_online;
 
     return (
         <article
-            className={`cam-card cam-card--${camera.status} ${!camera.is_enabled ? 'cam-card--disabled' : ''}`}
+            className={`cam-card cam-card--${camera.status}`}
             onClick={() => onClick && onClick(camera)}
             onKeyDown={(e) => e.key === 'Enter' && onClick && onClick(camera)}
             role="button"
             tabIndex={0}
             id={`cam-${camera.id}`}
             aria-label={`${camera.name}, status ${camera.status}`}
+            style={{
+                background: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
+                borderRadius: '8px',
+                padding: '16px',
+                cursor: 'pointer',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
+                transition: 'all 0.2s ease',
+                position: 'relative',
+                overflow: 'hidden'
+            }}
         >
-            {/* Top color strip */}
-            <div className="cam-card__strip" />
+            {/* Top status indicator line */}
+            <div className="cam-card__strip" style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '4px',
+                backgroundColor: camera.status === 'critical' ? 'var(--color-critical)'
+                    : camera.status === 'warning' ? 'var(--color-warning)'
+                    : camera.status === 'offline' ? 'var(--color-text-muted)'
+                    : 'var(--color-success)'
+            }} />
 
-            <div className="cam-card__top">
+            <div className="cam-card__top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <div className="cam-card__identity">
-                    <h3 className="cam-card__name">{camera.name || camera.id}</h3>
-                    <div className="cam-card__id-status">
-                        <span className="cam-card__id">{camera.id}</span>
-                        <StatusBadge status={camera.status} />
-                    </div>
+                    <h3 className="cam-card__name" style={{ margin: 0, fontSize: '0.95rem', fontWeight: 700 }}>
+                        {camera.name || camera.id}
+                    </h3>
+                    <span className="cam-card__id" style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', fontFamily: 'monospace' }}>
+                        {camera.id}
+                    </span>
                 </div>
-                
-                <div className="cam-card__quick-actions" onClick={(e) => e.stopPropagation()}>
-                    <button
-                        className="cam-card__quick-btn"
-                        onClick={() => onEdit && onEdit(camera)}
-                        title="Edit Camera"
-                        aria-label="Edit Camera settings"
-                    >
-                        <Edit2 size={13} />
-                    </button>
-                    <button
-                        className={`cam-card__quick-btn ${camera.is_enabled ? 'cam-card__quick-btn--active' : 'cam-card__quick-btn--inactive'}`}
-                        onClick={() => onToggle && onToggle(camera)}
-                        title={camera.is_enabled ? "Disable Camera" : "Enable Camera"}
-                        aria-label="Toggle Camera active state"
-                    >
-                        <Power size={13} />
-                    </button>
-                </div>
-            </div>
-
-            <div className="cam-card__location">
-                <MapPin size={13} />
-                <span>{camera.location || 'Unknown'}</span>
+                <StatusBadge status={camera.status} />
             </div>
 
             {isOnline ? (
                 <>
-                    <div className="cam-card__metrics">
-                        <ProgressBar label="CPU" value={health.cpu_usage} warn={75} crit={90} />
-                        <ProgressBar label="Memory" value={health.memory_usage} warn={75} crit={90} />
-                        <ProgressBar label="Storage" value={health.storage_usage} warn={80} crit={95} />
+                    <div className="cam-card__metrics" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <ProgressBar label="CPU" value={health.cpu_usage} icon={Cpu} warn={75} crit={90} />
+                        <ProgressBar label="Memory" value={health.memory_usage} icon={MemoryStick} warn={75} crit={90} />
+                        <ProgressBar label="Storage" value={health.storage_usage} icon={HardDrive} warn={80} crit={95} />
                     </div>
 
-                    <div className="cam-card__footer">
-                        <div className="cam-card__stat">
-                            <Globe size={13} />
+                    <div className="cam-card__footer" style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        fontSize: '0.75rem',
+                        color: 'var(--color-text-secondary)',
+                        borderTop: '1px solid var(--color-border)',
+                        paddingTop: '8px',
+                        marginTop: '4px'
+                    }}>
+                        <div className="cam-card__stat" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            <Globe size={12} />
                             <span style={{
                                 color: health.network_latency > 500 ? 'var(--color-critical)'
-                                    : health.network_latency > 200 ? 'var(--color-warning)' : 'var(--color-text-secondary)'
+                                    : health.network_latency > 200 ? 'var(--color-warning)' : 'inherit',
+                                fontWeight: health.network_latency > 200 ? 700 : 'normal'
                             }}>
                                 {health.network_latency.toFixed(0)} ms
                             </span>
                         </div>
-                        <div className="cam-card__stat">
-                            <Clock size={13} />
+                        <div className="cam-card__stat" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            <Clock size={12} />
                             <span>{formatRelativeTime(camera.last_heartbeat)}</span>
-                        </div>
-                        <div className="cam-card__score" style={{ color: scoreColor }}>
-                            {score}
                         </div>
                     </div>
 
                     {health.fault_type && (
-                        <div className="cam-card__fault">
-                            <Zap size={13} />
+                        <div className="cam-card__fault" style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            background: 'rgba(220, 38, 38, 0.1)',
+                            color: 'var(--color-critical)',
+                            padding: '6px 8px',
+                            borderRadius: '4px',
+                            fontSize: '0.7rem',
+                            fontWeight: 600
+                        }}>
+                            <Zap size={12} />
                             <span>{health.fault_type}</span>
                         </div>
                     )}
                 </>
             ) : (
-                <div className="cam-card__offline">
-                    <div className="cam-card__offline-icon" style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px', color: 'var(--color-text-muted)' }}>
-                        {camera.is_enabled ? <WifiOff size={24} /> : <VideoOff size={24} />}
-                    </div>
-                    <p className="cam-card__offline-title">{camera.is_enabled ? 'Camera Offline' : 'Camera Disabled'}</p>
-                    <p className="cam-card__offline-sub">
-                        {camera.is_enabled 
-                            ? `Last seen: ${formatRelativeTime(camera.last_heartbeat)}` 
-                            : 'Simulation feed paused'}
-                    </p>
-                </div>
-            )}
-
-            {camera.active_alerts > 0 && (
-                <div className="cam-card__alert-count">
-                    {camera.active_alerts} active alert{camera.active_alerts > 1 ? 's' : ''}
+                <div className="cam-card__offline" style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '24px 0',
+                    textAlign: 'center',
+                    background: 'rgba(0,0,0,0.05)',
+                    borderRadius: '4px',
+                    color: 'var(--color-text-secondary)',
+                    flex: 1
+                }}>
+                    <WifiOff size={24} style={{ marginBottom: '8px', opacity: 0.5 }} />
+                    <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Camera Offline</span>
+                    <span style={{ fontSize: '0.7rem', opacity: 0.7, marginTop: '2px' }}>
+                        {camera.last_heartbeat ? `Last seen: ${formatRelativeTime(camera.last_heartbeat)}` : 'Never connected'}
+                    </span>
                 </div>
             )}
         </article>

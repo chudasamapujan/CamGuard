@@ -1,12 +1,9 @@
 import React from 'react';
-import { LayoutDashboard, Video, FolderCog, Bell, Sliders } from 'lucide-react';
+import { LayoutDashboard, Sliders, Video } from 'lucide-react';
 
-export default function Sidebar({ activePage, setActivePage, activeAlertsCount }) {
+export default function Sidebar({ activePage, setActivePage }) {
     const navItems = [
-        { id: 'dashboard', label: 'Overview', icon: LayoutDashboard },
-        { id: 'cameras', label: 'Camera Fleet', icon: Video },
-        { id: 'management', label: 'Camera Management', icon: FolderCog },
-        { id: 'alerts', label: 'Alert Log', icon: Bell, badge: activeAlertsCount },
+        { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
         { id: 'settings', label: 'Settings', icon: Sliders },
     ];
 
@@ -38,11 +35,6 @@ export default function Sidebar({ activePage, setActivePage, activeAlertsCount }
                                 <Icon size={16} className="sidebar__icon" />
                                 <span className="sidebar__label">{item.label}</span>
                             </span>
-                            {item.badge > 0 && (
-                                <span className={`sidebar__badge ${item.id === 'alerts' ? 'sidebar__badge--alert' : ''}`}>
-                                    {item.badge}
-                                </span>
-                            )}
                         </button>
                     );
                 })}

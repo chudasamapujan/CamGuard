@@ -1,0 +1,409 @@
+openapi: 3.0.3
+info:
+  title: CamGuard — Multi-Camera Health Monitoring API
+  description: REST API for ingesting telemetry, querying camera status and performance aggregates, and managing global configuration settings.
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+    description: Local development server
+paths:
+  /:
+    get:
+      summary: Root health check
+      description: Returns liveness status of the API service.
+      responses:
+        '200':
+          description: Service is running
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service:
+                    type: string
+                    example: Camera Health Monitor API
+                  status:
+                    type: string
+                    example: running
+                  version:
+                    type: string
+                    example: 1.0.0
+
+  /health:
+    post:
+      summary: Ingest camera health telemetry
+      description: Receives metric updates from simulated cameras and checks thresholds for alert creation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - camera_id
+              properties:
+                camera_id:
+                  type: string
+                  example: "CAM-001"
+                name:
+                  type: string
+                  example: "Camera 001"
+                is_online:
+                  type: boolean
+                  example: true
+                cpu_usage:
+                  type: number
+                  format: float
+                  example: 45.2
+                memory_usage:
+                  type: number
+                  format: float
+                  example: 52.8
+                storage_usage:
+                  type: number
+                  format: float
+                  example: 71.4
+                network_latency:
+                  type: number
+                  format: float
+                  example: 24.5
+                fault_type:
+                  type: string
+                  nullable: true
+                  example: "Disk I/O Error"
+      responses:
+        '201':
+          description: Telemetry processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ok"
+                  camera_status:
+                    type: string
+                    example: "warning"
+                  new_alerts:
+                    type: integer
+                    example: 1
+        '400':
+          description: Invalid request parameter
+
+  /cameras:
+    get:
+      summary: List all cameras
+      description: Returns list of all registered cameras, including their current calculated status and latest health record.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Camera'
+
+  /cameras/{camera_id}:
+    get:
+      summary: Get camera details
+      description: Returns detailed profile, latest health check metrics, and active alerts for a single camera.
+      parameters:
+        - name: camera_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CameraDetail'
+        '404':
+          description: Camera not found
+
+  /history/{camera_id}:
+    get:
+      summary: Get camera health history
+      description: Retrieve time-series records of telemetry parameters for the camera.
+      parameters:
+        - name: camera_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: hours
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 24
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  camera_id:
+                    type: string
+                  hours:
+                    type: integer
+                  count:
+                    type: integer
+                  records:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/HealthRecord'
+
+  /dashboard/history:
+    get:
+      summary: Get system historical aggregates
+      description: Returns aggregated offline/warning counts over the last N hours for system charts.
+      parameters:
+        - name: hours
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 24
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    timestamp:
+                      type: string
+                    cpu_usage:
+                      type: number
+                    memory_usage:
+                      type: number
+                    storage_usage:
+                      type: number
+                    network_latency:
+                      type: number
+                    health_score:
+                      type: number
+
+  /dashboard/summary:
+    get:
+      summary: Get dashboard statistics summary
+      description: Aggregated totals of online, offline, warnings, and alerts count across the network.
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_cameras:
+                    type: integer
+                  online:
+                    type: integer
+                  warning:
+                    type: integer
+                  critical:
+                    type: integer
+                  offline:
+                    type: integer
+                  active_alerts:
+                    type: integer
+                  critical_alerts:
+                    type: integer
+                  warning_alerts:
+                    type: integer
+                  avg_cpu:
+                    type: number
+                  avg_mem:
+                    type: number
+                  avg_storage:
+                    type: number
+
+  /alerts:
+    get:
+      summary: Query alerts
+      description: List security and hardware status alerts.
+      parameters:
+        - name: active
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 50
+        - name: camera_id
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Alert'
+
+  /alerts/{alert_id}/resolve:
+    put:
+      summary: Resolve alert
+      description: Explicitly resolve a triggered alert.
+      parameters:
+        - name: alert_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Alert marked as resolved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Alert resolved successfully"
+        '404':
+          description: Alert not found
+
+  /settings:
+    get:
+      summary: Get global configurations
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  camera_count:
+                    type: integer
+                  reporting_interval:
+                    type: integer
+                  fault_probability:
+                    type: number
+                  cpu_threshold:
+                    type: number
+                  memory_threshold:
+                    type: number
+                  storage_threshold:
+                    type: number
+                  latency_threshold:
+                    type: number
+                  offline_timeout:
+                    type: integer
+    post:
+      summary: Update global configurations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Settings updated successfully
+
+components:
+  schemas:
+    Camera:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+          enum: [online, warning, critical, offline]
+        last_heartbeat:
+          type: string
+          format: date-time
+          nullable: true
+
+    HealthRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+        camera_id:
+          type: string
+        cpu_usage:
+          type: number
+          format: float
+        memory_usage:
+          type: number
+          format: float
+        storage_usage:
+          type: number
+          format: float
+        network_latency:
+          type: number
+          format: float
+        is_online:
+          type: boolean
+        fault_type:
+          type: string
+          nullable: true
+        timestamp:
+          type: string
+          format: date-time
+
+    CameraDetail:
+      allOf:
+        - $ref: '#/components/schemas/Camera'
+        - type: object
+          properties:
+            latest_health:
+              $ref: '#/components/schemas/HealthRecord'
+              nullable: true
+            active_alerts:
+              type: array
+              items:
+                $ref: '#/components/schemas/Alert'
+
+    Alert:
+      type: object
+      properties:
+        id:
+          type: integer
+        camera_id:
+          type: string
+        camera_name:
+          type: string
+        severity:
+          type: string
+          enum: [warning, critical]
+        alert_type:
+          type: string
+        message:
+          type: string
+        resolved:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        resolved_at:
+          type: string
+          format: date-time
+          nullable: true

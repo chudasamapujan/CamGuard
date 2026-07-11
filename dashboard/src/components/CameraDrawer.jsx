@@ -1,40 +1,21 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import {
-    X, MapPin, Clock, Cpu, MemoryStick, HardDrive, Globe,
-    Activity, Zap, Download, Heart, AlertTriangle, Settings,
-    Check, VideoOff
-} from 'lucide-react';
-import {
-    Chart as ChartJS, CategoryScale, LinearScale, PointElement,
-    LineElement, Title, Tooltip, Legend, Filler,
-} from 'chart.js';
+import { X, Clock, Cpu, MemoryStick, HardDrive, Globe, Activity, Zap, Download, AlertTriangle, Check, VideoOff } from 'lucide-react';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { fetchCameraHistory, updateCamera, toggleCamera, fetchAlerts } from '../services/api';
+import { fetchCameraHistory, fetchAlerts } from '../services/api';
 import StatusBadge from './StatusBadge';
 import EmptyState from './EmptyState';
-import { computeHealthScore, healthScoreColor, formatTime, formatRelativeTime, exportToCSV, formatDateTime } from '../utils/helpers';
+import { formatTime, formatRelativeTime, exportToCSV, formatDateTime } from '../utils/helpers';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
-function CameraDrawer({ camera, onClose, onCameraChange, addToast }) {
-    const [activeTab, setActiveTab] = useState('metrics'); // 'metrics', 'alerts', 'config'
+function CameraDrawer({ camera, onClose }) {
+    const [activeTab, setActiveTab] = useState('metrics'); // 'metrics', 'alerts'
     const [history, setHistory] = useState(null);
     const [historyLoading, setHistoryLoading] = useState(true);
     const [chartHours, setChartHours] = useState(1);
     const [cameraAlerts, setCameraAlerts] = useState([]);
     const [alertsLoading, setAlertsLoading] = useState(true);
-
-    // Editing State inside Config Tab
-    const [isEditing, setIsEditing] = useState(false);
-    const [formData, setFormData] = useState({
-        name: '',
-        location: '',
-        storage_capacity: 100,
-        reporting_interval: 30,
-        fault_probability: 0.05,
-        offline_probability: 0.03,
-        notes: ''
-    });
 
     const loadHistory = useCallback(async () => {
         if (!camera) return;
@@ -65,22 +46,7 @@ function CameraDrawer({ camera, onClose, onCameraChange, addToast }) {
         loadAlerts();
     }, [loadHistory, loadAlerts]);
 
-    // Reset form when camera updates
-    useEffect(() => {
-        if (camera) {
-            setFormData({
-                name: camera.name || '',
-                location: camera.location || '',
-                storage_capacity: camera.storage_capacity || 100,
-                reporting_interval: camera.reporting_interval || 30,
-                fault_probability: camera.fault_probability || 0.05,
-                offline_probability: camera.offline_probability || 0.03,
-                notes: camera.notes || ''
-            });
-        }
-    }, [camera]);
-
-    // Escape key closes drawer
+    // Escape key handler to close drawer
     useEffect(() => {
         const handler = (e) => { if (e.key === 'Escape') onClose(); };
         window.addEventListener('keydown', handler);
@@ -90,12 +56,28 @@ function CameraDrawer({ camera, onClose, onCameraChange, addToast }) {
     if (!camera) return null;
 
     const health = camera.latest_health;
-    const score = camera.is_enabled ? computeHealthScore(health) : 0;
-    const scoreColor = camera.is_enabled ? healthScoreColor(score) : 'var(--color-text-muted)';
-    const isOnline = health?.is_online && camera.is_enabled;
+    const isOnline = camera.status !== 'offline' && health?.is_online;
 
-    // Chart config
-    const records = history?.records || [];
+    const formattedHeartbeat = useMemo(() => {
+        const hb = health ? health.timestamp : camera.last_heartbeat;
+        if (!hb) return 'Never';
+        const relative = formatRelativeTime(hb);
+        if (relative === 'Just now') return 'Just now';
+        const absolute = formatTime(hb);
+        return `${absolute} (${relative})`;
+    }, [health, camera.last_heartbeat]);
+
+    const records = useMemo(() => {
+        const histRecords = history?.records ? [...history.records] : [];
+        if (isOnline && health) {
+            const hasLatest = histRecords.some(r => r.timestamp === health.timestamp || r.id === health.id);
+            if (!hasLatest) {
+                histRecords.push(health);
+            }
+        }
+        return histRecords;
+    }, [history, health, isOnline]);
+
     const labels = records.map(r => {
         const d = new Date(r.timestamp);
         return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
@@ -165,28 +147,6 @@ function CameraDrawer({ camera, onClose, onCameraChange, addToast }) {
         }
     };
 
-    const handleToggleState = async () => {
-        try {
-            await toggleCamera(camera.id, !camera.is_enabled);
-            if (addToast) addToast(`Camera ${camera.id} ${!camera.is_enabled ? 'enabled' : 'disabled'}`, 'success');
-            if (onCameraChange) onCameraChange();
-        } catch (err) {
-            if (addToast) addToast('Failed to toggle camera state', 'error');
-        }
-    };
-
-    const handleSaveConfig = async (e) => {
-        e.preventDefault();
-        try {
-            await updateCamera(camera.id, formData);
-            if (addToast) addToast('Camera configuration successfully saved', 'success');
-            setIsEditing(false);
-            if (onCameraChange) onCameraChange();
-        } catch (err) {
-            if (addToast) addToast('Failed to save configuration', 'error');
-        }
-    };
-
     return (
         <>
             <div className="drawer-overlay" onClick={onClose} aria-hidden="true" />
@@ -205,7 +165,7 @@ function CameraDrawer({ camera, onClose, onCameraChange, addToast }) {
                     </button>
                 </div>
 
-                {/* Drawer Tab Buttons */}
+                {/* Tabs */}
                 <div className="drawer__tabs" role="tablist">
                     <button
                         role="tab"
@@ -221,58 +181,44 @@ function CameraDrawer({ camera, onClose, onCameraChange, addToast }) {
                         className={`drawer__tab ${activeTab === 'alerts' ? 'drawer__tab--active' : ''}`}
                         onClick={() => setActiveTab('alerts')}
                     >
-                        <AlertTriangle size={14} /> Alert History ({cameraAlerts.length})
-                    </button>
-                    <button
-                        role="tab"
-                        aria-selected={activeTab === 'config'}
-                        className={`drawer__tab ${activeTab === 'config' ? 'drawer__tab--active' : ''}`}
-                        onClick={() => setActiveTab('config')}
-                    >
-                        <Settings size={14} /> Hardware Config
+                        <AlertTriangle size={14} /> Incident Reports ({cameraAlerts.length})
                     </button>
                 </div>
 
                 <div className="drawer__body">
-                    
-                    {/* TAB: METRICS & STATUS */}
+                    {/* Metrics and Status Tab */}
                     {activeTab === 'metrics' && (
                         <div className="drawer-tab-pane">
-                            {/* Summary strip */}
-                            <div className="drawer__info-grid">
-                                <div className="drawer__info-item">
-                                    <span className="drawer__info-label"><MapPin size={13} /> Location</span>
-                                    <span className="drawer__info-value">{camera.location || 'Unknown'}</span>
-                                </div>
-                                <div className="drawer__info-item">
-                                    <span className="drawer__info-label"><Heart size={13} /> Health Score</span>
-                                    <span className="drawer__info-value font-mono font-bold" style={{ color: scoreColor, fontSize: '1.1rem' }}>
-                                        {score}%
-                                    </span>
-                                </div>
+                            <div className="drawer__info-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '16px' }}>
                                 <div className="drawer__info-item">
                                     <span className="drawer__info-label"><Clock size={13} /> Last Heartbeat</span>
-                                    <span className="drawer__info-value">{formatRelativeTime(camera.last_heartbeat)}</span>
+                                    <span className="drawer__info-value">{formattedHeartbeat}</span>
+                                </div>
+                                <div className="drawer__info-item">
+                                    <span className="drawer__info-label"><Activity size={13} /> Current State</span>
+                                    <span className="drawer__info-value" style={{ fontWeight: 700 }}>
+                                        {camera.status.toUpperCase()}
+                                    </span>
                                 </div>
                             </div>
 
-                            {/* Current Telemetry Progress Bars */}
+                            {/* Current Telemetry */}
                             {isOnline && health ? (
-                                <section className="drawer__section">
+                                <section className="drawer__section" style={{ borderTop: '1px solid var(--color-border)', paddingTop: '16px' }}>
                                     <h3 className="drawer__section-title">Current Telemetry</h3>
-                                    <div className="drawer__metrics">
+                                    <div className="drawer__metrics" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                                         {[
-                                            { label: 'CPU', value: health.cpu_usage, icon: Cpu, warn: 75, crit: 90 },
-                                            { label: 'Memory', value: health.memory_usage, icon: MemoryStick, warn: 75, crit: 90 },
-                                            { label: 'Storage', value: health.storage_usage, icon: HardDrive, warn: 80, crit: 95 },
+                                            { label: 'CPU Usage', value: health.cpu_usage, icon: Cpu, warn: 75, crit: 90 },
+                                            { label: 'Memory Usage', value: health.memory_usage, icon: MemoryStick, warn: 75, crit: 90 },
+                                            { label: 'Storage Usage', value: health.storage_usage, icon: HardDrive, warn: 80, crit: 95 },
                                         ].map(m => {
-                                            const color = m.value >= m.crit ? '#E74C3C' : m.value >= m.warn ? '#FFB800' : '#2ECC71';
+                                            const color = m.value >= m.crit ? 'var(--color-critical)' : m.value >= m.warn ? 'var(--color-warning)' : 'var(--color-success)';
                                             return (
                                                 <div key={m.label} className="drawer__metric-row">
                                                     <div className="drawer__metric-label"><m.icon size={13} /> {m.label}</div>
                                                     <div className="drawer__metric-bar-wrapper">
-                                                        <div className="progress__track" style={{ flex: 1 }}>
-                                                            <div className="progress__fill" style={{ width: `${m.value}%`, backgroundColor: color }} />
+                                                        <div className="progress__track" style={{ flex: 1, height: '6px' }}>
+                                                            <div className="progress__fill" style={{ width: `${m.value}%`, backgroundColor: color, height: '100%' }} />
                                                         </div>
                                                         <span className="drawer__metric-val font-mono" style={{ color }}>{m.value.toFixed(1)}%</span>
                                                     </div>
@@ -282,42 +228,54 @@ function CameraDrawer({ camera, onClose, onCameraChange, addToast }) {
                                         <div className="drawer__metric-row">
                                             <div className="drawer__metric-label"><Globe size={13} /> Network Latency</div>
                                             <span className="drawer__metric-val font-mono font-bold" style={{
-                                                color: health.network_latency > 500 ? '#E74C3C' : health.network_latency > 200 ? '#FFB800' : '#2ECC71'
+                                                color: health.network_latency > 500 ? 'var(--color-critical)' : health.network_latency > 200 ? 'var(--color-warning)' : 'var(--color-success)'
                                             }}>
                                                 {health.network_latency.toFixed(0)} ms
                                             </span>
                                         </div>
                                         {health.fault_type && (
-                                            <div className="drawer__fault">
-                                                <Zap size={14} /> Device Fault Detected: <strong>{health.fault_type}</strong>
+                                            <div className="drawer__fault" style={{
+                                                background: 'rgba(220,38,38,0.1)',
+                                                color: 'var(--color-critical)',
+                                                padding: '8px 12px',
+                                                borderRadius: '6px',
+                                                marginTop: '8px',
+                                                fontSize: '0.8rem',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '8px'
+                                            }}>
+                                                <Zap size={14} />
+                                                <span>Device Fault Active: <strong>{health.fault_type}</strong></span>
                                             </div>
                                         )}
                                     </div>
                                 </section>
                             ) : (
-                                <div className="drawer__offline-banner" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                                    <VideoOff size={14} />
-                                    <span>Telemetry feed offline. Enable camera or start simulator to see metric updates.</span>
+                                <div className="drawer__offline-banner" style={{ textAlign: 'center', padding: '24px 16px', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border)', borderRadius: '6px' }}>
+                                    <VideoOff size={24} style={{ marginBottom: '8px', opacity: 0.5 }} />
+                                    <p style={{ margin: 0, fontSize: '0.8rem' }}>Telemetry feed offline. Check power supply or device network interface.</p>
                                 </div>
                             )}
 
-                            {/* Line Charts */}
+                            {/* Charts */}
                             {isOnline && (
-                                <section className="drawer__section">
-                                    <div className="drawer__section-header">
-                                        <h3 className="drawer__section-title">Performance Trend</h3>
-                                        <div className="drawer__chart-controls">
+                                <section className="drawer__section" style={{ marginTop: '20px', borderTop: '1px solid var(--color-border)', paddingTop: '16px' }}>
+                                    <div className="drawer__section-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                                        <h3 className="drawer__section-title" style={{ margin: 0 }}>Telemetry Trends</h3>
+                                        <div className="drawer__chart-controls" style={{ display: 'flex', gap: '4px' }}>
                                             {[1, 6, 24].map(h => (
                                                 <button
                                                     key={h}
                                                     className={`btn btn--sm ${chartHours === h ? 'btn--active' : 'btn--ghost'}`}
                                                     onClick={() => setChartHours(h)}
+                                                    style={{ padding: '2px 8px', fontSize: '0.7rem' }}
                                                 >
                                                     {h}h
                                                 </button>
                                             ))}
-                                            <button className="btn btn--sm btn--ghost" onClick={handleExport} title="Export CSV" aria-label="Export history to CSV">
-                                                <Download size={14} />
+                                            <button className="btn btn--sm btn--ghost" onClick={handleExport} title="Export CSV" style={{ padding: '2px 8px' }}>
+                                                <Download size={12} />
                                             </button>
                                         </div>
                                     </div>
@@ -327,10 +285,10 @@ function CameraDrawer({ camera, onClose, onCameraChange, addToast }) {
                                     ) : records.length === 0 ? (
                                         <EmptyState type="history" />
                                     ) : (
-                                        <div className="drawer__charts">
+                                        <div className="drawer__charts" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                                             <div className="drawer__chart-box">
-                                                <h4>Resources (CPU / Memory / Storage)</h4>
-                                                <div className="drawer__chart-canvas">
+                                                <h4 style={{ margin: '0 0 8px 0', fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Resource Utilization (%)</h4>
+                                                <div className="drawer__chart-canvas" style={{ height: '140px' }}>
                                                     <Line
                                                         data={{
                                                             labels,
@@ -345,8 +303,8 @@ function CameraDrawer({ camera, onClose, onCameraChange, addToast }) {
                                                 </div>
                                             </div>
                                             <div className="drawer__chart-box">
-                                                <h4>Network Latency</h4>
-                                                <div className="drawer__chart-canvas">
+                                                <h4 style={{ margin: '0 0 8px 0', fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>Network Latency (ms)</h4>
+                                                <div className="drawer__chart-canvas" style={{ height: '140px' }}>
                                                     <Line
                                                         data={{
                                                             labels,
@@ -360,53 +318,50 @@ function CameraDrawer({ camera, onClose, onCameraChange, addToast }) {
                                     )}
                                 </section>
                             )}
-
-                            {/* Recent Heartbeat table */}
-                            {records.length > 0 && (
-                                <section className="drawer__section">
-                                    <h3 className="drawer__section-title">Telemetry Packets (Last 5)</h3>
-                                    <div className="drawer__heartbeats">
-                                        {records.slice(-5).reverse().map((r, i) => (
-                                            <div key={r.id || i} className="drawer__heartbeat-row">
-                                                <span className="drawer__hb-time font-mono">{formatTime(r.timestamp)}</span>
-                                                <span className={`drawer__hb-dot ${r.is_online ? 'drawer__hb-dot--on' : 'drawer__hb-dot--off'}`} />
-                                                <span className="drawer__hb-cpu font-mono text-muted">CPU {r.cpu_usage.toFixed(1)}%</span>
-                                                <span className="drawer__hb-mem font-mono text-muted">MEM {r.memory_usage.toFixed(1)}%</span>
-                                                <span className="drawer__hb-latency font-mono text-muted">{r.network_latency.toFixed(0)}ms</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </section>
-                            )}
                         </div>
                     )}
 
-                    {/* TAB: ALERT HISTORY */}
+                    {/* Alerts Tab */}
                     {activeTab === 'alerts' && (
                         <div className="drawer-tab-pane">
-                            <h3 className="drawer__section-title">Incident Reports</h3>
+                            <h3 className="drawer__section-title">Incidents History</h3>
                             {alertsLoading ? (
-                                <div className="drawer__chart-placeholder">Loading alerts...</div>
+                                <div className="drawer__chart-placeholder">Loading incidents...</div>
                             ) : cameraAlerts.length === 0 ? (
-                                <div className="drawer-alerts-empty">
-                                    <Check size={32} className="text-success" />
-                                    <p>No alerts recorded for this camera node.</p>
+                                <div className="drawer-alerts-empty" style={{ textAlign: 'center', padding: '30px 16px' }}>
+                                    <Check size={32} style={{ color: 'var(--color-success)', marginBottom: '8px' }} />
+                                    <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-text-secondary)' }}>All checks passing. No incidents recorded.</p>
                                 </div>
                             ) : (
-                                <div className="drawer-alerts-list">
+                                <div className="drawer-alerts-list" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                                     {cameraAlerts.map(alert => (
-                                        <div key={alert.id} className={`drawer-alert-item drawer-alert-item--${alert.severity} ${alert.resolved ? 'resolved' : ''}`}>
-                                            <div className="drawer-alert-meta">
-                                                <span className={`alert-severity alert-severity--${alert.severity}`}>
+                                        <div key={alert.id} className={`drawer-alert-item drawer-alert-item--${alert.severity} ${alert.resolved ? 'resolved' : ''}`} style={{
+                                            border: '1px solid var(--color-border)',
+                                            borderRadius: '6px',
+                                            padding: '12px',
+                                            background: 'var(--color-surface-raised)'
+                                        }}>
+                                            <div className="drawer-alert-meta" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                                                <span className={`alert-severity alert-severity--${alert.severity}`} style={{
+                                                    fontSize: '0.65rem',
+                                                    fontWeight: 700,
+                                                    padding: '2px 6px',
+                                                    borderRadius: '4px',
+                                                    background: alert.severity === 'critical' ? 'var(--color-critical)' : 'var(--color-warning)',
+                                                    color: 'white'
+                                                }}>
                                                     {alert.severity.toUpperCase()}
                                                 </span>
-                                                <span className="drawer-alert-time">{formatDateTime(alert.created_at)}</span>
+                                                <span className="drawer-alert-time" style={{ fontSize: '0.7rem', color: 'var(--color-text-secondary)' }}>{formatDateTime(alert.created_at)}</span>
                                             </div>
-                                            <p className="drawer-alert-msg">{alert.message}</p>
-                                            <div className="drawer-alert-status">
+                                            <p className="drawer-alert-msg" style={{ margin: '0 0 8px 0', fontSize: '0.8rem', fontWeight: 600 }}>{alert.message}</p>
+                                            <div className="drawer-alert-status" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: 'var(--color-text-secondary)' }}>
                                                 <span>Type: {alert.alert_type.replace(/_/g, ' ')}</span>
-                                                <span className={alert.resolved ? 'text-success' : 'text-danger font-bold'}>
-                                                    {alert.resolved ? 'Resolved' : 'Active Incident'}
+                                                <span style={{
+                                                    color: alert.resolved ? 'var(--color-success)' : 'var(--color-critical)',
+                                                    fontWeight: 700
+                                                }}>
+                                                    {alert.resolved ? 'Resolved' : 'Active'}
                                                 </span>
                                             </div>
                                         </div>
@@ -415,150 +370,6 @@ function CameraDrawer({ camera, onClose, onCameraChange, addToast }) {
                             )}
                         </div>
                     )}
-
-                    {/* TAB: HARDWARE CONFIG */}
-                    {activeTab === 'config' && (
-                        <div className="drawer-tab-pane">
-                            <div className="drawer-config-header">
-                                <h3 className="drawer__section-title">Administrative Settings</h3>
-                                <button 
-                                    className="btn btn--sm btn--primary" 
-                                    onClick={() => setIsEditing(!isEditing)}
-                                >
-                                    {isEditing ? 'Cancel Edit' : 'Edit Settings'}
-                                </button>
-                            </div>
-
-                            {isEditing ? (
-                                <form onSubmit={handleSaveConfig} className="drawer-config-form">
-                                    <div className="form-group">
-                                        <label htmlFor="cfg-name">Camera Name *</label>
-                                        <input
-                                            id="cfg-name"
-                                            type="text"
-                                            className="form-control"
-                                            value={formData.name}
-                                            onChange={e => setFormData({...formData, name: e.target.value})}
-                                            required
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="cfg-loc">Deployment Location</label>
-                                        <input
-                                            id="cfg-loc"
-                                            type="text"
-                                            className="form-control"
-                                            value={formData.location}
-                                            onChange={e => setFormData({...formData, location: e.target.value})}
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="cfg-storage">Storage Capacity (GB)</label>
-                                        <input
-                                            id="cfg-storage"
-                                            type="number"
-                                            className="form-control"
-                                            value={formData.storage_capacity}
-                                            onChange={e => setFormData({...formData, storage_capacity: parseFloat(e.target.value)})}
-                                            min="1"
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="cfg-interval">Reporting Interval (seconds)</label>
-                                        <input
-                                            id="cfg-interval"
-                                            type="number"
-                                            className="form-control"
-                                            value={formData.reporting_interval}
-                                            onChange={e => setFormData({...formData, reporting_interval: parseInt(e.target.value)})}
-                                            min="5"
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="cfg-fault">Fault Probability (0.0 - 1.0)</label>
-                                        <input
-                                            id="cfg-fault"
-                                            type="number" step="0.01"
-                                            className="form-control"
-                                            value={formData.fault_probability}
-                                            onChange={e => setFormData({...formData, fault_probability: parseFloat(e.target.value)})}
-                                            min="0" max="1"
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="cfg-offline">Offline Probability (0.0 - 1.0)</label>
-                                        <input
-                                            id="cfg-offline"
-                                            type="number" step="0.01"
-                                            className="form-control"
-                                            value={formData.offline_probability}
-                                            onChange={e => setFormData({...formData, offline_probability: parseFloat(e.target.value)})}
-                                            min="0" max="1"
-                                        />
-                                    </div>
-                                    <div className="form-group full-width">
-                                        <label htmlFor="cfg-notes">Administrative Notes</label>
-                                        <textarea
-                                            id="cfg-notes"
-                                            className="form-control"
-                                            value={formData.notes}
-                                            onChange={e => setFormData({...formData, notes: e.target.value})}
-                                            rows="3"
-                                        />
-                                    </div>
-                                    <button type="submit" className="btn btn--success full-width" style={{ marginTop: '10px' }}>
-                                        Save Configuration Changes
-                                    </button>
-                                </form>
-                            ) : (
-                                <div className="drawer-config-details">
-                                    <div className="config-detail-row">
-                                        <span>Camera ID:</span>
-                                        <strong className="font-mono">{camera.id}</strong>
-                                    </div>
-                                    <div className="config-detail-row">
-                                        <span>Camera Name:</span>
-                                        <strong>{camera.name || camera.id}</strong>
-                                    </div>
-                                    <div className="config-detail-row">
-                                        <span>Location:</span>
-                                        <strong>{camera.location || 'Not Specified'}</strong>
-                                    </div>
-                                    <div className="config-detail-row">
-                                        <span>Storage Capacity:</span>
-                                        <strong>{camera.storage_capacity || 100} GB</strong>
-                                    </div>
-                                    <div className="config-detail-row">
-                                        <span>Reporting Interval:</span>
-                                        <strong>{camera.reporting_interval || 30} seconds</strong>
-                                    </div>
-                                    <div className="config-detail-row">
-                                        <span>Fault Probability:</span>
-                                        <strong>{Math.round((camera.fault_probability || 0.05) * 100)}%</strong>
-                                    </div>
-                                    <div className="config-detail-row">
-                                        <span>Offline Probability:</span>
-                                        <strong>{Math.round((camera.offline_probability || 0.03) * 100)}%</strong>
-                                    </div>
-                                    <div className="config-detail-row">
-                                        <span>Admin Notes:</span>
-                                        <p className="config-detail-notes">{camera.notes || 'No administrative notes registered.'}</p>
-                                    </div>
-                                    
-                                    <div className="config-detail-actions">
-                                        <button 
-                                            className={`btn full-width ${camera.is_enabled ? 'btn--danger' : 'btn--success'}`}
-                                            onClick={handleToggleState}
-                                        >
-                                            {camera.is_enabled ? <Power size={14} /> : <Check size={14} />}
-                                            {camera.is_enabled ? 'Disable Camera Telemetry' : 'Enable Camera Telemetry'}
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    )}
-
                 </div>
             </aside>
         </>

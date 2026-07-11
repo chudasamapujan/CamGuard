@@ -1,96 +1,31 @@
-"""
-Health Data Routes
-------------------
-Handles ingestion of health data from the camera simulator.
-
-POST /api/health
-- Receives a JSON payload with camera health metrics
-- Upserts the camera record (creates if first time, updates status)
-- Stores the health record in the time-series table
-- Triggers threshold checking and alert generation
-- Returns created alerts in the response
-
-Design decisions:
-- Single endpoint for all cameras (camera_id is in the payload)
-- Camera auto-registration: if a camera_id is seen for the first time, a new
-  Camera record is created automatically (no manual setup needed)
-- Status is computed from the most significant violation (critical > warning > online)
-"""
-
-from datetime import datetime, timezone
 from flask import Blueprint, request, jsonify
-from backend.database import db
-from backend.models import Camera, HealthRecord
-from backend.services.alert_service import process_health_data
+from backend.services.alert_service import AlertService
+from backend.services.history_service import HistoryService
 
 health_bp = Blueprint("health", __name__)
 
-
 @health_bp.route("/api/health", methods=["POST"])
+@health_bp.route("/health", methods=["POST"])
 def ingest_health_data():
-    """Receive health data from camera simulator."""
+    """Ingest telemetry metrics from the camera simulator."""
     data = request.get_json()
+    result, error = AlertService.ingest_health_data(data)
+    if error:
+        return jsonify({"error": error}), 400
+    return jsonify(result), 201
 
-    if not data or "camera_id" not in data:
-        return jsonify({"error": "Missing camera_id in payload"}), 400
+@health_bp.route("/api/cameras/<camera_id>/history", methods=["GET"])
+@health_bp.route("/history/<camera_id>", methods=["GET"])
+def get_camera_history(camera_id):
+    """Retrieve time-series health logs for a camera."""
+    hours = request.args.get("hours", 24, type=int)
+    result = HistoryService.get_camera_history(camera_id, hours)
+    return jsonify(result), 200
 
-    camera_id = data["camera_id"]
-
-    # Auto-register camera if it doesn't exist
-    camera = db.session.get(Camera, camera_id)
-    if not camera:
-        camera = Camera(
-            id=camera_id,
-            name=data.get("name", f"Camera {camera_id}"),
-            location=data.get("location", "Unknown"),
-            is_enabled=True,
-            status="offline"
-        )
-        db.session.add(camera)
-    elif not camera.is_enabled:
-        return jsonify({"error": f"Camera {camera_id} is disabled", "is_enabled": False}), 400
-
-    # Update camera status based on health data
-    is_online = data.get("is_online", True)
-    cpu = data.get("cpu_usage", 0)
-    memory = data.get("memory_usage", 0)
-    storage = data.get("storage_usage", 0)
-    latency = data.get("network_latency", 0)
-    fault = data.get("fault_type")
-
-    from backend.services.threshold import get_db_thresholds
-    thresholds = get_db_thresholds()
-
-    # Determine status: critical > warning > online > offline
-    if not is_online or fault:
-        camera.status = "critical"
-    elif cpu >= thresholds["cpu_critical"] or memory >= thresholds["memory_critical"] or storage >= thresholds["storage_critical"] or latency >= thresholds["latency_critical"]:
-        camera.status = "critical"
-    elif cpu >= thresholds["cpu_warning"] or memory >= thresholds["memory_warning"] or storage >= thresholds["storage_warning"] or latency >= thresholds["latency_warning"]:
-        camera.status = "warning"
-    else:
-        camera.status = "online"
-
-    camera.last_heartbeat = datetime.now(timezone.utc)
-
-    # Store health record
-    record = HealthRecord(
-        camera_id=camera_id,
-        cpu_usage=cpu,
-        memory_usage=memory,
-        storage_usage=storage,
-        network_latency=latency,
-        is_online=is_online,
-        fault_type=fault,
-    )
-    db.session.add(record)
-    db.session.commit()
-
-    # Process alerts
-    new_alerts = process_health_data(data)
-
-    return jsonify({
-        "status": "ok",
-        "camera_status": camera.status,
-        "new_alerts": len(new_alerts),
-    }), 201
+@health_bp.route("/api/dashboard/history", methods=["GET"])
+@health_bp.route("/dashboard/history", methods=["GET"])
+def get_dashboard_history():
+    """Retrieve aggregated fleet-wide performance history."""
+    hours = request.args.get("hours", 24, type=int)
+    result = HistoryService.get_dashboard_history(hours)
+    return jsonify(result), 200
