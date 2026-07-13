@@ -4,7 +4,7 @@ from logging.handlers import RotatingFileHandler
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from backend.config import Config, BASE_DIR
-from backend.database import db
+from backend.database import db, migrate
 from backend.socket_manager import socketio
 
 def setup_logging():
@@ -44,6 +44,7 @@ def create_app(test_config=None):
     # Initialize CORS with allowed origins
     CORS(app, resources={r"/*": {"origins": Config.CORS_ALLOWED_ORIGINS}})
     db.init_app(app)
+    migrate.init_app(app, db)
     socketio.init_app(app)
 
     # Register blueprints
@@ -84,17 +85,12 @@ def create_app(test_config=None):
             return jsonify({"error": "An internal server error occurred."}), 500
         return jsonify({"error": f"An unexpected error occurred: {str(error)}"}), 500
 
-    # Recreate and seed DB tables
-    with app.app_context():
-        # Execute safe raw SQL migration schema upgrade if active column doesn't exist yet
-        try:
-            db.session.execute(db.text("ALTER TABLE cameras ADD COLUMN active BOOLEAN DEFAULT 1 NOT NULL"))
-            db.session.commit()
-        except Exception:
-            db.session.rollback()
-        db.create_all()
-        from backend.services.configuration_service import ConfigurationService
-        ConfigurationService.seed_default_settings()
+    # Recreate and seed DB tables if not running migration tool
+    if not os.environ.get("FLASK_DB_MIGRATING"):
+        with app.app_context():
+            db.create_all()
+            from backend.services.configuration_service import ConfigurationService
+            ConfigurationService.seed_default_settings()
 
     @app.route("/")
     def index():
