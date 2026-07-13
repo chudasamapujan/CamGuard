@@ -34,10 +34,12 @@ def setup_logging():
 
 logger = setup_logging()
 
-def create_app():
+def create_app(test_config=None):
     """Create and configure the Flask application."""
     app = Flask(__name__)
     app.config.from_object(Config)
+    if test_config:
+        app.config.update(test_config)
 
     # Initialize CORS with allowed origins
     CORS(app, resources={r"/*": {"origins": Config.CORS_ALLOWED_ORIGINS}})

@@ -47,3 +47,11 @@ venv.bak/
 # Environments / Sensitive Data
 .env
 .env.*
+
+# Testing & Logs
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+logs/*.log
+
