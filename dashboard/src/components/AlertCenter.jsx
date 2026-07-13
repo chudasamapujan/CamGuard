@@ -45,7 +45,7 @@ export default function AlertCenter({ alerts, onAlertResolved, addToast }) {
             flexDirection: 'column',
             gap: '16px'
         }}>
-            <div className="alert-center__header" style={{ display: 'flex', justifyBetween: 'space-between', alignItems: 'center' }}>
+            <div className="alert-center__header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h3 className="alert-center__title" style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0, fontSize: '1rem', fontWeight: 800 }}>
                     <AlertTriangle size={18} style={{ color: 'var(--color-warning)' }} />
                     Recent Alerts Log

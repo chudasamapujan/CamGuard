@@ -35,7 +35,7 @@ function Dashboard({
 
             {/* Section 2: Responsive Camera Grid */}
             <div className="dashboard-section" style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: '8px', padding: '20px' }}>
-                <div style={{ display: 'flex', justifyBetween: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
                     <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 800 }}>Camera Fleet Status</h3>
                 </div>
                 <CameraGrid
