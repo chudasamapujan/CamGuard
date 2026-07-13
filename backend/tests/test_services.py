@@ -159,6 +159,18 @@ def test_alert_service_ingest_threshold_breach_and_deduplication(app, db_session
         active_alerts = Alert.query.filter_by(camera_id="CAM-002", resolved=False).all()
         assert len(active_alerts) == 1
 
+        # 4. Deduplication across severity transition (e.g. breach changes from critical down to warning or warning up to critical)
+        res_transition, _ = AlertService.ingest_health_data({
+            "camera_id": "CAM-002",
+            "cpu_usage": 80.0, "memory_usage": 40.0, "storage_usage": 40.0, "network_latency": 50.0, "is_online": True
+        })
+        assert res_transition["new_alerts"] == 0
+        transitioned_alerts = Alert.query.filter_by(camera_id="CAM-002", resolved=False).all()
+        assert len(transitioned_alerts) == 1
+        assert transitioned_alerts[0].severity == "warning"
+        assert "80.0%" in transitioned_alerts[0].message
+
+
 
 def test_alert_service_auto_resolution(app, db_session):
     with app.app_context():

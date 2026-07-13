@@ -130,14 +130,13 @@ class AlertService:
                     alert.resolved_at = datetime.now(timezone.utc)
                     resolved_alerts.append(alert)
 
-            # Trigger new alerts with deduplication
+            # Trigger new alerts with deduplication (and update existing active alerts if severity/message changes)
             new_alerts_count = 0
             created_alerts = []
             for v in violations:
                 existing = Alert.query.filter_by(
                     camera_id=camera_id,
                     alert_type=v["type"],
-                    severity=v["severity"],
                     resolved=False
                 ).first()
 
@@ -151,6 +150,10 @@ class AlertService:
                     db.session.add(alert)
                     created_alerts.append(alert)
                     new_alerts_count += 1
+                else:
+                    # Update existing active alert instead of creating a duplicate
+                    existing.severity = v["severity"]
+                    existing.message = v["msg"]
 
             db.session.commit()
 
