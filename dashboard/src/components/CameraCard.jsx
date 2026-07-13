@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cpu, MemoryStick, HardDrive, Globe, Clock, Zap, WifiOff, ShieldAlert } from 'lucide-react';
+import { Cpu, MemoryStick, HardDrive, Globe, Clock, Zap, WifiOff, ShieldAlert, MapPin } from 'lucide-react';
 import StatusBadge from './StatusBadge';
 import { formatRelativeTime } from '../utils/helpers';
 
@@ -76,6 +76,13 @@ function CameraCard({ camera, onClick }) {
                 </div>
                 <StatusBadge status={camera.status} />
             </div>
+
+            {camera.location && (
+                <div className="cam-card__location" style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
+                    <MapPin size={12} />
+                    <span>{camera.location}</span>
+                </div>
+            )}
 
             {isOnline ? (
                 <>

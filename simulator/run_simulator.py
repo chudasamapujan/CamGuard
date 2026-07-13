@@ -21,7 +21,7 @@ if reconfigure:
         pass
 
 from simulator.camera import Camera
-from simulator.config import BACKEND_URL, LOG_LEVEL
+from simulator.config import BACKEND_URL, LOG_LEVEL, CAMERA_LOCATIONS
 
 def setup_logging():
     """Configure rotating file logging and console logging for simulator."""
@@ -142,11 +142,17 @@ def main():
                     else:
                         # Spawn new camera thread
                         logger.info(f"[+] Starting camera simulation for {cam_id}")
+                        try:
+                            cam_num = int(cam_id.split('-')[1])
+                            loc = CAMERA_LOCATIONS[(cam_num - 1) % len(CAMERA_LOCATIONS)]
+                        except (IndexError, ValueError):
+                            loc = "Main Entrance"
                         cam = Camera(
                             camera_id=cam_id,
                             name=f"Camera {cam_id.split('-')[1]}",
                             reporting_interval=interval,
-                            fault_probability=fault_prob
+                            fault_probability=fault_prob,
+                            location=loc
                         )
                         stop_event = threading.Event()
                         t = threading.Thread(

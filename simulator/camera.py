@@ -13,11 +13,12 @@ from simulator.config import FAULT_TYPES
 class Camera:
     """Simulates a single camera with telemetry metric behavior."""
 
-    def __init__(self, camera_id, name, reporting_interval=30, fault_probability=0.05):
+    def __init__(self, camera_id, name, reporting_interval=30, fault_probability=0.05, location=None):
         self.camera_id = camera_id
         self.name = name
         self.reporting_interval = reporting_interval
         self.fault_probability = fault_probability
+        self.location = location
 
         # Baseline metrics
         self.cpu_usage = random.uniform(20, 45)
@@ -71,6 +72,7 @@ class Camera:
         return {
             "camera_id": self.camera_id,
             "name": self.name,
+            "location": self.location,
             "cpu_usage": round(self.cpu_usage, 1) if self.is_online else 0.0,
             "memory_usage": round(self.memory_usage, 1) if self.is_online else 0.0,
             "storage_usage": round(self.storage_usage, 1) if self.is_online else 0.0,

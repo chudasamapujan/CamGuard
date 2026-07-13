@@ -29,6 +29,7 @@ class AlertService:
                 camera = Camera(
                     id=camera_id,
                     name=data.get("name", f"Camera {camera_id}"),
+                    location=data.get("location"),
                     status="offline",
                     active=True
                 )
@@ -42,6 +43,8 @@ class AlertService:
                     cam_num = 0
                 if cam_num <= int(settings.get("camera_count", 0)):
                     camera.active = True
+                    if data.get("location") and camera.location != data.get("location"):
+                        camera.location = data.get("location")
                     db.session.add(camera)
                     db.session.flush()
                     from backend.socket_manager import broadcast_camera_activated
@@ -50,6 +53,10 @@ class AlertService:
                     # Camera is beyond configured count — drop telemetry silently
                     logger.debug(f"Dropped telemetry for inactive camera {camera_id}: beyond configured count")
                     return {"status": "ignored", "camera_status": "inactive", "new_alerts": 0}, None
+            else:
+                if data.get("location") and camera.location != data.get("location"):
+                    camera.location = data.get("location")
+                    db.session.add(camera)
 
             # 2. Extract metrics
             is_online = data.get("is_online", True)

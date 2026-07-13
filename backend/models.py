@@ -9,12 +9,26 @@ def serialize_dt(dt):
         return dt.isoformat() + "Z"
     return dt.isoformat()
 
+CAMERA_LOCATIONS = [
+    "Main Entrance",
+    "Parking Lot A",
+    "Server Room",
+    "Warehouse East",
+    "Loading Dock",
+    "Office Floor 2",
+    "Cafeteria",
+    "Emergency Exit B",
+    "Rooftop",
+    "Lobby",
+]
+
 class Camera(db.Model):
     """Represents a camera node in the system."""
     __tablename__ = "cameras"
 
     id = db.Column(db.String(50), primary_key=True)
     name = db.Column(db.String(100), nullable=False)
+    location = db.Column(db.String(150), nullable=True)
     status = db.Column(db.String(20), default="offline")  # online, warning, critical, offline
     last_heartbeat = db.Column(db.DateTime, nullable=True)
     active = db.Column(db.Boolean, default=True, nullable=False)
@@ -23,17 +37,25 @@ class Camera(db.Model):
     health_records = db.relationship("HealthRecord", back_populates="camera", cascade="all, delete-orphan", lazy="dynamic")
     alerts = db.relationship("Alert", back_populates="camera", cascade="all, delete-orphan", lazy="dynamic")
 
-    def __init__(self, id, name, status="offline", last_heartbeat=None, active=True, **kwargs):
+    def __init__(self, id, name, status="offline", last_heartbeat=None, active=True, location=None, **kwargs):
         self.id = id
         self.name = name
         self.status = status
         self.last_heartbeat = last_heartbeat
         self.active = active
+        self.location = location or kwargs.get("location")
+        if not self.location and isinstance(id, str) and "-" in id:
+            try:
+                num = int(id.split("-")[1])
+                self.location = CAMERA_LOCATIONS[(num - 1) % len(CAMERA_LOCATIONS)]
+            except (IndexError, ValueError):
+                self.location = "Lobby"
 
     def to_dict(self):
         return {
             "id": self.id,
             "name": self.name,
+            "location": self.location,
             "status": self.status,
             "last_heartbeat": serialize_dt(self.last_heartbeat),
             "active": self.active
