@@ -47,6 +47,7 @@ venv.bak/
 # Environments / Sensitive Data
 .env
 .env.*
+!.env.example
 
 # Testing & Logs
 .pytest_cache/

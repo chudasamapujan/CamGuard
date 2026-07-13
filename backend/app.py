@@ -40,11 +40,21 @@ def create_app(test_config=None):
     """Create and configure the Flask application."""
     app = Flask(__name__)
     app.config.from_object(Config)
+    if "ENVIRONMENT" in os.environ:
+        app.config["ENVIRONMENT"] = os.environ.get("ENVIRONMENT")
+    if "API_KEY" in os.environ or os.environ.get("ENVIRONMENT") == "production":
+        app.config["API_KEY"] = os.environ.get("API_KEY")
     if test_config:
         app.config.update(test_config)
 
     if (app.config.get("TESTING") or (test_config and test_config.get("TESTING"))) and not (test_config and "RATELIMIT_ENABLED" in test_config):
         app.config["RATELIMIT_ENABLED"] = False
+
+    if not app.config.get("TESTING"):
+        env_mode = app.config.get("ENVIRONMENT")
+        api_key = app.config.get("API_KEY")
+        if env_mode == "production" and not api_key:
+            raise RuntimeError("API_KEY must be set when ENVIRONMENT=production — refusing to start with an unauthenticated /settings endpoint")
 
     # Initialize CORS with allowed origins
     CORS(app, resources={r"/*": {"origins": Config.CORS_ALLOWED_ORIGINS}})

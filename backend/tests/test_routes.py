@@ -245,6 +245,28 @@ def test_rate_limiting():
     assert res3.status_code == 429  # Too Many Requests
 
 
+def test_create_app_production_api_key_check(monkeypatch):
+    from backend.app import create_app
+    import pytest
+
+    # 1. ENVIRONMENT=production and no API_KEY when TESTING is False -> raises RuntimeError
+    monkeypatch.setenv("ENVIRONMENT", "production")
+    monkeypatch.delenv("API_KEY", raising=False)
+    with pytest.raises(RuntimeError, match="API_KEY must be set when ENVIRONMENT=production"):
+        create_app({"TESTING": False})
+
+    # 2. ENVIRONMENT=production and API_KEY set -> boots normally
+    monkeypatch.setenv("API_KEY", "secret-admin-key")
+    app_prod = create_app({"TESTING": False})
+    assert app_prod is not None
+
+    # 3. ENVIRONMENT=development and no API_KEY -> boots normally
+    monkeypatch.setenv("ENVIRONMENT", "development")
+    monkeypatch.delenv("API_KEY", raising=False)
+    app_dev = create_app({"TESTING": False})
+    assert app_dev is not None
+
+
 
 
 
