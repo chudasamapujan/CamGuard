@@ -36,13 +36,14 @@ ChartJS.register(
 export default function MetricChart({ cameraId, cameraName }) {
     const [history, setHistory] = useState(null);
     const [selectedMetric, setSelectedMetric] = useState('resources'); // resources, latency, health
+    const [timeRange, setTimeRange] = useState(1); // 1, 6, 24, 168 hours
 
     useEffect(() => {
         const load = async () => {
             try {
                 const res = cameraId
-                    ? await fetchCameraHistory(cameraId, 1)
-                    : await fetchDashboardHistory(1);
+                    ? await fetchCameraHistory(cameraId, timeRange)
+                    : await fetchDashboardHistory(timeRange);
                 
                 if (cameraId) {
                     setHistory(res.data);
@@ -60,13 +61,72 @@ export default function MetricChart({ cameraId, cameraName }) {
         load();
         const interval = setInterval(load, 15000);
         return () => clearInterval(interval);
-    }, [cameraId]);
+    }, [cameraId, timeRange]);
+
+    const renderHeader = () => (
+        <div className="metric-chart-header">
+            <h3 className="metric-chart-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Activity size={16} />
+                {cameraId ? `Camera ${cameraName || cameraId} Metrics` : 'Performance Overview'}
+            </h3>
+            <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+                <div className="metric-chart-tabs" role="tablist" aria-label="Metric Type">
+                    <button
+                        role="tab"
+                        aria-selected={selectedMetric === 'resources'}
+                        className={`metric-chart-tab ${selectedMetric === 'resources' ? 'metric-chart-tab--active' : ''}`}
+                        onClick={() => setSelectedMetric('resources')}
+                    >
+                        Resources
+                    </button>
+                    <button
+                        role="tab"
+                        aria-selected={selectedMetric === 'latency'}
+                        className={`metric-chart-tab ${selectedMetric === 'latency' ? 'metric-chart-tab--active' : ''}`}
+                        onClick={() => setSelectedMetric('latency')}
+                    >
+                        Latency
+                    </button>
+                    <button
+                        role="tab"
+                        aria-selected={selectedMetric === 'health'}
+                        className={`metric-chart-tab ${selectedMetric === 'health' ? 'metric-chart-tab--active' : ''}`}
+                        onClick={() => setSelectedMetric('health')}
+                    >
+                        Health
+                    </button>
+                </div>
+
+                <div className="metric-chart-tabs" role="tablist" aria-label="Time Range Selector">
+                    {[
+                        { label: '1h', value: 1 },
+                        { label: '6h', value: 6 },
+                        { label: '24h', value: 24 },
+                        { label: '7d', value: 168 }
+                    ].map((item) => (
+                        <button
+                            key={item.value}
+                            role="tab"
+                            aria-selected={timeRange === item.value}
+                            className={`metric-chart-tab ${timeRange === item.value ? 'metric-chart-tab--active' : ''}`}
+                            onClick={() => setTimeRange(item.value)}
+                        >
+                            {item.label}
+                        </button>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
 
     if (!history || !history.records || history.records.length === 0) {
         return (
-            <div className="metric-chart-empty" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', minHeight: '220px', color: 'var(--color-text-secondary)' }}>
-                <Activity size={24} style={{ marginBottom: '8px', opacity: 0.5 }} />
-                <p style={{ margin: 0, fontSize: '0.85rem' }}>No historical telemetry logs found for this timeframe.</p>
+            <div className="metric-chart">
+                {renderHeader()}
+                <div className="metric-chart-empty" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', minHeight: '220px', color: 'var(--color-text-secondary)' }}>
+                    <Activity size={24} style={{ marginBottom: '8px', opacity: 0.5 }} />
+                    <p style={{ margin: 0, fontSize: '0.85rem' }}>No historical telemetry logs found for this timeframe.</p>
+                </div>
             </div>
         );
     }
@@ -199,38 +259,7 @@ export default function MetricChart({ cameraId, cameraName }) {
 
     return (
         <div className="metric-chart">
-            <div className="metric-chart-header">
-                <h3 className="metric-chart-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Activity size={16} />
-                    {cameraId ? `Camera ${cameraName || cameraId} Metrics` : 'Performance Overview'}
-                </h3>
-                <div className="metric-chart-tabs" role="tablist">
-                    <button
-                        role="tab"
-                        aria-selected={selectedMetric === 'resources'}
-                        className={`metric-chart-tab ${selectedMetric === 'resources' ? 'metric-chart-tab--active' : ''}`}
-                        onClick={() => setSelectedMetric('resources')}
-                    >
-                        Resources
-                    </button>
-                    <button
-                        role="tab"
-                        aria-selected={selectedMetric === 'latency'}
-                        className={`metric-chart-tab ${selectedMetric === 'latency' ? 'metric-chart-tab--active' : ''}`}
-                        onClick={() => setSelectedMetric('latency')}
-                    >
-                        Latency
-                    </button>
-                    <button
-                        role="tab"
-                        aria-selected={selectedMetric === 'health'}
-                        className={`metric-chart-tab ${selectedMetric === 'health' ? 'metric-chart-tab--active' : ''}`}
-                        onClick={() => setSelectedMetric('health')}
-                    >
-                        Health
-                    </button>
-                </div>
-            </div>
+            {renderHeader()}
             <div className="metric-chart-container">
                 <Line data={chartData} options={options} />
             </div>
