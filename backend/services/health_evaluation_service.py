@@ -68,15 +68,47 @@ class HealthEvaluationService:
     def list_cameras(cls):
         """List all active cameras with dynamic status and latest health metrics."""
         try:
+            from sqlalchemy import func
             settings = ConfigurationService.get_all_settings()
             bounds = cls.get_threshold_bounds(settings)
             
             # Enforce querying only active devices
             cameras = Camera.query.filter_by(active=True).order_by(Camera.id.asc()).all()
+            if not cameras:
+                return []
+
+            camera_ids = [cam.id for cam in cameras]
+
+            # Bulk query max HealthRecord ID per camera_id using subquery
+            subq = (
+                db.session.query(
+                    HealthRecord.camera_id,
+                    func.max(HealthRecord.id).label("max_id")
+                )
+                .filter(HealthRecord.camera_id.in_(camera_ids))
+                .group_by(HealthRecord.camera_id)
+                .subquery()
+            )
+
+            latest_records = (
+                db.session.query(HealthRecord)
+                .join(subq, HealthRecord.id == subq.c.max_id)
+                .all()
+            )
+            latest_by_cam = {r.camera_id: r for r in latest_records}
+
+            # Bulk query active alerts count per camera_id
+            alert_counts = (
+                db.session.query(Alert.camera_id, func.count(Alert.id))
+                .filter(Alert.camera_id.in_(camera_ids), Alert.resolved == False)
+                .group_by(Alert.camera_id)
+                .all()
+            )
+            alerts_by_cam = {cam_id: count for cam_id, count in alert_counts}
 
             result = []
             for cam in cameras:
-                latest = HealthRecord.query.filter_by(camera_id=cam.id).order_by(HealthRecord.timestamp.desc()).first()
+                latest = latest_by_cam.get(cam.id)
                 cam_status = cls.calculate_status(cam, latest, bounds)
                 
                 # Sync status back to DB for quick querying/filtering
@@ -86,10 +118,7 @@ class HealthEvaluationService:
 
                 cam_dict = cam.to_dict()
                 cam_dict["latest_health"] = latest.to_dict() if latest else None
-                
-                # Count active alerts
-                active_alerts = Alert.query.filter_by(camera_id=cam.id, resolved=False).count()
-                cam_dict["active_alerts"] = active_alerts
+                cam_dict["active_alerts"] = alerts_by_cam.get(cam.id, 0)
                 result.append(cam_dict)
 
             db.session.commit()
@@ -133,11 +162,46 @@ class HealthEvaluationService:
     def get_dashboard_summary(cls):
         """Retrieve aggregated dashboard stats only for active devices."""
         try:
+            from sqlalchemy import func
             settings = ConfigurationService.get_all_settings()
             bounds = cls.get_threshold_bounds(settings)
             
             # Query active devices exclusively
             cameras = Camera.query.filter_by(active=True).all()
+            if not cameras:
+                return {
+                    "total_cameras": 0,
+                    "online": 0,
+                    "warning": 0,
+                    "critical": 0,
+                    "offline": 0,
+                    "active_alerts": 0,
+                    "critical_alerts": 0,
+                    "warning_alerts": 0,
+                    "avg_cpu": 0.0,
+                    "avg_mem": 0.0,
+                    "avg_storage": 0.0,
+                }
+
+            camera_ids = [cam.id for cam in cameras]
+
+            # Bulk query max HealthRecord ID per camera_id
+            subq = (
+                db.session.query(
+                    HealthRecord.camera_id,
+                    func.max(HealthRecord.id).label("max_id")
+                )
+                .filter(HealthRecord.camera_id.in_(camera_ids))
+                .group_by(HealthRecord.camera_id)
+                .subquery()
+            )
+
+            latest_records = (
+                db.session.query(HealthRecord)
+                .join(subq, HealthRecord.id == subq.c.max_id)
+                .all()
+            )
+            latest_by_cam = {r.camera_id: r for r in latest_records}
 
             total = len(cameras)
             online = 0
@@ -151,7 +215,7 @@ class HealthEvaluationService:
             total_storage = 0.0
 
             for cam in cameras:
-                latest = HealthRecord.query.filter_by(camera_id=cam.id).order_by(HealthRecord.timestamp.desc()).first()
+                latest = latest_by_cam.get(cam.id)
                 status = cls.calculate_status(cam, latest, bounds)
                 
                 if cam.status != status:
