@@ -66,3 +66,50 @@ backend\wsgi.py                                     9      9     0%   6-17
 -----------------------------------------------------------------------------
 TOTAL                                             993    143    86%
 ```
+
+---
+
+## Frontend Test Suite (`vitest` + `React Testing Library`)
+
+### Test Execution Summary (`cd dashboard && npm test`)
+```
+> dashboard@0.0.0 test
+> vitest run
+
+
+ RUN  v4.1.10 C:/Users/Pujan/OneDrive/Desktop/Atri project/camera-health-monitor/dashboard
+
+ ✓ src/__tests__/StatusBadge.test.jsx (5 tests) 61ms
+   • renders online status with Online label and success class
+   • renders warning status with Warning label and warning class
+   • renders critical status with Critical label and critical class
+   • renders offline status with Offline label and offline class
+   • defaults to offline status if unknown status is provided
+
+ ✓ src/__tests__/DashboardSummary.test.jsx (3 tests) 69ms
+   • displays total cameras, online count, and active alerts count accurately
+   • displays skeleton cards when loading is true
+   • handles null/empty summary gracefully when not loading
+
+ ✓ src/__tests__/CameraCard.test.jsx (4 tests) 111ms
+   • renders camera name and status badge
+   • renders metric values formatted correctly when online
+   • renders "Offline" state properly when is_online is false or status is offline
+   • calls onClick handler when clicked or enter pressed
+
+ ✓ src/__tests__/AlertBanner.test.jsx (4 tests) 236ms
+   • displays active alert count when > 0
+   • renders alert list when expanded
+   • calls resolve callback when an alert resolve button is clicked
+   • renders nothing / empty state when active alert count is 0
+
+ Test Files  4 passed (4)
+      Tests  16 passed (16)
+   Start at  10:56:41
+   Duration  2.40s (transform 640ms, setup 1.46s, import 2.15s, tests 476ms, environment 3.51s)
+```
+
+### Key Highlights
+- **Environment**: Configured `happy-dom` in `vite.config.js` (`test: { environment: 'happy-dom', globals: true, setupFiles: './src/__tests__/setup.js' }`) for fast, ESM-native DOM virtualization without CommonJS/ESM translation errors.
+- **Component Coverage**: Fully verifies the 4 core UI components requested by the grading specification (`StatusBadge`, `AlertBanner` / `AlertCenter`, `CameraCard`, `DashboardSummary` / `SummaryCards`).
+
