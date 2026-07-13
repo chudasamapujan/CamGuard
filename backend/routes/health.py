@@ -8,7 +8,28 @@ health_bp = Blueprint("health", __name__)
 @health_bp.route("/health", methods=["POST"])
 def ingest_health_data():
     """Ingest telemetry metrics from the camera simulator."""
-    data = request.get_json()
+    data = request.get_json(silent=True)
+    if not data or not isinstance(data, dict):
+        return jsonify({"error": "Invalid or missing JSON payload"}), 400
+
+    if "camera_id" not in data or not data["camera_id"] or not isinstance(data["camera_id"], str):
+        return jsonify({"error": "Missing camera_id in payload"}), 400
+
+    for metric in ["cpu_usage", "memory_usage", "storage_usage"]:
+        if metric in data and data[metric] is not None:
+            val = data[metric]
+            if not isinstance(val, (int, float)) or isinstance(val, bool):
+                return jsonify({"error": f"Metric {metric} must be numeric (float or int)"}), 400
+            if not (0 <= val <= 100):
+                return jsonify({"error": f"Metric {metric} must be between 0 and 100"}), 400
+
+    if "network_latency" in data and data["network_latency"] is not None:
+        val = data["network_latency"]
+        if not isinstance(val, (int, float)) or isinstance(val, bool):
+            return jsonify({"error": "Metric network_latency must be numeric (float or int)"}), 400
+        if val < 0:
+            return jsonify({"error": "Metric network_latency must be non-negative (>= 0)"}), 400
+
     result, error = AlertService.ingest_health_data(data)
     if error:
         return jsonify({"error": error}), 400

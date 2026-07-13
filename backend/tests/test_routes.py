@@ -22,6 +22,34 @@ def test_health_ingest_valid_and_missing_camera_id(client, db_session):
     assert res_good.get_json()["status"] == "ok"
 
 
+def test_health_ingest_input_validation_rules(client, db_session):
+    # 1. Out of range CPU (> 100)
+    res = client.post("/health", json={"camera_id": "CAM-101", "cpu_usage": 105.0})
+    assert res.status_code == 400
+    assert "between 0 and 100" in res.get_json()["error"]
+
+    # 2. Out of range Memory (< 0)
+    res = client.post("/health", json={"camera_id": "CAM-101", "memory_usage": -5.0})
+    assert res.status_code == 400
+    assert "between 0 and 100" in res.get_json()["error"]
+
+    # 3. Non-numeric storage
+    res = client.post("/health", json={"camera_id": "CAM-101", "storage_usage": "full"})
+    assert res.status_code == 400
+    assert "must be numeric" in res.get_json()["error"]
+
+    # 4. Negative network latency
+    res = client.post("/health", json={"camera_id": "CAM-101", "network_latency": -20.0})
+    assert res.status_code == 400
+    assert "non-negative" in res.get_json()["error"]
+
+    # 5. Invalid / non-dict payload
+    res = client.post("/health", data="not json", content_type="application/json")
+    assert res.status_code == 400
+    assert "Invalid or missing JSON payload" in res.get_json()["error"]
+
+
+
 def test_health_ingest_increases_active_alerts(client, db_session):
     # Normal telemetry
     client.post("/health", json={
