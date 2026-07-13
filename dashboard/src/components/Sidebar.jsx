@@ -1,10 +1,12 @@
 import React from 'react';
-import { LayoutDashboard, Sliders, Video } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
+import { LayoutDashboard, Bell, Sliders, Video } from 'lucide-react';
 
 export default function Sidebar({ activePage, setActivePage }) {
     const navItems = [
-        { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-        { id: 'settings', label: 'Settings', icon: Sliders },
+        { id: 'dashboard', path: '/', label: 'Dashboard', icon: LayoutDashboard },
+        { id: 'alerts', path: '/alerts', label: 'Alerts', icon: Bell },
+        { id: 'settings', path: '/settings', label: 'Settings', icon: Sliders },
     ];
 
     return (
@@ -21,21 +23,21 @@ export default function Sidebar({ activePage, setActivePage }) {
             <nav className="sidebar__nav">
                 {navItems.map((item) => {
                     const Icon = item.icon;
-                    const isActive = activePage === item.id;
                     return (
-                        <button
+                        <NavLink
                             key={item.id}
-                            className={`sidebar__item ${isActive ? 'sidebar__item--active' : ''}`}
-                            onClick={() => setActivePage(item.id)}
+                            to={item.path}
+                            end={item.path === '/'}
+                            onClick={() => setActivePage && setActivePage(item.id)}
+                            className={({ isActive }) => `sidebar__item ${isActive || activePage === item.id ? 'sidebar__item--active' : ''}`}
                             role="tab"
-                            aria-selected={isActive}
                             aria-label={item.label}
                         >
                             <span className="sidebar__item-left">
                                 <Icon size={16} className="sidebar__icon" />
                                 <span className="sidebar__label">{item.label}</span>
                             </span>
-                        </button>
+                        </NavLink>
                     );
                 })}
             </nav>

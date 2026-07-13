@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { useToast } from './hooks/useToast';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import SettingsPanel from './components/SettingsPanel';
+import AlertCenter from './components/AlertCenter';
 import ToastContainer from './components/Toast';
 import { fetchCameras, fetchDashboardSummary, fetchAlerts } from './services/api';
 import { socket } from './services/socket';
 import './App.css';
 
-function AppContent() {
-  const [activePage, setActivePage] = useState('dashboard');
+export function AppContent() {
   const [cameras, setCameras] = useState([]);
   const [summary, setSummary] = useState(null);
   const [alerts, setAlerts] = useState([]);
@@ -162,45 +163,9 @@ function AppContent() {
     addToast('Dashboard data refreshed manually', 'info');
   }, [loadData, addToast]);
 
-  const renderPage = () => {
-    switch (activePage) {
-      case 'dashboard':
-        return (
-          <Dashboard
-            cameras={cameras}
-            summary={summary}
-            alerts={alerts}
-            loading={loading}
-            onRefresh={loadData}
-            addToast={addToast}
-          />
-        );
-      case 'settings':
-        return (
-          <SettingsPanel
-            addToast={addToast}
-          />
-        );
-      default:
-        return (
-          <Dashboard
-            cameras={cameras}
-            summary={summary}
-            alerts={alerts}
-            loading={loading}
-            onRefresh={loadData}
-            addToast={addToast}
-          />
-        );
-    }
-  };
-
   return (
     <div className="app-container">
-      <Sidebar
-        activePage={activePage}
-        setActivePage={setActivePage}
-      />
+      <Sidebar />
       <div className="app-main-layout">
         <Header
           apiStatus={apiStatus}
@@ -208,7 +173,31 @@ function AppContent() {
           onRefresh={handleRefresh}
         />
         <main className="app-main-content">
-          {renderPage()}
+          <Routes>
+            <Route path="/" element={
+              <Dashboard
+                cameras={cameras}
+                summary={summary}
+                alerts={alerts}
+                loading={loading}
+                onRefresh={loadData}
+                addToast={addToast}
+              />
+            } />
+            <Route path="/alerts" element={
+              <AlertCenter
+                alerts={alerts}
+                onAlertResolved={loadData}
+                addToast={addToast}
+              />
+            } />
+            <Route path="/settings" element={
+              <SettingsPanel
+                addToast={addToast}
+              />
+            } />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
         </main>
       </div>
 
@@ -220,7 +209,9 @@ function AppContent() {
 function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
