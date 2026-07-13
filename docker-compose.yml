@@ -39,13 +39,16 @@ services:
     restart: always
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - certs_data:/etc/nginx/certs
     depends_on:
       backend:
         condition: service_healthy
     networks:
       - camguard-net
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost/health || curl -f -k https://localhost/health || exit 1"]
       interval: 15s
       timeout: 5s
       retries: 5
@@ -76,6 +79,8 @@ volumes:
     name: camguard_db_data
   logs_data:
     name: camguard_logs_data
+  certs_data:
+    name: camguard_certs_data
 
 networks:
   camguard-net:
