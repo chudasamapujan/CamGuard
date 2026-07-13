@@ -67,7 +67,7 @@ class HealthRecord(db.Model):
     __tablename__ = "health_records"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    camera_id = db.Column(db.String(50), db.ForeignKey("cameras.id"), nullable=False)
+    camera_id = db.Column(db.String(50), db.ForeignKey("cameras.id"), nullable=False, index=True)
     cpu_usage = db.Column(db.Float, nullable=False)
     memory_usage = db.Column(db.Float, nullable=False)
     storage_usage = db.Column(db.Float, nullable=False)
