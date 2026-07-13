@@ -17,6 +17,7 @@ def get_database_uri():
 class Config:
     """Base configurations for CamGuard Flask API."""
     SECRET_KEY = os.environ.get("SECRET_KEY", "camera-health-monitor-secret-key")
+    ENVIRONMENT = os.environ.get("ENVIRONMENT", "development")
     
     SQLALCHEMY_DATABASE_URI = get_database_uri()
     SQLALCHEMY_TRACK_MODIFICATIONS = False

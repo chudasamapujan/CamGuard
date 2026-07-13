@@ -80,6 +80,8 @@ def create_app(test_config=None):
     @app.errorhandler(Exception)
     def unhandled_exception(error):
         logger.exception(f"Unhandled Exception: {error}")
+        if app.config.get("ENVIRONMENT") == "production":
+            return jsonify({"error": "An internal server error occurred."}), 500
         return jsonify({"error": f"An unexpected error occurred: {str(error)}"}), 500
 
     # Recreate and seed DB tables

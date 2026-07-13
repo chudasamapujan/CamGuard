@@ -158,3 +158,29 @@ def test_history_routes(client, db_session):
     assert len(data_dash) >= 1
     assert "health_score" in data_dash[0]
 
+
+def test_exception_handler_production_vs_development(app, client):
+    # Add a temporary failing route to trigger Exception handler
+    @app.route("/error-test-endpoint")
+    def trigger_error():
+        raise ValueError("Secret database password db_pass_123 leaked!")
+
+    # Test development mode (should include error details)
+    app.config["ENVIRONMENT"] = "development"
+    res_dev = client.get("/error-test-endpoint")
+    assert res_dev.status_code == 500
+    data_dev = res_dev.get_json()
+    assert "Secret database password db_pass_123 leaked!" in data_dev["error"]
+
+    # Test production mode (should mask error details with generic message)
+    app.config["ENVIRONMENT"] = "production"
+    res_prod = client.get("/error-test-endpoint")
+    assert res_prod.status_code == 500
+    data_prod = res_prod.get_json()
+    assert data_prod["error"] == "An internal server error occurred."
+    assert "db_pass_123" not in data_prod["error"]
+
+    # Reset environment to default
+    app.config["ENVIRONMENT"] = "development"
+
+
