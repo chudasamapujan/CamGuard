@@ -2,10 +2,12 @@ import os
 import logging
 from logging.handlers import RotatingFileHandler
 from flask import Flask, jsonify, request
+from werkzeug.exceptions import HTTPException
 from flask_cors import CORS
 from backend.config import Config, BASE_DIR
 from backend.database import db, migrate
 from backend.socket_manager import socketio
+from backend.limiter import limiter
 
 def setup_logging():
     """Configure rotating file logging and console logging for production."""
@@ -41,22 +43,30 @@ def create_app(test_config=None):
     if test_config:
         app.config.update(test_config)
 
+    if (app.config.get("TESTING") or (test_config and test_config.get("TESTING"))) and not (test_config and "RATELIMIT_ENABLED" in test_config):
+        app.config["RATELIMIT_ENABLED"] = False
+
     # Initialize CORS with allowed origins
     CORS(app, resources={r"/*": {"origins": Config.CORS_ALLOWED_ORIGINS}})
     db.init_app(app)
     migrate.init_app(app, db)
     socketio.init_app(app)
+    limiter.init_app(app)
 
     # Register blueprints
     from backend.routes.health import health_bp
     from backend.routes.cameras import cameras_bp
     from backend.routes.alerts import alerts_bp
     from backend.routes.docs import docs_bp
+    from backend.routes.settings import settings_bp
+    from backend.routes.auth import auth_bp
 
     app.register_blueprint(health_bp)
     app.register_blueprint(cameras_bp)
     app.register_blueprint(alerts_bp)
     app.register_blueprint(docs_bp)
+    app.register_blueprint(settings_bp)
+    app.register_blueprint(auth_bp)
 
     # Request / Response logging hooks
     @app.before_request
@@ -73,6 +83,10 @@ def create_app(test_config=None):
     def not_found_error(error):
         return jsonify({"error": "Resource not found"}), 404
 
+    @app.errorhandler(429)
+    def rate_limit_error(error):
+        return jsonify({"error": f"Rate limit exceeded: {getattr(error, 'description', str(error))}"}), 429
+
     @app.errorhandler(500)
     def internal_error(error):
         logger.exception(f"Internal Server Error: {error}")
@@ -80,6 +94,8 @@ def create_app(test_config=None):
 
     @app.errorhandler(Exception)
     def unhandled_exception(error):
+        if isinstance(error, HTTPException):
+            return jsonify({"error": getattr(error, "description", str(error))}), error.code
         logger.exception(f"Unhandled Exception: {error}")
         if app.config.get("ENVIRONMENT") == "production":
             return jsonify({"error": "An internal server error occurred."}), 500

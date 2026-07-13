@@ -212,3 +212,40 @@ def test_exception_handler_production_vs_development(app, client):
     app.config["ENVIRONMENT"] = "development"
 
 
+def test_auth_verify_route(client, monkeypatch):
+    from backend.config import Config
+    monkeypatch.setattr(Config, "API_KEY", "test-key-123")
+
+    res_unauth = client.get("/auth/verify")
+    assert res_unauth.status_code == 401
+    assert res_unauth.get_json()["authenticated"] is False
+
+    res_auth = client.get("/auth/verify", headers={"X-API-Key": "test-key-123"})
+    assert res_auth.status_code == 200
+    assert res_auth.get_json()["authenticated"] is True
+
+
+def test_rate_limiting():
+    from backend.app import create_app
+    from backend.limiter import limiter
+    
+    rate_app = create_app({"TESTING": True, "RATELIMIT_ENABLED": True})
+    rate_client = rate_app.test_client()
+
+    @rate_app.route("/rate-test-route")
+    @limiter.limit("2 per minute")
+    def rate_test():
+        return "ok"
+
+    res1 = rate_client.get("/rate-test-route")
+    assert res1.status_code == 200
+    res2 = rate_client.get("/rate-test-route")
+    assert res2.status_code == 200
+    res3 = rate_client.get("/rate-test-route")
+    assert res3.status_code == 429  # Too Many Requests
+
+
+
+
+
+
