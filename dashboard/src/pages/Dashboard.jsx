@@ -3,6 +3,7 @@ import SummaryCards from '../components/SummaryCards';
 import CameraGrid from '../components/CameraGrid';
 import CameraDrawer from '../components/CameraDrawer';
 import AlertCenter from '../components/AlertCenter';
+import AlertBanner from '../components/AlertBanner';
 import MetricChart from '../components/MetricChart';
 
 function Dashboard({
@@ -25,6 +26,7 @@ function Dashboard({
 
     return (
         <div className="dashboard" style={{ display: 'flex', flexDirection: 'column', gap: '24px', padding: '24px' }}>
+            <AlertBanner alerts={alerts} onAlertResolved={onRefresh} addToast={addToast} />
             
             {/* Section 1: KPI Top Summary Cards */}
             <div className="dashboard-section">
