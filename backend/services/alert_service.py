@@ -168,6 +168,7 @@ class AlertService:
             cam_dict = camera.to_dict()
             cam_dict["latest_health"] = record.to_dict()
             cam_dict["active_alerts"] = Alert.query.filter_by(camera_id=camera_id, resolved=False).count()
+            cam_dict["thresholds"] = bounds
             broadcast_camera_update(cam_dict)
 
             # Emit dashboard summary updates

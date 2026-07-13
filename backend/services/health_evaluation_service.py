@@ -119,6 +119,7 @@ class HealthEvaluationService:
                 cam_dict = cam.to_dict()
                 cam_dict["latest_health"] = latest.to_dict() if latest else None
                 cam_dict["active_alerts"] = alerts_by_cam.get(cam.id, 0)
+                cam_dict["thresholds"] = bounds
                 result.append(cam_dict)
 
             db.session.commit()
@@ -148,6 +149,7 @@ class HealthEvaluationService:
 
             cam_dict = cam.to_dict()
             cam_dict["latest_health"] = latest.to_dict() if latest else None
+            cam_dict["thresholds"] = bounds
             
             # Include active alerts details
             active_alerts = Alert.query.filter_by(camera_id=camera_id, resolved=False).all()

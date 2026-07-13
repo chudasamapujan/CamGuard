@@ -8,7 +8,7 @@ import Dashboard from './pages/Dashboard';
 import SettingsPanel from './components/SettingsPanel';
 import AlertCenter from './components/AlertCenter';
 import ToastContainer from './components/Toast';
-import { fetchCameras, fetchDashboardSummary, fetchAlerts } from './services/api';
+import { fetchCameras, fetchDashboardSummary, fetchAlerts, fetchSettings } from './services/api';
 import { socket } from './services/socket';
 import './App.css';
 
@@ -16,6 +16,7 @@ export function AppContent() {
   const [cameras, setCameras] = useState([]);
   const [summary, setSummary] = useState(null);
   const [alerts, setAlerts] = useState([]);
+  const [settings, setSettings] = useState(null);
   const [apiStatus, setApiStatus] = useState('offline');
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
@@ -24,14 +25,16 @@ export function AppContent() {
 
   const loadData = useCallback(async () => {
     try {
-      const [camRes, sumRes, alertRes] = await Promise.all([
+      const [camRes, sumRes, alertRes, setRes] = await Promise.all([
         fetchCameras(),
         fetchDashboardSummary(),
-        fetchAlerts(false, 100)
+        fetchAlerts(false, 100),
+        (typeof fetchSettings === 'function' ? fetchSettings() : Promise.resolve({ data: null }))
       ]);
       setCameras(camRes.data);
       setSummary(sumRes.data);
       setAlerts(alertRes.data);
+      if (setRes && setRes.data) setSettings(setRes.data);
       setLastUpdated(new Date());
     } catch (err) {
       console.error('Initial data fetch error:', err);
@@ -96,6 +99,9 @@ export function AppContent() {
 
     const onSettingsUpdated = (data) => {
       addToast('System configuration options dynamically reloaded', 'info');
+      if (data) {
+        setSettings(prev => ({ ...prev, ...data }));
+      }
       if (data && data.camera_count) {
         const count = parseInt(data.camera_count, 10);
         setCameras(prev => prev.filter(c => {
@@ -180,6 +186,7 @@ export function AppContent() {
                 summary={summary}
                 alerts={alerts}
                 loading={loading}
+                settings={settings}
                 onRefresh={loadData}
                 addToast={addToast}
               />

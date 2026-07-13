@@ -4,7 +4,7 @@ import CameraCard from './CameraCard';
 import { SkeletonCard } from './Skeleton';
 import EmptyState from './EmptyState';
 
-function CameraGrid({ cameras, loading, onCameraClick, onToggle, onEdit, onAddCamera }) {
+function CameraGrid({ cameras, loading, settings, onCameraClick, onToggle, onEdit, onAddCamera }) {
     const [search, setSearch] = useState('');
     const [statusFilter, setStatusFilter] = useState('all');
     const [showFilters, setShowFilters] = useState(false);
@@ -130,6 +130,7 @@ function CameraGrid({ cameras, loading, onCameraClick, onToggle, onEdit, onAddCa
                         <CameraCard
                             key={cam.id}
                             camera={cam}
+                            settings={settings}
                             onClick={onCameraClick}
                             onToggle={onToggle}
                             onEdit={onEdit}

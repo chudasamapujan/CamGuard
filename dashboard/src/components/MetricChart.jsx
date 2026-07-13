@@ -19,7 +19,7 @@ import {
     Filler,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { fetchCameraHistory, fetchDashboardHistory } from '../services/api';
+import { fetchCameraHistory, fetchDashboardHistory, fetchSettings } from '../services/api';
 import { socket } from '../services/socket';
 import { Activity } from 'lucide-react';
 
@@ -34,10 +34,17 @@ ChartJS.register(
     Filler
 );
 
-export default function MetricChart({ cameraId, cameraName }) {
+export default function MetricChart({ cameraId, cameraName, settings: propSettings }) {
     const [history, setHistory] = useState(null);
     const [selectedMetric, setSelectedMetric] = useState('resources'); // resources, latency, health
     const [timeRange, setTimeRange] = useState(1); // 1, 6, 24, 168 hours
+    const [localSettings, setLocalSettings] = useState(null);
+
+    const activeSettings = propSettings || localSettings || {};
+    const cpuWarn = parseFloat(activeSettings.cpu_threshold) || 75;
+    const memoryWarn = parseFloat(activeSettings.memory_threshold) || 75;
+    const storageWarn = parseFloat(activeSettings.storage_threshold) || 80;
+    const latencyWarn = parseFloat(activeSettings.latency_threshold) || 200;
 
     useEffect(() => {
         const load = async () => {
@@ -60,6 +67,9 @@ export default function MetricChart({ cameraId, cameraName }) {
         };
 
         load();
+        if (!propSettings && typeof fetchSettings === 'function') {
+            fetchSettings().then(res => setLocalSettings(res?.data || null)).catch(err => console.error('Failed to load settings:', err));
+        }
 
         const handleSocketUpdate = (data) => {
             if (!cameraId || (data && (data.id === cameraId || data.camera_id === cameraId))) {
@@ -67,14 +77,20 @@ export default function MetricChart({ cameraId, cameraName }) {
             }
         };
 
+        const handleSettingsUpdate = (data) => {
+            if (data) setLocalSettings(prev => ({ ...prev, ...data }));
+        };
+
         socket.on('camera_update', handleSocketUpdate);
         socket.on('dashboard_summary', handleSocketUpdate);
+        socket.on('settings_updated', handleSettingsUpdate);
 
         return () => {
             socket.off('camera_update', handleSocketUpdate);
             socket.off('dashboard_summary', handleSocketUpdate);
+            socket.off('settings_updated', handleSettingsUpdate);
         };
-    }, [cameraId, timeRange]);
+    }, [cameraId, timeRange, propSettings]);
 
     const renderHeader = () => (
         <div className="metric-chart-header">
@@ -172,10 +188,10 @@ export default function MetricChart({ cameraId, cameraName }) {
                         if (cameraId) {
                             if (!r.is_online) return 0;
                             let score = 100;
-                            if (r.cpu_usage > 75) score -= (r.cpu_usage - 75) * 0.5;
-                            if (r.memory_usage > 75) score -= (r.memory_usage - 75) * 0.5;
-                            if (r.storage_usage > 85) score -= (r.storage_usage - 85) * 0.5;
-                            if (r.network_latency > 200) score -= (r.network_latency - 200) * 0.1;
+                            if (r.cpu_usage > cpuWarn) score -= (r.cpu_usage - cpuWarn) * 0.5;
+                            if (r.memory_usage > memoryWarn) score -= (r.memory_usage - memoryWarn) * 0.5;
+                            if (r.storage_usage > storageWarn) score -= (r.storage_usage - storageWarn) * 0.5;
+                            if (r.network_latency > latencyWarn) score -= (r.network_latency - latencyWarn) * 0.1;
                             if (r.fault_type) score -= 40;
                             return Math.max(0, Math.round(score));
                         }

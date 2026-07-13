@@ -25,9 +25,28 @@ function ProgressBar({ label, value, icon: Icon, warn = 75, crit = 90 }) {
     );
 }
 
-function CameraCard({ camera, onClick }) {
+function CameraCard({ camera, onClick, settings }) {
     const health = camera.latest_health;
     const isOnline = camera.status !== 'offline' && health && health.is_online;
+    const thresholds = camera.thresholds || (settings ? {
+        cpu_warning: parseFloat(settings.cpu_threshold) || 75,
+        cpu_critical: (parseFloat(settings.cpu_threshold) || 75) * 1.2,
+        memory_warning: parseFloat(settings.memory_threshold) || 75,
+        memory_critical: (parseFloat(settings.memory_threshold) || 75) * 1.2,
+        storage_warning: parseFloat(settings.storage_threshold) || 80,
+        storage_critical: (parseFloat(settings.storage_threshold) || 80) * 1.15,
+        latency_warning: parseFloat(settings.latency_threshold) || 200,
+        latency_critical: (parseFloat(settings.latency_threshold) || 200) * 2.5
+    } : {
+        cpu_warning: 75,
+        cpu_critical: 90,
+        memory_warning: 75,
+        memory_critical: 90,
+        storage_warning: 80,
+        storage_critical: 92,
+        latency_warning: 200,
+        latency_critical: 500
+    });
 
     return (
         <article
@@ -87,9 +106,9 @@ function CameraCard({ camera, onClick }) {
             {isOnline ? (
                 <>
                     <div className="cam-card__metrics" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                        <ProgressBar label="CPU" value={health.cpu_usage} icon={Cpu} warn={75} crit={90} />
-                        <ProgressBar label="Memory" value={health.memory_usage} icon={MemoryStick} warn={75} crit={90} />
-                        <ProgressBar label="Storage" value={health.storage_usage} icon={HardDrive} warn={80} crit={95} />
+                        <ProgressBar label="CPU" value={health.cpu_usage} icon={Cpu} warn={thresholds.cpu_warning} crit={thresholds.cpu_critical} />
+                        <ProgressBar label="Memory" value={health.memory_usage} icon={MemoryStick} warn={thresholds.memory_warning} crit={thresholds.memory_critical} />
+                        <ProgressBar label="Storage" value={health.storage_usage} icon={HardDrive} warn={thresholds.storage_warning} crit={thresholds.storage_critical} />
                     </div>
 
                     <div className="cam-card__footer" style={{
@@ -105,9 +124,9 @@ function CameraCard({ camera, onClick }) {
                         <div className="cam-card__stat" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                             <Globe size={12} />
                             <span style={{
-                                color: health.network_latency > 500 ? 'var(--color-critical)'
-                                    : health.network_latency > 200 ? 'var(--color-warning)' : 'inherit',
-                                fontWeight: health.network_latency > 200 ? 700 : 'normal'
+                                color: health.network_latency >= thresholds.latency_critical ? 'var(--color-critical)'
+                                    : health.network_latency >= thresholds.latency_warning ? 'var(--color-warning)' : 'inherit',
+                                fontWeight: health.network_latency >= thresholds.latency_warning ? 700 : 'normal'
                             }}>
                                 {health.network_latency.toFixed(0)} ms
                             </span>

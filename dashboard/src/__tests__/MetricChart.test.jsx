@@ -8,6 +8,7 @@ import { socket } from '../services/socket';
 vi.mock('../services/api', () => ({
   fetchCameraHistory: vi.fn(),
   fetchDashboardHistory: vi.fn(),
+  fetchSettings: vi.fn().mockResolvedValue({ data: { cpu_threshold: 75, memory_threshold: 75, storage_threshold: 80, latency_threshold: 200 } }),
 }));
 
 vi.mock('../services/socket', () => ({

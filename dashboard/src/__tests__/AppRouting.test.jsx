@@ -13,6 +13,7 @@ vi.mock('../services/api', () => ({
   fetchDashboardSummary: vi.fn().mockResolvedValue({ data: { total_cameras: 0, online: 0, warning: 0, critical: 0, offline: 0 } }),
   fetchAlerts: vi.fn().mockResolvedValue({ data: [] }),
   fetchDashboardHistory: vi.fn().mockResolvedValue({ data: [] }),
+  fetchSettings: vi.fn().mockResolvedValue({ data: { cpu_threshold: 75, memory_threshold: 75, storage_threshold: 80, latency_threshold: 200 } }),
   resolveAlert: vi.fn()
 }));
 

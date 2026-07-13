@@ -11,6 +11,7 @@ function Dashboard({
     summary,
     alerts,
     loading,
+    settings,
     onRefresh,
     addToast
 }) {
@@ -41,13 +42,14 @@ function Dashboard({
                 <CameraGrid
                     cameras={cameras}
                     loading={loading}
+                    settings={settings}
                     onCameraClick={handleCameraClick}
                 />
             </div>
 
             {/* Section 3: Historical Charts */}
             <div className="dashboard-section" style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: '8px', padding: '20px', minHeight: '300px' }}>
-                <MetricChart />
+                <MetricChart settings={settings} />
             </div>
 
             {/* Section 4: Recent Alerts Table */}
@@ -64,6 +66,7 @@ function Dashboard({
             {selectedCamera && (
                 <CameraDrawer
                     camera={selectedCamera}
+                    settings={settings}
                     onClose={handleCloseDrawer}
                 />
             )}
