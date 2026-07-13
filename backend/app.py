@@ -115,12 +115,6 @@ def create_app(test_config=None):
     if not os.environ.get("FLASK_DB_MIGRATING"):
         with app.app_context():
             db.create_all()
-            try:
-                with db.engine.connect() as conn:
-                    conn.execute(db.text("ALTER TABLE cameras ADD COLUMN location VARCHAR(150)"))
-                    conn.commit()
-            except Exception:
-                pass
             from backend.services.configuration_service import ConfigurationService
             ConfigurationService.seed_default_settings()
 
