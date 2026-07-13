@@ -1,0 +1,1927 @@
+2026-07-12 23:43:59,215 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.156.162.209:5000
+2026-07-12 23:43:59,216 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-07-12 23:52:37,764 - __main__ - INFO - Incoming request: GET / from 127.0.0.1
+2026-07-12 23:52:37,780 - __main__ - INFO - Outgoing response: GET / -> 200
+2026-07-12 23:52:37,809 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:52:37] "GET / HTTP/1.1" 200 -
+2026-07-12 23:53:02,029 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:53:02,068 - __main__ - INFO - Incoming request: GET /dashboard/summary from 127.0.0.1
+2026-07-12 23:53:02,071 - __main__ - INFO - Incoming request: GET /alerts from 127.0.0.1
+2026-07-12 23:53:02,072 - __main__ - INFO - Incoming request: GET /cameras from 127.0.0.1
+2026-07-12 23:53:02,383 - backend.socket_manager - INFO - Client connected to socket network
+2026-07-12 23:53:02,385 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:53:02,404 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:02] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:53:02,414 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:53:02,420 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:53:02,457 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:02] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:53:02,575 - __main__ - INFO - Outgoing response: GET /dashboard/summary -> 200
+2026-07-12 23:53:02,577 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:02] "GET /dashboard/summary HTTP/1.1" 200 -
+2026-07-12 23:53:02,612 - __main__ - INFO - Outgoing response: GET /cameras -> 200
+2026-07-12 23:53:02,613 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:02] "GET /cameras HTTP/1.1" 200 -
+2026-07-12 23:53:02,632 - __main__ - INFO - Outgoing response: GET /alerts -> 200
+2026-07-12 23:53:02,634 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:02] "GET /alerts?active=false&limit=100 HTTP/1.1" 200 -
+2026-07-12 23:53:02,896 - __main__ - INFO - Incoming request: GET /dashboard/summary from 127.0.0.1
+2026-07-12 23:53:02,905 - __main__ - INFO - Outgoing response: GET /dashboard/summary -> 200
+2026-07-12 23:53:02,906 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:02] "GET /dashboard/summary HTTP/1.1" 200 -
+2026-07-12 23:53:02,922 - __main__ - INFO - Incoming request: GET /cameras from 127.0.0.1
+2026-07-12 23:53:02,930 - __main__ - INFO - Outgoing response: GET /cameras -> 200
+2026-07-12 23:53:02,931 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:02] "GET /cameras HTTP/1.1" 200 -
+2026-07-12 23:53:02,942 - __main__ - INFO - Incoming request: GET /alerts from 127.0.0.1
+2026-07-12 23:53:02,953 - __main__ - INFO - Outgoing response: GET /alerts -> 200
+2026-07-12 23:53:02,954 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:02] "GET /alerts?active=false&limit=100 HTTP/1.1" 200 -
+2026-07-12 23:53:03,222 - __main__ - INFO - Incoming request: GET /dashboard/summary from 127.0.0.1
+2026-07-12 23:53:03,236 - __main__ - INFO - Outgoing response: GET /dashboard/summary -> 200
+2026-07-12 23:53:03,237 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:03] "GET /dashboard/summary HTTP/1.1" 200 -
+2026-07-12 23:53:03,240 - __main__ - INFO - Incoming request: GET /cameras from 127.0.0.1
+2026-07-12 23:53:03,254 - __main__ - INFO - Outgoing response: GET /cameras -> 200
+2026-07-12 23:53:03,255 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:03] "GET /cameras HTTP/1.1" 200 -
+2026-07-12 23:53:03,261 - __main__ - INFO - Incoming request: GET /alerts from 127.0.0.1
+2026-07-12 23:53:03,278 - __main__ - INFO - Outgoing response: GET /alerts -> 200
+2026-07-12 23:53:03,279 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:03] "GET /alerts?active=false&limit=100 HTTP/1.1" 200 -
+2026-07-12 23:53:17,043 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:53:17,048 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:53:17,050 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:17] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:53:18,088 - __main__ - INFO - Incoming request: GET /history/CAM-002 from 127.0.0.1
+2026-07-12 23:53:18,092 - __main__ - INFO - Outgoing response: GET /history/CAM-002 -> 200
+2026-07-12 23:53:18,094 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:18] "GET /history/CAM-002?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:53:18,394 - __main__ - INFO - Incoming request: GET /alerts from 127.0.0.1
+2026-07-12 23:53:18,412 - __main__ - INFO - Outgoing response: GET /alerts -> 200
+2026-07-12 23:53:18,414 - __main__ - INFO - Incoming request: GET /history/CAM-002 from 127.0.0.1
+2026-07-12 23:53:18,415 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:18] "GET /alerts?active=false&limit=100&camera_id=CAM-002 HTTP/1.1" 200 -
+2026-07-12 23:53:18,418 - __main__ - INFO - Outgoing response: GET /history/CAM-002 -> 200
+2026-07-12 23:53:18,419 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:18] "GET /history/CAM-002?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:53:18,739 - __main__ - INFO - Incoming request: GET /alerts from 127.0.0.1
+2026-07-12 23:53:18,749 - __main__ - INFO - Outgoing response: GET /alerts -> 200
+2026-07-12 23:53:18,750 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:18] "GET /alerts?active=false&limit=100&camera_id=CAM-002 HTTP/1.1" 200 -
+2026-07-12 23:53:32,287 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:53:32,289 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:53:32,290 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:32] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:53:46,975 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:53:46,978 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:53:46,979 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:53:46] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:54:02,272 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:54:02,275 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:54:02,276 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:02] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:54:16,836 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:54:16,838 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:54:16,839 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:16] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:54:16,968 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:54:16,970 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:54:16,971 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:16] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:54:18,890 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:54:18,969 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:54:18,971 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:18] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:54:19,108 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:54:19,140 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:54:19,141 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:19] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:54:24,296 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:54:24,299 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:54:24,300 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:24] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:54:31,354 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:54:31,356 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:54:31,357 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:31] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:54:32,032 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:54:32,034 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:54:32,036 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:32] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:54:38,416 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:54:38,419 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:54:38,420 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:38] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:54:45,471 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:54:45,474 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:54:45,475 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:45] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:54:46,968 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:54:46,972 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:54:46,973 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:46] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:54:51,029 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:54:51,075 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:54:51,076 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:51] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:54:51,223 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:54:51,279 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:54:51,280 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:51] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:54:52,506 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:54:52,508 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:54:52,509 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:52] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:54:59,582 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:54:59,585 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:54:59,586 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:54:59] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:55:00,638 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:55:00,641 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:55:00,642 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:00] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:55:00,896 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:55:00,898 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:55:00,899 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:00] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:55:06,266 - __main__ - INFO - Incoming request: OPTIONS /settings from 127.0.0.1
+2026-07-12 23:55:06,277 - __main__ - INFO - Outgoing response: OPTIONS /settings -> 200
+2026-07-12 23:55:06,280 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:06] "OPTIONS /settings HTTP/1.1" 200 -
+2026-07-12 23:55:06,604 - __main__ - INFO - Incoming request: POST /settings from 127.0.0.1
+2026-07-12 23:55:06,635 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:55:06,646 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:55:06,648 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:06] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:55:06,720 - __main__ - INFO - Outgoing response: POST /settings -> 200
+2026-07-12 23:55:06,721 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:06] "POST /settings HTTP/1.1" 200 -
+2026-07-12 23:55:08,749 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:55:08,792 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:55:08,793 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:08] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:55:08,934 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:55:08,992 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:55:08,994 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:08] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:55:09,124 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:55:09,184 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:55:09,185 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:09] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:55:09,326 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:55:09,377 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:55:09,378 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:09] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:55:09,514 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:55:09,561 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:55:09,562 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:09] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:55:09,715 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:55:09,719 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:55:09,720 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:09] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:55:10,030 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:55:10,035 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:55:10,036 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:10] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:55:14,739 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:55:14,745 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:55:14,746 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:14] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:55:17,596 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:55:17,599 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:55:17,600 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:17] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:55:17,845 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:55:17,848 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:55:17,849 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:17] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:55:21,790 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:55:21,793 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:55:21,794 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:21] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:55:23,124 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:55:23,202 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:55:23,203 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:23] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:55:23,327 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:55:23,378 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:55:23,379 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:23] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:55:24,098 - __main__ - INFO - Incoming request: OPTIONS /settings from 127.0.0.1
+2026-07-12 23:55:24,098 - __main__ - INFO - Outgoing response: OPTIONS /settings -> 200
+2026-07-12 23:55:24,100 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:24] "OPTIONS /settings HTTP/1.1" 200 -
+2026-07-12 23:55:24,423 - __main__ - INFO - Incoming request: POST /settings from 127.0.0.1
+2026-07-12 23:55:24,475 - __main__ - INFO - Outgoing response: POST /settings -> 200
+2026-07-12 23:55:24,477 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:24] "POST /settings HTTP/1.1" 200 -
+2026-07-12 23:55:26,712 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:55:26,716 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:55:26,718 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:26] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:55:27,031 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:55:27,034 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:55:27,035 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:27] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:55:28,854 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:55:28,856 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:55:28,857 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:28] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:55:36,774 - __main__ - INFO - Incoming request: GET /history/CAM-001 from 127.0.0.1
+2026-07-12 23:55:36,776 - __main__ - INFO - Incoming request: GET /alerts from 127.0.0.1
+2026-07-12 23:55:36,780 - __main__ - INFO - Outgoing response: GET /history/CAM-001 -> 200
+2026-07-12 23:55:36,781 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:36] "GET /history/CAM-001?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:55:36,793 - __main__ - INFO - Outgoing response: GET /alerts -> 200
+2026-07-12 23:55:36,795 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:36] "GET /alerts?active=false&limit=100&camera_id=CAM-001 HTTP/1.1" 200 -
+2026-07-12 23:55:37,028 - __main__ - INFO - Incoming request: GET /history/CAM-001 from 127.0.0.1
+2026-07-12 23:55:37,032 - __main__ - INFO - Outgoing response: GET /history/CAM-001 -> 200
+2026-07-12 23:55:37,033 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:37] "GET /history/CAM-001?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:55:37,091 - __main__ - INFO - Incoming request: GET /alerts from 127.0.0.1
+2026-07-12 23:55:37,098 - __main__ - INFO - Outgoing response: GET /alerts -> 200
+2026-07-12 23:55:37,099 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:37] "GET /alerts?active=false&limit=100&camera_id=CAM-001 HTTP/1.1" 200 -
+2026-07-12 23:55:37,613 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:55:37,614 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:55:37,616 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:37] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:55:41,058 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:55:41,117 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:55:41,119 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:41] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:55:41,718 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:55:41,723 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:55:41,724 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:41] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:55:44,668 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:55:44,671 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:55:44,672 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:44] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:55:46,440 - __main__ - INFO - Incoming request: GET /history/CAM-001 from 127.0.0.1
+2026-07-12 23:55:46,443 - __main__ - INFO - Outgoing response: GET /history/CAM-001 -> 200
+2026-07-12 23:55:46,444 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:46] "GET /history/CAM-001?hours=24 HTTP/1.1" 200 -
+2026-07-12 23:55:46,458 - __main__ - INFO - Incoming request: GET /alerts from 127.0.0.1
+2026-07-12 23:55:46,474 - __main__ - INFO - Outgoing response: GET /alerts -> 200
+2026-07-12 23:55:46,475 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:46] "GET /alerts?active=false&limit=100&camera_id=CAM-001 HTTP/1.1" 200 -
+2026-07-12 23:55:48,473 - __main__ - INFO - Incoming request: GET /history/CAM-001 from 127.0.0.1
+2026-07-12 23:55:48,478 - __main__ - INFO - Outgoing response: GET /history/CAM-001 -> 200
+2026-07-12 23:55:48,480 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:48] "GET /history/CAM-001?hours=6 HTTP/1.1" 200 -
+2026-07-12 23:55:48,785 - __main__ - INFO - Incoming request: GET /alerts from 127.0.0.1
+2026-07-12 23:55:48,807 - __main__ - INFO - Outgoing response: GET /alerts -> 200
+2026-07-12 23:55:48,808 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:48] "GET /alerts?active=false&limit=100&camera_id=CAM-001 HTTP/1.1" 200 -
+2026-07-12 23:55:51,738 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:55:51,741 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:55:51,743 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:51] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:55:55,245 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:55:55,280 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:55:55,281 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:55] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:55:55,432 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:55:55,468 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:55:55,470 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:55] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:55:57,035 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:55:57,038 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:55:57,039 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:57] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:55:58,780 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:55:58,783 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:55:58,784 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:55:58] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:56:05,835 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:56:05,838 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:56:05,840 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:05] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:56:11,718 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:56:11,722 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:56:11,724 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:11] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:56:12,919 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:56:12,921 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:56:12,922 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:12] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:56:13,187 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:56:13,232 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:56:13,234 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:13] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:56:19,971 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:56:19,974 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:56:19,975 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:19] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:56:27,028 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:56:27,030 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:56:27,032 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:56:27,034 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:27] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:56:27,035 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:56:27,036 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:27] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:56:27,367 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:56:27,420 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:56:27,422 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:27] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:56:27,524 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:56:27,564 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:56:27,565 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:27] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:56:34,095 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:56:34,099 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:56:34,100 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:34] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:56:41,160 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:56:41,162 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:56:41,163 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:41] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:56:41,719 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:56:41,722 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:56:41,724 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:41] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:56:45,301 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:56:45,349 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:56:45,350 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:45] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:56:48,201 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:56:48,205 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:56:48,206 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:48] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:56:55,263 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:56:55,267 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:56:55,268 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:55] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:56:57,025 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:56:57,029 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:56:57,031 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:57] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:56:59,508 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:56:59,546 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:56:59,547 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:59] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:56:59,642 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:56:59,686 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:56:59,688 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:56:59] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:57:02,331 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:57:02,334 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:57:02,335 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:02] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:57:09,393 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:57:09,395 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:57:09,396 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:09] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:57:11,719 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:57:11,723 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:57:11,725 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:11] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:57:16,461 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:57:16,464 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:57:16,465 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:16] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:57:17,418 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:57:17,461 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:57:17,462 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:17] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:57:23,505 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:57:23,508 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:57:23,509 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:23] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:57:27,023 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:57:27,027 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:57:27,028 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:27] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:57:30,553 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:57:30,555 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:57:30,557 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:30] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:57:31,601 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:57:31,641 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:57:31,643 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:31] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:57:31,747 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:57:31,788 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:57:31,789 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:31] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:57:37,612 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:57:37,615 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:57:37,617 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:37] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:57:41,721 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:57:41,725 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:57:41,726 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:41] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:57:44,656 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:57:44,659 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:57:44,660 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:44] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:57:49,524 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:57:49,572 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:57:49,573 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:49] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:57:51,704 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:57:51,706 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:57:51,707 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:51] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:57:57,025 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:57:57,028 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:57:57,030 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:57] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:57:58,786 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:57:58,788 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:57:58,790 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:57:58] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:58:03,709 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:58:03,752 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:58:03,753 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:03] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:58:03,837 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:58:03,881 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:58:03,883 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:03] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:58:05,849 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:58:05,852 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:58:05,853 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:05] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:58:11,721 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:58:11,725 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:58:11,726 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:11] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:58:12,894 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:58:12,897 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:58:12,898 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:12] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:58:19,950 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:58:19,952 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:58:19,954 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:19] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:58:21,624 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:58:21,666 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:58:21,668 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:21] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:58:27,023 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:58:27,025 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:58:27,026 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:27] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:58:27,039 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:58:27,043 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:58:27,045 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:27] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:58:34,107 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:58:34,109 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:58:34,111 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:34] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:58:35,800 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:58:35,842 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:58:35,844 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:35] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:58:35,955 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:58:36,004 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:58:36,005 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:36] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:58:41,187 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:58:41,190 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:58:41,191 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:41] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:58:41,720 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:58:41,724 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:58:41,726 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:41] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:58:48,263 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:58:48,267 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:58:48,268 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:48] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:58:53,726 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:58:53,771 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:58:53,772 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:53] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:58:55,317 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:58:55,320 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:58:55,321 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:55] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:58:57,026 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:58:57,029 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:58:57,030 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:58:57] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:59:02,383 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:59:02,386 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:59:02,387 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:02] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:59:07,917 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:59:07,954 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:59:07,955 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:07] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:59:08,084 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:59:08,120 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:59:08,122 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:08] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:59:09,439 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:59:09,441 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:59:09,443 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:09] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:59:11,718 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:59:11,721 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:59:11,728 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:11] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:59:16,485 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:59:16,487 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:59:16,488 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:16] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:59:23,533 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:59:23,535 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:59:23,536 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:23] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:59:25,839 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:59:25,885 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:59:25,886 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:25] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:59:27,273 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:59:27,276 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:59:27,277 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:27] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:59:30,590 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:59:30,592 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:59:30,593 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:30] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:59:37,667 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:59:37,670 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:59:37,671 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:37] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:59:40,022 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:59:40,068 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:59:40,074 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:40] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:59:40,196 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:59:40,238 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:59:40,240 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:40] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:59:41,969 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:59:41,972 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:59:41,973 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:41] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:59:44,728 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:59:44,730 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:59:44,731 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:44] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:59:51,771 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:59:51,774 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:59:51,775 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:51] "GET /settings HTTP/1.1" 200 -
+2026-07-12 23:59:57,281 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-12 23:59:57,284 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-12 23:59:57,285 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:57] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-12 23:59:57,979 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-12 23:59:58,026 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-12 23:59:58,028 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:58] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-12 23:59:58,811 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-12 23:59:58,814 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-12 23:59:58,815 - werkzeug - INFO - 127.0.0.1 - - [12/Jul/2026 23:59:58] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:00:05,856 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:00:05,857 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:00:05,858 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:00:05] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:00:12,152 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:00:12,196 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:00:12,198 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:00:12] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:00:12,292 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:00:12,323 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:00:12,324 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:00:12] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:00:12,920 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:00:12,922 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:00:12,923 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:00:12] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:00:16,965 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:00:16,969 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:00:16,970 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:00:16] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:00:19,995 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:00:19,998 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:00:19,999 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:00:19] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:00:27,043 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:00:27,045 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:00:27,046 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:00:27] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:00:30,094 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:00:30,149 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:00:30,150 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:00:30] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:00:34,102 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:00:34,105 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:00:34,106 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:00:34] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:00:41,169 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:00:41,171 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:00:41,172 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:00:41] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:00:44,285 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:00:44,343 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:00:44,345 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:00:44] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:00:44,378 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:00:44,413 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:00:44,415 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:00:44] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:00:48,224 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:00:48,227 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:00:48,228 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:00:48] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:00:55,265 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:00:55,267 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:00:55,268 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:00:55] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:01:02,220 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:01:02,254 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:01:02,256 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:02] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:01:02,312 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:01:02,315 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:01:02,316 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:02] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:01:09,375 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:01:09,377 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:01:09,378 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:09] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:01:16,416 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:01:16,417 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:01:16,422 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:01:16,425 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:16] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:01:16,463 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:01:16,464 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:16] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:01:16,478 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:01:16,533 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:01:16,535 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:16] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:01:17,279 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:01:17,282 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:01:17,283 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:17] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:01:23,503 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:01:23,505 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:01:23,506 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:23] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:01:28,774 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:01:28,780 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:01:28,781 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:28] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:01:30,549 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:01:30,551 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:01:30,552 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:30] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:01:34,304 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:01:34,355 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:01:34,357 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:34] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:01:37,591 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:01:37,593 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:01:37,595 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:37] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:01:42,285 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:01:42,289 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:01:42,290 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:42] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:01:44,628 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:01:44,630 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:01:44,632 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:44] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:01:48,506 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:01:48,545 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:01:48,546 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:48] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:01:48,587 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:01:48,630 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:01:48,633 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:48] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:01:51,688 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:01:51,692 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:01:51,693 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:51] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:01:56,972 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:01:56,978 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:01:56,980 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:56] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:01:58,746 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:01:58,748 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:01:58,749 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:01:58] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:02:05,797 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:02:05,801 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:02:05,802 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:05] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:02:06,419 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:02:06,460 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:02:06,462 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:06] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:02:12,281 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:02:12,286 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:02:12,288 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:12] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:02:12,858 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:02:12,863 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:02:12,865 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:12] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:02:19,919 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:02:19,921 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:02:19,922 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:19] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:02:20,594 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:02:20,645 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:02:20,648 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:20] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:02:20,714 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:02:20,759 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:02:20,760 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:20] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:02:26,954 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:02:26,958 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:02:26,959 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:26] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:02:26,970 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:02:26,976 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:02:26,978 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:26] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:02:34,013 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:02:34,022 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:02:34,024 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:34] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:02:38,536 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:02:38,581 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:02:38,582 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:38] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:02:41,079 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:02:41,082 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:02:41,083 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:41] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:02:48,149 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:02:48,151 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:02:48,152 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:48] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:02:52,691 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:02:52,738 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:02:52,740 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:52] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:02:52,828 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:02:52,869 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:02:52,871 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:52] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:02:55,211 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:02:55,214 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:02:55,215 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:02:55] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:03:02,287 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:03:02,290 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:03:02,291 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:02] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:03:09,388 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:03:09,391 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:03:09,392 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:09] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:03:10,682 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:03:11,010 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:03:11,012 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:11] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:03:16,438 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:03:16,442 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:03:16,443 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:16] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:03:17,274 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:03:17,280 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:03:17,281 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:17] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:03:23,493 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:03:23,496 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:03:23,497 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:23] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:03:24,817 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:03:24,864 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:03:24,865 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:24] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:03:24,958 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:03:25,026 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:03:25,028 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:25] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:03:30,554 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:03:30,557 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:03:30,558 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:30] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:03:37,609 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:03:37,612 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:03:37,614 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:37] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:03:43,103 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:03:43,148 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:03:43,149 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:43] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:03:44,687 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:03:44,690 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:03:44,692 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:44] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:03:51,742 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:03:51,745 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:03:51,747 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:51] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:03:56,933 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:03:56,980 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:03:56,982 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:56] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:03:57,090 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:03:57,127 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:03:57,128 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:57] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:03:58,806 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:03:58,809 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:03:58,811 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:03:58] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:04:05,881 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:04:05,885 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:04:05,887 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:04:05] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:04:12,972 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:04:12,980 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:04:12,982 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:04:12] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:04:15,230 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:04:15,298 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:04:15,303 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:04:15] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:04:16,972 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:04:16,977 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:04:16,978 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:04:16] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:04:20,057 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:04:20,060 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:04:20,061 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:04:20] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:04:27,100 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:04:27,104 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:04:27,105 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:04:27] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:04:29,077 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:04:29,113 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:04:29,114 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:04:29] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:04:29,248 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:04:29,288 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:04:29,289 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:04:29] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:04:34,146 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:04:34,148 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:04:34,149 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:04:34] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:04:41,188 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:04:41,195 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:04:41,197 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:04:41] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:04:47,388 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:04:47,423 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:04:47,424 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:04:47] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:04:48,253 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:04:48,256 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:04:48,257 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:04:48] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:04:55,328 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:04:55,330 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:04:55,331 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:04:55] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:05:01,186 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:05:01,232 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:05:01,234 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:01] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:05:01,344 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:05:01,376 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:05:01,377 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:01] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:05:02,376 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:05:02,392 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:05:02,393 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:02] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:05:09,460 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:05:09,463 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:05:09,463 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:09] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:05:16,521 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:05:16,523 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:05:16,524 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:16] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:05:17,287 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:05:17,305 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:05:17,306 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:17] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:05:19,476 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:05:19,526 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:05:19,528 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:19] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:05:23,578 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:05:23,581 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:05:23,582 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:23] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:05:30,652 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:05:30,654 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:05:30,655 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:30] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:05:33,273 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:05:33,396 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:05:33,397 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:33] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:05:33,450 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:05:33,622 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:05:33,623 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:33] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:05:37,727 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:05:37,729 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:05:37,730 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:37] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:05:44,808 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:05:44,810 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:05:44,811 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:44] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:05:51,588 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:05:51,617 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:05:51,619 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:51] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:05:51,854 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:05:51,856 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:05:51,857 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:51] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:05:58,939 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:05:58,941 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:05:58,942 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:05:58] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:06:04,260 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:06:04,263 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:06:04,264 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:04] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:06:05,461 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:06:05,492 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:06:05,493 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:05] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:06:05,671 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:06:05,692 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:06:05,693 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:05] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:06:05,987 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:06:05,989 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:06:05,989 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:05] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:06:12,036 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:06:12,042 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:06:12,043 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:12] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:06:13,061 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:06:13,064 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:06:13,065 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:13] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:06:20,125 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:06:20,126 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:06:20,127 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:20] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:06:23,674 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:06:23,707 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:06:23,709 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:23] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:06:26,967 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:06:26,972 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:06:26,973 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:26] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:06:27,196 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:06:27,198 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:06:27,199 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:27] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:06:34,246 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:06:34,249 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:06:34,249 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:34] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:06:37,577 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:06:37,622 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:06:37,623 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:37] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:06:37,752 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:06:37,794 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:06:37,795 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:37] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:06:41,310 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:06:41,316 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:06:41,318 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:41] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:06:42,287 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:06:42,293 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:06:42,295 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:42] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:06:48,385 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:06:48,387 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:06:48,387 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:48] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:06:55,433 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:06:55,435 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:06:55,436 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:55] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:06:55,748 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:06:55,784 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:06:55,785 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:55] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:06:56,970 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:06:56,974 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:06:56,975 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:06:56] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:07:02,472 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:07:02,474 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:07:02,475 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:02] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:07:09,534 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:07:09,537 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:07:09,538 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:09] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:07:09,690 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:07:09,756 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:07:09,759 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:09] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:07:09,845 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:07:09,891 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:07:09,892 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:09] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:07:12,282 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:07:12,286 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:07:12,287 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:12] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:07:16,586 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:07:16,589 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:07:16,590 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:16] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:07:23,652 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:07:23,659 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:07:23,662 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:23] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:07:27,856 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:07:27,906 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:07:27,908 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:27] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:07:30,722 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:07:30,725 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:07:30,726 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:30] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:07:37,752 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:07:37,755 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:07:37,756 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:37] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:07:41,810 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:07:41,846 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:07:41,847 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:41] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:07:41,942 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:07:41,977 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:07:41,978 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:41] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:07:44,785 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:07:44,788 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:07:44,789 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:44] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:07:51,829 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:07:51,831 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:07:51,832 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:51] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:07:58,879 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:07:58,881 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:07:58,882 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:07:58] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:07:59,974 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:08:00,014 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:08:00,015 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:00] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:08:05,929 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:08:05,931 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:08:05,932 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:05] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:08:12,953 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:08:12,956 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:08:12,957 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:12] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:08:13,894 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:08:13,930 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:08:13,931 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:13] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:08:14,038 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:08:14,071 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:08:14,072 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:14] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:08:17,284 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:08:17,290 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:08:17,291 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:17] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:08:19,977 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:08:19,979 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:08:19,980 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:19] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:08:27,021 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:08:27,023 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:08:27,024 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:27] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:08:32,122 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:08:32,158 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:08:32,160 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:32] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:08:34,087 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:08:34,089 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:08:34,091 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:34] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:08:41,142 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:08:41,144 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:08:41,145 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:41] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:08:45,990 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:08:46,053 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:08:46,055 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:46] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:08:46,118 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:08:46,161 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:08:46,162 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:46] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:08:48,186 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:08:48,189 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:08:48,190 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:48] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:08:51,089 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:08:51,096 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:08:51,098 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:51] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:08:55,222 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:08:55,224 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:08:55,225 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:55] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:08:57,271 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:08:57,276 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:08:57,277 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:08:57] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:09:02,282 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:09:02,284 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:09:02,285 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:02] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:09:04,200 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:09:04,234 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:09:04,235 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:04] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:09:09,340 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:09:09,343 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:09:09,345 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:09] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:09:11,966 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:09:11,971 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:09:11,972 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:11] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:09:16,386 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:09:16,388 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:09:16,389 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:16] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:09:18,119 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:09:18,160 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:09:18,161 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:18] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:09:18,235 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:09:18,272 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:09:18,273 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:18] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:09:23,431 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:09:23,434 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:09:23,435 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:23] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:09:27,271 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:09:27,283 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:09:27,284 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:27] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:09:30,467 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:09:30,469 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:09:30,470 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:30] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:09:36,286 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:09:36,333 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:09:36,334 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:36] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:09:37,506 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:09:37,509 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:09:37,512 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:37] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:09:41,971 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:09:41,979 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:09:41,981 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:41] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:09:44,550 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:09:44,552 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:09:44,553 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:44] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:09:50,230 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:09:50,305 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:09:50,306 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:50] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:09:50,340 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:09:50,378 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:09:50,379 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:50] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:09:51,591 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:09:51,594 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:09:51,595 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:51] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:09:58,657 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:09:58,659 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:09:58,660 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:09:58] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:10:05,698 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:10:05,700 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:10:05,702 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:05] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:10:08,421 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:10:08,463 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:10:08,465 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:08] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:10:12,760 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:10:12,762 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:10:12,763 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:12] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:10:17,271 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:10:17,275 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:10:17,276 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:17] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:10:19,841 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:10:19,844 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:10:19,846 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:19] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:10:22,351 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:10:22,388 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:10:22,389 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:22] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:10:22,445 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:10:22,477 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:10:22,478 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:22] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:10:26,890 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:10:26,892 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:10:26,893 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:26] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:10:28,319 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:10:28,330 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:10:28,332 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:28] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:10:33,947 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:10:33,949 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:10:33,950 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:33] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:10:40,515 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:10:40,570 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:10:40,571 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:40] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:10:41,007 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:10:41,010 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:10:41,010 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:41] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:10:42,286 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:10:42,293 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:10:42,295 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:42] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:10:48,063 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:10:48,065 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:10:48,066 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:48] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:10:54,466 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:10:54,501 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:10:54,502 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:54] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:10:54,544 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:10:54,582 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:10:54,584 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:54] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:10:55,117 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:10:55,121 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:10:55,122 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:55] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:10:57,273 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:10:57,278 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:10:57,279 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:10:57] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:11:02,160 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:11:02,163 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:11:02,164 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:02] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:11:09,218 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:11:09,220 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:11:09,222 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:09] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:11:11,973 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:11:11,977 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:11:11,978 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:11] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:11:12,612 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:11:12,654 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:11:12,655 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:12] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:11:16,289 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:11:16,293 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:11:16,294 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:16] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:11:23,343 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:11:23,345 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:11:23,346 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:23] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:11:26,558 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:11:26,598 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:11:26,599 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:26] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:11:26,634 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:11:26,669 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:11:26,671 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:26] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:11:27,281 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:11:27,285 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:11:27,286 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:27] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:11:30,405 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:11:30,407 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:11:30,408 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:30] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:11:37,459 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:11:37,461 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:11:37,462 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:37] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:11:41,962 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:11:41,981 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:11:41,982 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:41] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:11:44,495 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:11:44,497 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:11:44,498 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:44] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:11:44,697 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:11:44,733 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:11:44,734 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:44] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:11:51,525 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:11:51,528 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:11:51,528 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:51] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:11:58,585 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:11:58,588 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:11:58,589 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:58] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:11:58,650 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:11:58,683 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:11:58,684 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:58] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:11:58,713 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:11:58,748 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:11:58,749 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:11:58] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:12:05,625 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:12:05,628 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:12:05,629 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:05] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:12:12,664 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:12:12,667 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:12:12,668 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:12] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:12:16,810 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:12:16,846 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:12:16,848 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:16] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:12:17,282 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:12:17,288 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:12:17,289 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:17] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:12:19,718 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:12:19,720 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:12:19,721 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:19] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:12:26,815 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:12:26,818 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:12:26,819 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:26] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:12:30,753 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:12:30,798 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:12:30,800 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:30] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:12:30,817 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:12:30,860 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:12:30,861 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:30] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:12:31,172 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:12:31,180 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:12:31,181 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:31] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:12:33,871 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:12:33,874 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:12:33,875 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:33] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:12:40,898 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:12:40,900 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:12:40,901 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:40] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:12:42,278 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:12:42,286 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:12:42,288 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:42] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:12:47,921 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:12:47,923 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:12:47,924 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:47] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:12:48,879 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:12:48,922 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:12:48,924 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:48] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:12:54,951 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:12:54,953 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:12:54,954 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:54] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:12:56,968 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:12:56,974 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:12:56,976 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:12:56] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:13:01,978 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:13:01,982 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:13:01,982 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:01] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:13:02,853 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:13:02,891 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:13:02,892 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:02] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:13:02,903 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:13:02,945 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:13:02,946 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:02] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:13:09,033 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:13:09,035 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:13:09,036 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:09] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:13:12,285 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:13:12,292 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:13:12,293 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:12] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:13:16,092 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:13:16,095 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:13:16,097 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:16] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:13:20,982 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:13:21,026 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:13:21,028 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:21] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:13:23,140 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:13:23,143 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:13:23,144 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:23] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:13:26,714 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:13:26,722 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:13:26,723 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:26] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:13:30,179 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:13:30,181 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:13:30,182 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:30] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:13:34,949 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:13:34,999 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:13:35,000 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:13:35,003 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:35] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:13:35,057 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:13:35,060 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:35] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:13:37,227 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:13:37,229 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:13:37,230 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:37] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:13:42,279 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:13:42,286 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:13:42,287 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:42] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:13:44,277 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:13:44,280 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:13:44,281 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:44] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:13:51,311 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:13:51,313 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:13:51,314 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:51] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:13:53,096 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:13:53,144 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:13:53,146 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:53] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:13:56,972 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:13:56,979 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:13:56,980 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:56] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:13:58,363 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:13:58,366 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:13:58,368 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:13:58] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:14:05,408 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:14:05,411 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:14:05,412 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:05] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:14:07,081 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:14:07,118 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:14:07,119 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:07] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:14:07,130 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:14:07,171 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:14:07,172 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:07] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:14:12,279 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:14:12,285 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:14:12,286 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:12] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:14:12,476 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:14:12,485 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:14:12,489 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:12] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:14:19,542 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:14:19,543 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:14:19,544 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:19] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:14:25,215 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:14:25,252 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:14:25,253 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:25] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:14:26,583 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:14:26,585 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:14:26,587 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:26] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:14:26,966 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:14:26,971 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:14:26,972 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:26] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:14:33,623 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:14:33,626 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:14:33,627 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:33] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:14:39,158 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:14:39,189 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:14:39,190 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:39] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:14:39,222 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:14:39,266 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:14:39,267 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:39] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:14:40,655 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:14:40,658 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:14:40,659 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:40] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:14:47,728 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:14:47,730 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:14:47,731 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:47] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:14:54,761 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:14:54,763 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:14:54,764 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:54] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:14:57,319 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:14:57,349 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:14:57,350 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:14:57] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:15:01,814 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:15:01,817 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:15:01,818 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:01] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:15:08,864 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:15:08,868 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:15:08,869 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:08] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:15:11,236 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:15:11,274 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:15:11,275 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:11] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:15:11,330 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:15:11,368 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:15:11,369 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:11] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:15:15,923 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:15:15,925 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:15:15,927 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:15] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:15:17,287 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:15:17,293 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:15:17,294 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:17] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:15:22,968 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:15:22,970 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:15:22,972 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:22] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:15:29,422 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:15:29,456 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:15:29,457 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:29] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:15:30,025 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:15:30,028 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:15:30,030 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:30] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:15:37,080 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:15:37,083 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:15:37,086 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:37] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:15:43,337 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:15:43,378 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:15:43,379 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:43] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:15:43,434 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:15:43,470 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:15:43,472 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:43] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:15:44,149 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:15:44,152 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:15:44,153 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:44] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:15:51,195 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:15:51,197 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:15:51,197 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:51] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:15:58,239 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:15:58,242 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:15:58,243 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:15:58] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:16:01,487 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:16:01,527 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:16:01,528 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:01] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:16:05,306 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:16:05,308 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:16:05,309 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:05] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:16:12,358 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:16:12,360 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:16:12,364 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:12] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:16:15,465 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:16:15,508 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:16:15,510 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:15] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:16:15,544 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:16:15,581 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:16:15,582 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:15] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:16:16,970 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:16:16,975 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:16:16,976 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:16] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:16:19,433 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:16:19,436 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:16:19,437 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:19] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:16:26,516 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:16:26,518 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:16:26,520 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:26] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:16:33,579 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:16:33,582 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:16:33,585 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:33] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:16:33,609 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:16:33,642 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:16:33,643 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:33] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:16:40,636 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:16:40,638 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:16:40,639 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:40] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:16:47,574 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:16:47,608 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:16:47,609 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:47] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:16:47,636 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:16:47,674 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:16:47,675 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:47] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:16:47,684 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:16:47,687 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:16:47,689 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:47] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:16:54,775 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:16:54,777 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:16:54,779 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:16:54] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:17:01,819 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:17:01,821 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:17:01,822 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:01] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:17:05,693 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:17:05,732 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:17:05,733 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:05] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:17:08,904 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:17:08,906 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:17:08,907 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:08] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:17:15,960 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:17:15,962 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:17:15,963 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:15] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:17:17,274 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:17:17,282 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:17:17,284 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:17] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:17:19,672 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:17:19,708 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:17:19,709 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:19] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:17:19,737 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:17:19,773 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:17:19,774 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:19] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:17:23,000 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:17:23,002 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:17:23,003 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:23] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:17:26,969 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:17:26,978 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:17:26,979 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:26] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:17:30,051 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:17:30,054 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:17:30,055 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:30] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:17:37,106 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:17:37,108 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:17:37,109 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:37] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:17:37,807 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:17:37,844 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:17:37,845 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:37] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:17:42,266 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:17:42,275 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:17:42,276 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:42] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:17:44,172 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:17:44,175 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:17:44,177 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:44] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:17:51,246 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:17:51,249 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:17:51,250 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:51] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:17:51,783 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:17:51,821 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:17:51,822 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:51] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:17:51,853 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:17:51,892 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:17:51,893 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:51] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:17:56,970 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:17:56,978 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:17:56,979 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:56] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:17:58,303 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:17:58,306 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:17:58,307 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:17:58] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:18:05,347 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:18:05,350 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:18:05,351 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:05] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:18:09,899 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:18:09,949 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:18:09,951 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:09] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:18:12,283 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:18:12,291 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:18:12,292 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:12] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:18:12,456 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:18:12,460 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:18:12,469 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:12] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:18:19,521 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:18:19,523 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:18:19,524 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:19] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:18:23,881 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:18:23,919 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:18:23,920 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:23] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:18:23,944 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:18:23,989 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:18:23,991 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:23] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:18:26,561 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:18:26,563 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:18:26,564 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:26] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:18:26,973 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:18:26,982 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:18:26,986 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:26] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:18:33,612 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:18:33,617 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:18:33,618 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:33] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:18:40,674 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:18:40,679 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:18:40,680 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:40] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:18:42,047 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:18:42,082 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:18:42,083 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:42] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:18:42,282 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:18:42,290 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:18:42,291 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:42] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:18:47,708 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:18:47,711 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:18:47,712 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:47] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:18:54,741 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:18:54,743 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:18:54,744 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:54] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:18:55,967 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:18:56,012 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:18:56,013 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:56] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:18:56,076 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:18:56,117 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:18:56,119 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:56] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:18:56,964 - __main__ - INFO - Incoming request: GET /dashboard/history from 127.0.0.1
+2026-07-13 00:18:56,972 - __main__ - INFO - Outgoing response: GET /dashboard/history -> 200
+2026-07-13 00:18:56,973 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:18:56] "GET /dashboard/history?hours=1 HTTP/1.1" 200 -
+2026-07-13 00:19:01,786 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:19:01,790 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:19:01,792 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:01] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:19:02,582 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:19:02,584 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:19:02,585 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:02] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:19:02,849 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:19:02,851 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:19:02,852 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:02] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:19:08,828 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:19:08,830 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:19:08,831 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:08] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:19:14,185 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:19:14,217 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:19:14,218 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:14] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:19:15,882 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:19:15,884 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:19:15,885 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:15] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:19:22,926 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:19:22,929 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:19:22,930 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:22] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:19:28,085 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:19:28,115 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:19:28,117 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:28] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:19:28,181 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:19:28,215 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:19:28,216 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:28] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:19:29,973 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:19:29,975 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:19:29,976 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:29] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:19:37,008 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:19:37,009 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:19:37,010 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:37] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:19:44,057 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:19:44,059 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:19:44,060 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:44] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:19:46,260 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:19:46,294 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:19:46,295 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:46] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:19:51,100 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:19:51,102 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:19:51,103 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:51] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:19:58,164 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:19:58,180 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:19:58,182 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:19:58] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:20:00,161 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:20:00,207 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:20:00,208 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:20:00] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:20:00,267 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:20:00,298 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:20:00,299 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:20:00] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:20:05,206 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:20:05,208 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:20:05,209 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:20:05] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:20:12,258 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:20:12,261 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:20:12,262 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:20:12] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:20:18,363 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:20:18,394 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:20:18,396 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:20:18] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:20:19,304 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:20:19,306 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:20:19,307 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:20:19] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:20:26,351 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:20:26,354 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:20:26,355 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:20:26] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:20:32,261 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:20:32,305 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:20:32,307 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:20:32] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:20:32,363 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:20:32,398 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:20:32,399 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:20:32] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:20:33,394 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:20:33,397 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:20:33,398 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:20:33] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:20:40,440 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:20:40,443 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:20:40,444 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:20:40] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:20:47,483 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:20:47,485 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:20:47,486 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:20:47] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:20:50,448 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:20:50,500 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:20:50,501 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:20:50] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:20:54,547 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:20:54,550 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:20:54,551 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:20:54] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:21:01,593 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:21:01,595 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:21:01,596 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:01] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:21:04,362 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:21:04,395 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:21:04,396 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:04] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:21:04,441 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:21:04,479 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:21:04,480 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:04] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:21:08,642 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:21:08,644 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:21:08,645 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:08] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:21:15,668 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:21:15,670 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:21:15,671 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:15] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:21:22,533 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:21:22,571 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:21:22,572 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:22] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:21:22,697 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:21:22,699 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:21:22,700 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:22] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:21:29,729 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:21:29,731 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:21:29,732 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:29] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:21:36,443 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:21:36,480 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:21:36,482 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:36] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:21:36,518 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:21:36,552 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:21:36,553 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:36] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:21:36,768 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:21:36,770 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:21:36,771 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:36] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:21:43,811 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:21:43,812 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:21:43,814 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:43] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:21:50,860 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:21:50,863 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:21:50,864 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:50] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:21:54,649 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:21:54,694 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:21:54,694 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:54] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:21:57,938 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:21:57,940 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:21:57,941 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:21:57] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:22:04,982 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:22:04,984 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:22:04,985 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:22:04] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:22:08,536 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:22:08,573 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:22:08,574 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:22:08] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:22:08,600 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:22:08,642 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:22:08,643 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:22:08] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:22:12,020 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:22:12,023 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:22:12,024 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:22:12] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:22:19,088 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:22:19,090 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:22:19,091 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:22:19] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:22:26,172 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:22:26,174 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:22:26,175 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:22:26] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:22:26,736 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:22:26,773 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:22:26,774 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:22:26] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:22:33,237 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:22:33,239 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:22:33,240 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:22:33] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:22:40,299 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:22:40,302 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:22:40,303 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:22:40] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:22:40,644 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:22:40,697 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:22:40,698 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:22:40] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:22:40,722 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:22:40,761 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:22:40,762 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:22:40] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:22:47,363 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:22:47,366 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:22:47,367 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:22:47] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:22:54,394 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:22:54,397 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:22:54,398 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:22:54] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:22:58,848 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:22:58,884 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:22:58,886 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:22:58] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:23:01,430 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:23:01,433 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:23:01,434 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:23:01] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:23:08,487 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:23:08,489 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:23:08,490 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:23:08] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:23:12,771 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:23:12,813 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:23:12,814 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:23:12] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:23:12,819 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:23:12,882 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:23:12,883 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:23:12] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:23:15,534 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:23:15,537 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:23:15,538 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:23:15] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:23:22,597 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:23:22,599 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:23:22,600 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:23:22] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:23:29,631 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:23:29,633 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:23:29,634 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:23:29] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:23:30,930 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:23:30,964 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:23:30,965 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:23:30] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:23:36,686 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:23:36,688 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:23:36,689 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:23:36] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:23:43,724 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:23:43,727 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:23:43,728 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:23:43] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:23:44,881 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:23:44,924 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:23:44,975 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:23:44,978 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:23:44] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:23:44,989 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:23:44,991 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:23:44] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:23:50,768 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:23:50,771 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:23:50,772 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:23:50] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:23:57,828 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:23:57,830 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:23:57,831 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:23:57] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:24:03,029 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:24:03,061 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:24:03,062 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:24:03] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:24:04,857 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:24:04,860 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:24:04,861 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:24:04] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:24:11,883 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:24:11,885 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:24:11,886 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:24:11] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:24:17,061 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:24:17,087 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:24:17,226 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:24:17,229 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:24:17,232 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:24:17] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:24:17,233 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:24:17] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:24:18,929 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:24:18,931 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:24:18,932 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:24:18] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:24:25,986 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:24:25,988 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:24:25,989 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:24:25] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:24:33,052 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:24:33,057 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:24:33,059 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:24:33] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:24:35,160 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:24:35,226 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:24:35,227 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:24:35] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:24:40,140 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:24:40,142 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:24:40,143 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:24:40] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:24:47,175 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:24:47,177 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:24:47,177 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:24:47] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:24:49,292 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:24:49,308 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:24:49,339 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:24:49,341 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:24:49] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:24:49,362 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:24:49,363 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:24:49] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:24:54,224 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:24:54,227 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:24:54,228 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:24:54] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:25:01,286 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:25:01,288 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:25:01,289 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:01] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:25:07,267 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:25:07,308 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:25:07,309 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:07] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:25:08,355 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:25:08,357 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:25:08,358 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:08] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:25:15,408 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:25:15,410 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:25:15,411 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:15] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:25:21,386 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:25:21,424 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:25:21,467 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:25:21,469 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:21] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:25:21,475 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:25:21,476 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:21] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:25:22,447 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:25:22,449 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:25:22,450 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:22] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:25:29,507 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:25:29,510 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:25:29,510 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:29] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:25:36,563 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:25:36,565 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:25:36,565 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:36] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:25:39,363 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:25:39,418 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:25:39,419 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:39] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:25:43,622 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:25:43,624 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:25:43,625 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:43] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:25:50,650 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:25:50,652 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:25:50,653 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:50] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:25:53,545 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:25:53,548 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:25:53,622 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:25:53,624 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:53] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:25:53,633 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:25:53,636 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:53] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:25:57,701 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:25:57,705 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:25:57,706 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:25:57] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:26:04,768 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:26:04,771 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:26:04,772 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:26:04] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:26:11,488 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:26:11,518 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:26:11,519 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:26:11] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:26:11,819 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:26:11,821 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:26:11,822 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:26:11] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:26:18,874 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:26:18,877 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:26:18,878 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:26:18] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:26:25,678 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:26:25,680 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:26:25,725 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:26:25,728 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:26:25] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:26:25,754 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:26:25,765 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:26:25] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:26:25,913 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:26:25,915 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:26:25,916 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:26:25] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:26:32,964 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:26:32,967 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:26:32,967 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:26:32] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:26:40,017 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:26:40,019 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:26:40,020 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:26:40] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:26:43,576 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:26:43,627 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:26:43,628 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:26:43] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:26:47,076 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:26:47,079 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:26:47,080 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:26:47] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:26:54,137 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:26:54,139 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:26:54,140 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:26:54] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:26:57,796 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:26:57,825 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:26:57,853 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:26:57,855 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:26:57] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:26:57,875 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:26:57,876 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:26:57] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:27:01,255 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:27:01,260 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:27:01,261 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:27:01] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:27:08,294 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:27:08,297 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:27:08,298 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:27:08] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:27:15,348 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:27:15,351 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:27:15,352 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:27:15] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:27:15,676 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:27:15,710 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:27:15,711 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:27:15] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:27:22,399 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:27:22,401 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:27:22,402 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:27:22] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:27:29,447 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:27:29,449 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:27:29,450 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:27:29] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:27:29,911 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:27:29,945 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:27:29,964 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:27:29,966 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:27:29] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:27:29,999 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:27:30,000 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:27:30] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:27:36,478 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:27:36,481 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:27:36,482 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:27:36] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:27:43,527 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:27:43,530 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:27:43,531 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:27:43] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:27:47,773 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:27:47,813 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:27:47,815 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:27:47] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:27:50,598 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:27:50,601 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:27:50,602 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:27:50] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:27:57,638 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:27:57,640 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:27:57,642 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:27:57] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:28:02,033 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:28:02,067 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:28:02,068 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:28:02] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:28:02,074 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:28:02,110 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:28:02,111 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:28:02] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:28:04,699 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:28:04,701 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:28:04,702 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:28:04] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:28:11,757 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:28:11,759 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:28:11,759 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:28:11] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:28:18,791 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:28:18,794 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:28:18,795 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:28:18] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:28:19,870 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:28:19,911 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:28:19,912 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:28:19] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:28:25,845 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:28:25,847 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:28:25,848 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:28:25] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:28:32,896 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:28:32,898 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:28:32,899 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:28:32] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:28:34,120 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:28:34,156 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:28:34,158 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:28:34] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:28:34,161 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:28:34,211 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:28:34,213 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:28:34] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:28:39,953 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:28:39,956 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:28:39,957 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:28:39] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:28:46,991 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:28:46,994 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:28:46,995 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:28:46] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:28:51,952 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:28:51,989 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:28:51,990 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:28:51] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:28:54,024 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:28:54,027 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:28:54,028 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:28:54] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:29:01,077 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:29:01,082 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:29:01,083 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:01] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:29:06,220 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:29:06,259 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:29:06,261 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:06] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:29:06,283 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:29:06,326 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:29:06,327 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:06] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:29:08,120 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:29:08,122 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:29:08,123 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:08] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:29:15,167 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:29:15,170 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:29:15,171 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:15] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:29:22,201 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:29:22,203 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:29:22,204 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:22] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:29:24,058 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:29:24,096 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:29:24,097 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:24] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:29:29,244 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:29:29,246 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:29:29,247 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:29] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:29:36,273 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:29:36,275 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:29:36,276 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:36] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:29:38,326 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:29:38,371 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:29:38,372 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:38] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:29:38,388 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:29:38,424 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:29:38,425 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:38] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:29:43,328 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:29:43,330 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:29:43,331 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:43] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:29:50,375 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:29:50,377 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:29:50,378 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:50] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:29:56,171 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:29:56,203 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:29:56,205 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:56] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:29:57,418 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:29:57,421 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:29:57,422 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:29:57] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:30:04,468 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:30:04,469 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:30:04,470 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:30:04] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:30:10,433 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:30:10,464 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:30:10,466 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:30:10] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:30:10,480 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:30:10,514 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:30:10,515 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:30:10] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:30:11,516 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:30:11,518 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:30:11,519 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:30:11] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:30:18,587 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:30:18,588 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:30:18,589 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:30:18] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:30:25,639 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:30:25,642 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:30:25,643 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:30:25] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:30:28,260 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:30:28,301 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:30:28,302 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:30:28] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:30:32,700 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:30:32,702 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:30:32,704 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:30:32] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:30:39,740 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:30:39,743 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:30:39,744 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:30:39] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:30:42,592 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:30:42,623 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:30:42,634 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:30:42,638 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:30:42] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:30:42,664 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:30:42,665 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:30:42] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:30:46,808 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:30:46,810 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:30:46,811 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:30:46] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:30:53,857 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:30:53,859 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:30:53,860 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:30:53] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:31:00,355 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:31:00,412 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:31:00,413 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:31:00] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:31:00,913 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:31:00,915 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:31:00,916 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:31:00] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:31:07,953 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:31:07,955 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:31:07,957 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:31:07] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:31:14,688 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:31:14,722 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:31:14,723 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:31:14] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:31:14,738 - __main__ - INFO - Incoming request: POST /health from 127.0.0.1
+2026-07-13 00:31:14,773 - __main__ - INFO - Outgoing response: POST /health -> 201
+2026-07-13 00:31:14,774 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:31:14] "[35m[1mPOST /health HTTP/1.1[0m" 201 -
+2026-07-13 00:31:14,994 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:31:14,996 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:31:14,997 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:31:14] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:31:22,030 - __main__ - INFO - Incoming request: GET /settings from 127.0.0.1
+2026-07-13 00:31:22,032 - __main__ - INFO - Outgoing response: GET /settings -> 200
+2026-07-13 00:31:22,032 - werkzeug - INFO - 127.0.0.1 - - [13/Jul/2026 00:31:22] "GET /settings HTTP/1.1" 200 -
+2026-07-13 00:31:22,420 - backend.socket_manager - INFO - Client disconnected from socket network

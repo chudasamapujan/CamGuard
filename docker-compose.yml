@@ -1,0 +1,83 @@
+# ==============================================================================
+# CamGuard Enterprise - Production Multi-Container Orchestration
+# AWS EC2 / Ubuntu Deployment via Docker Compose
+# ==============================================================================
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: camguard-backend
+    restart: always
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-camera-health-monitor-production-secret-key}
+      - DATABASE_URL=${DATABASE_URL:-sqlite:////app/data/health.db}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-*}
+      - SOCKET_ASYNC_MODE=eventlet
+      - API_PORT=5000
+    volumes:
+      - db_data:/app/data
+      - logs_data:/app/logs
+    networks:
+      - camguard-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5000/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        VITE_API_URL: ${VITE_API_URL:-/api}
+        VITE_SOCKET_URL: ${VITE_SOCKET_URL:-/}
+    container_name: camguard-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - camguard-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  simulator:
+    build:
+      context: .
+      dockerfile: Dockerfile.simulator
+    container_name: camguard-simulator
+    restart: always
+    environment:
+      - BACKEND_URL=http://backend:5000
+      - SIMULATOR_INTERVAL=${SIMULATOR_INTERVAL:-30}
+      - CAMERA_COUNT=${CAMERA_COUNT:-10}
+      - FAULT_PROBABILITY=${FAULT_PROBABILITY:-0.05}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - logs_data:/app/logs
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - camguard-net
+
+volumes:
+  db_data:
+    name: camguard_db_data
+  logs_data:
+    name: camguard_logs_data
+
+networks:
+  camguard-net:
+    name: camguard_network
+    driver: bridge

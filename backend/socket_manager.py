@@ -1,12 +1,26 @@
+import os
 import logging
 from flask_socketio import SocketIO
 
 logger = logging.getLogger(__name__)
 
-# Use async_mode="threading" to bypass eventlet ssl wrap_socket incompatibility in Python 3.13
-socketio = SocketIO(cors_allowed_origins="*", async_mode="threading")
+# Read production configuration from environment
+_cors_origins = os.environ.get("CORS_ALLOWED_ORIGINS", "*")
+if _cors_origins != "*":
+    _cors_origins = [o.strip() for o in _cors_origins.split(",") if o.strip()]
+
+_async_mode = os.environ.get("SOCKET_ASYNC_MODE", "threading")
+
+socketio = SocketIO(
+    cors_allowed_origins=_cors_origins,
+    async_mode=_async_mode,
+    ping_timeout=20,
+    ping_interval=10,
+    manage_session=False
+)
 
 @socketio.on("connect")
+
 def handle_connect():
     """Triggered when a client establishes a WebSocket connection."""
     logger.info("Client connected to socket network")

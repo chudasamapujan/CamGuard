@@ -1,0 +1,30 @@
+# Version control & OS files
+.git
+.gitignore
+.DS_Store
+Thumbs.db
+
+# Virtual environments and caches
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.venv
+venv
+env
+
+# Local database and logs
+*.db
+*.sqlite3
+health.db
+camera_health.db
+logs/
+data/
+
+# Frontend node modules and build artifacts
+node_modules/
+dist/
+.env
+.env.local
+.antigravityignore
+deployment/

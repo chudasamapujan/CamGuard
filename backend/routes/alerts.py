@@ -35,6 +35,12 @@ def get_settings():
 @alerts_bp.route("/settings", methods=["PUT", "POST"])
 def update_settings():
     """Update global configuration settings."""
+    from backend.config import Config
+    if Config.API_KEY:
+        provided_key = request.headers.get("X-API-Key") or request.headers.get("Authorization", "").replace("Bearer ", "")
+        if provided_key != Config.API_KEY:
+            return jsonify({"error": "Unauthorized: Invalid or missing API Key"}), 401
+
     data = request.get_json()
     success = ConfigurationService.update_settings(data)
     if not success:

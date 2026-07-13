@@ -1,0 +1,32 @@
+# ==============================================================================
+# CamGuard Enterprise - Simulator Dockerfile (Production)
+# Autonomous Telemetry Generator Service running inside Docker Compose network
+# ==============================================================================
+FROM python:3.11-slim as production
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app \
+    BACKEND_URL=http://backend:5000 \
+    LOG_LEVEL=INFO
+
+WORKDIR /app
+
+# Install minimal system requirements
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy simulator source code
+COPY simulator /app/simulator
+
+# Ensure logs volume path exists
+RUN mkdir -p /app/logs && chmod -R 777 /app/logs
+
+# Launch autonomous multi-threaded simulator loop
+CMD ["python", "-m", "simulator.run_simulator"]

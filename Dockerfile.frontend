@@ -1,0 +1,46 @@
+# ==============================================================================
+# CamGuard Enterprise - Frontend Multi-Stage Dockerfile (Production)
+# Stage 1: Vite + React Production Build
+# Stage 2: Nginx Reverse Proxy & Static Asset Server
+# ==============================================================================
+
+# --- Stage 1: Build React Application ---
+FROM node:20-alpine as builder
+
+WORKDIR /app
+
+# Install dependencies first for optimal Docker layer caching
+COPY dashboard/package*.json ./
+RUN npm ci || npm install
+
+# Copy source and pass build-time environment arguments
+COPY dashboard/ ./
+
+ARG VITE_API_URL=/api
+ARG VITE_SOCKET_URL=/
+ENV VITE_API_URL=$VITE_API_URL \
+    VITE_SOCKET_URL=$VITE_SOCKET_URL
+
+# Generate optimized production static bundle inside /app/dist
+RUN npm run build
+
+# --- Stage 2: Serve with Production Nginx ---
+FROM nginx:alpine as production
+
+# Install curl for health checking inside the container
+RUN apk add --no-cache curl
+
+# Remove default Nginx config and copy production static files
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Copy our custom reverse proxy nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 80
+
+# Health check verifies that Nginx reverse proxy routes properly
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost/health || exit 1
+
+CMD ["nginx", "-g", "daemon off;"]

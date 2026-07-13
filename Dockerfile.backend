@@ -1,0 +1,40 @@
+# ==============================================================================
+# CamGuard Enterprise - Backend Dockerfile (Production)
+# Gunicorn + Eventlet WSGI Server running Flask & Socket.IO
+# ==============================================================================
+FROM python:3.11-slim as production
+
+# Set environment variables for clean Python behavior
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app \
+    API_PORT=5000 \
+    SOCKET_ASYNC_MODE=eventlet
+
+WORKDIR /app
+
+# Install system dependencies (curl required for health check and minimal DB utilities)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy application source code
+COPY backend /app/backend
+
+# Ensure persistent directories exist and have proper permissions
+RUN mkdir -p /app/logs /app/data && \
+    chmod -R 777 /app/logs /app/data
+
+EXPOSE 5000
+
+# Docker health check endpoint verification
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:5000/health || exit 1
+
+# Launch with Gunicorn using Eventlet worker for production WebSocket concurrency
+CMD ["gunicorn", "--worker-class", "eventlet", "-w", "1", "--bind", "0.0.0.0:5000", "--timeout", "120", "--graceful-timeout", "30", "--access-logfile", "-", "--error-logfile", "-", "backend.wsgi:app"]

@@ -12,20 +12,25 @@ Design decisions:
 - CAMERA_LOCATIONS: realistic physical locations for the UI
 """
 
+import os
+
 # Number of cameras to simulate
-CAMERA_COUNT = 10
+CAMERA_COUNT = int(os.environ.get("CAMERA_COUNT", 10))
 
 # How often each camera sends data (seconds)
-SEND_INTERVAL = 30
+SEND_INTERVAL = int(os.environ.get("SIMULATOR_INTERVAL", os.environ.get("SEND_INTERVAL", 30)))
 
 # Probability of a random fault per camera per tick (0.0 to 1.0)
-FAULT_PROBABILITY = 0.05
+FAULT_PROBABILITY = float(os.environ.get("FAULT_PROBABILITY", 0.05))
 
 # Probability of a camera going offline per tick
-OFFLINE_PROBABILITY = 0.03
+OFFLINE_PROBABILITY = float(os.environ.get("OFFLINE_PROBABILITY", 0.03))
 
 # Backend API URL
-BACKEND_URL = "http://localhost:5000"
+BACKEND_URL = os.environ.get("BACKEND_URL", "http://localhost:5000")
+
+# Logging level
+LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
 
 # Simulated camera locations
 CAMERA_LOCATIONS = [

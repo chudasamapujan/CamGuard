@@ -15,6 +15,7 @@ def ingest_health_data():
     return jsonify(result), 201
 
 @health_bp.route("/api/cameras/<camera_id>/history", methods=["GET"])
+@health_bp.route("/api/history/<camera_id>", methods=["GET"])
 @health_bp.route("/history/<camera_id>", methods=["GET"])
 def get_camera_history(camera_id):
     """Retrieve time-series health logs for a camera."""

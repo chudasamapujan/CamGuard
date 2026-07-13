@@ -4,6 +4,10 @@ info:
   description: REST API for ingesting telemetry, querying camera status and performance aggregates, and managing global configuration settings.
   version: 1.0.0
 servers:
+  - url: /api
+    description: Production Nginx Reverse Proxy API endpoint
+  - url: /
+    description: Direct or Root API endpoint
   - url: http://localhost:5000
     description: Local development server
 paths:

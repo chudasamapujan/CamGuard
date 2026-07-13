@@ -4,3 +4,5 @@ Flask-CORS==5.0.1
 requests==2.32.3
 flask-socketio==5.3.6
 python-socketio==5.11.2
+gunicorn==23.0.0
+eventlet==0.39.0
