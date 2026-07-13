@@ -3,10 +3,18 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import MetricChart from '../components/MetricChart';
 import * as api from '../services/api';
+import { socket } from '../services/socket';
 
 vi.mock('../services/api', () => ({
   fetchCameraHistory: vi.fn(),
   fetchDashboardHistory: vi.fn(),
+}));
+
+vi.mock('../services/socket', () => ({
+  socket: {
+    on: vi.fn(),
+    off: vi.fn()
+  }
 }));
 
 // Mock react-chartjs-2 Line component to avoid canvas rendering issues in test environment
@@ -83,5 +91,23 @@ describe('MetricChart Component Time-Range Selector', () => {
     await waitFor(() => {
       expect(api.fetchDashboardHistory).toHaveBeenCalledWith(168);
     });
+  });
+
+  it('subscribes to socket.on events instead of interval polling', async () => {
+    api.fetchDashboardHistory.mockResolvedValueOnce({
+      data: [{ timestamp: new Date().toISOString(), cpu_usage: 10, memory_usage: 20, storage_usage: 30 }]
+    });
+
+    const { unmount } = render(<MetricChart />);
+
+    await waitFor(() => {
+      expect(api.fetchDashboardHistory).toHaveBeenCalledWith(1);
+      expect(socket.on).toHaveBeenCalledWith('camera_update', expect.any(Function));
+      expect(socket.on).toHaveBeenCalledWith('dashboard_summary', expect.any(Function));
+    });
+
+    unmount();
+    expect(socket.off).toHaveBeenCalledWith('camera_update', expect.any(Function));
+    expect(socket.off).toHaveBeenCalledWith('dashboard_summary', expect.any(Function));
   });
 });

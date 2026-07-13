@@ -20,6 +20,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { fetchCameraHistory, fetchDashboardHistory } from '../services/api';
+import { socket } from '../services/socket';
 import { Activity } from 'lucide-react';
 
 ChartJS.register(
@@ -59,8 +60,20 @@ export default function MetricChart({ cameraId, cameraName }) {
         };
 
         load();
-        const interval = setInterval(load, 15000);
-        return () => clearInterval(interval);
+
+        const handleSocketUpdate = (data) => {
+            if (!cameraId || (data && (data.id === cameraId || data.camera_id === cameraId))) {
+                load();
+            }
+        };
+
+        socket.on('camera_update', handleSocketUpdate);
+        socket.on('dashboard_summary', handleSocketUpdate);
+
+        return () => {
+            socket.off('camera_update', handleSocketUpdate);
+            socket.off('dashboard_summary', handleSocketUpdate);
+        };
     }, [cameraId, timeRange]);
 
     const renderHeader = () => (
