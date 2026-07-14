@@ -11,6 +11,12 @@ const api = axios.create({
     },
 });
 
+// Automatically inject X-API-Key if compiled into the frontend bundle
+const apiKey = import.meta.env.VITE_API_KEY;
+if (apiKey) {
+    api.defaults.headers.common['X-API-Key'] = apiKey;
+}
+
 // Camera endpoints
 export const fetchCameras = () => api.get('/cameras');
 export const fetchCamera = (id) => api.get(`/cameras/${id}`);

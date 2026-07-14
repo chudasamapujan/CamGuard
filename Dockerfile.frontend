@@ -18,8 +18,10 @@ COPY dashboard/ ./
 
 ARG VITE_API_URL=/api
 ARG VITE_SOCKET_URL=/
+ARG VITE_API_KEY
 ENV VITE_API_URL=$VITE_API_URL \
-    VITE_SOCKET_URL=$VITE_SOCKET_URL
+    VITE_SOCKET_URL=$VITE_SOCKET_URL \
+    VITE_API_KEY=$VITE_API_KEY
 
 # Generate optimized production static bundle inside /app/dist
 RUN npm run build
